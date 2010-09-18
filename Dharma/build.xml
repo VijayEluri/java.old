@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="Dharma Project" default="make-jar">
+    <!-- 定义目录变量 -->
+    <property name="dir.src" value="src" />
+    <property name="dir.build" location="build"/>
+    <property name="dir.jar" value="D:\Java\dharma\"/>
+
+	<target name="init">
+	    <!-- Create the time stamp -->
+	    <tstamp/>
+	    <!-- Create the build directory structure used by compile -->
+	    <mkdir dir="${build}"/>
+	</target>
+
+    <target name="compile" description="compile the source">
+        <!-- Compile the java code from ${src} into ${build} -->
+        <javac srcdir="${dir.src}" destdir="${dir.build}"/>
+    </target>
+
+    <!-- 打包源码 -->
+    <target name="make-jar">
+        <jar jarfile="${dir.jar}/dharma.jar" basedir="${dir.build}"/>
+    	<jar jarfile="${dir.jar}/dharma.src.jar" basedir="${dir.src}"/>
+    </target>
+
+    <target name="clean" description="clean up" >
+        <!-- Delete the ${build} and ${dist} directory trees -->
+        <delete dir="${build}"/>
+    </target>
+</project>

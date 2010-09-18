@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="GBK"?>
+<record separator="," description="测试记录格式">
+	<field name="field1"/>
+ 	<field name="field2">
+ 		<value src="1" dest="你好"/>
+		<value src="2" dest="Hello"/>
+		<value src="3" dest="Ni Hao"/>
+ 	</field>
+</record>
+

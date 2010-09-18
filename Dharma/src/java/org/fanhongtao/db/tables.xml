@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!DOCTYPE tables [
+	<!ELEMENT tables (table+)>
+	
+	<!ELEMENT table (column+)>
+	<!ATTLIST table
+		name CDATA #REQUIRED 
+	>
+	
+	<!ELEMENT column EMPTY>
+	<!ATTLIST column
+		name CDATA #REQUIRED
+		typeStr CDATA #REQUIRED
+		key (true | false) "false"
+	>
+]>
+
+<tables>
+
+<table name="Dir">
+	<column name="DirID" typeStr="INTEGER" key="true"/>
+	<column name="ParentDirID" typeStr="INTEGER"/>
+	<column name="DirName" typeStr="VARCHAR"/>
+</table>
+
+<table name="File">
+	<column name="FileID" typeStr="INTEGER" key="true"/>
+	<column name="DirID" typeStr="INTEGER"/>
+	<column name="FileLocation" typeStr="VARCHAR"/>
+	<column name="FileName" typeStr="VARCHAR"/>
+	<column name="CreateTime" typeStr="DATE"/>
+	<column name="LastModifyTime" typeStr="DATE"/>
+</table>
+
+</tables>

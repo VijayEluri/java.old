@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+<digester-rules>
+	<pattern value="tables">
+		<pattern value="table">
+			<object-create-rule classname="org.fanhongtao.db.Table" />
+			<set-properties-rule/>
+			<set-next-rule methodname="addTable" />
+			
+			<pattern value="column">
+				<object-create-rule classname="org.fanhongtao.db.Column" />
+				<set-properties-rule/>
+				<set-next-rule methodname="addColumn" />
+			</pattern>
+		</pattern>
+	</pattern>
+</digester-rules>
