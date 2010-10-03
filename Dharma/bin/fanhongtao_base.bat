@@ -7,7 +7,8 @@ cd build
 setlocal  enabledelayedexpansion
 set LIB_PATH=..\lib
 set MY_JARS=.
-FOR /R %LIB_PATH% %%I in (*.jar) DO set MY_JARS=!MY_JARS!;%LIB_PATH%\%%~nxI
+@REM FOR /R %LIB_PATH% %%I in (*.jar) DO set MY_JARS=!MY_JARS!;%LIB_PATH%\%%~nxI
+FOR /R %LIB_PATH% %%I in (*.jar) DO set MY_JARS=!MY_JARS!;%%~fI
 javaw -cp %MY_JARS%  %1
 
 endlocal

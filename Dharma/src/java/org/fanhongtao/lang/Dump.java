@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * ÊµÏÖ½«Ò»¸öJava¶ÔÏóµÄÄÚÈİÒÔ·½±ãÔÄ¶ÁµÄ·½Ê½×ª»»³É×Ö·û´®¡£<br>
- * ×¢Òâ£¬ÒòÎªÊ¹ÓÃÁËStringBuilder£¬Õâ¸öÀà²»ÊÇÏß³Ì°²È«µÄ£¬Ö»ÄÜÔÚÒ»¸öÏß³ÌÄÚ²¿Ê¹ÓÃÕâ¸öÀà¡£<br>
- * Í¨³£µÄÓÃ·¨ÊÇÔÚĞèÒªÊ±ÁÙÊ±¶¨ÒåÒ»¸öDump¶ÔÏó£¬È»ºóµ÷ÓÃÆätoString·½·¨¡£Èç£º
+ * å®ç°å°†ä¸€ä¸ªJavaå¯¹è±¡çš„å†…å®¹ä»¥æ–¹ä¾¿é˜…è¯»çš„æ–¹å¼è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚<br>
+ * æ³¨æ„ï¼Œå› ä¸ºä½¿ç”¨äº†StringBuilderï¼Œè¿™ä¸ªç±»ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œåªèƒ½åœ¨ä¸€ä¸ªçº¿ç¨‹å†…éƒ¨ä½¿ç”¨è¿™ä¸ªç±»ã€‚<br>
+ * é€šå¸¸çš„ç”¨æ³•æ˜¯åœ¨éœ€è¦æ—¶ä¸´æ—¶å®šä¹‰ä¸€ä¸ªDumpå¯¹è±¡ï¼Œç„¶åè°ƒç”¨å…¶toStringæ–¹æ³•ã€‚å¦‚ï¼š
  *  System.out.println(new Dump().toString(object));
  * 
  * @author Dharma
@@ -18,18 +18,18 @@ import java.util.Set;
  */
 public class Dump
 {
-    /** ´òÓ¡ĞÅÏ¢µÄÈ±Ê¡²ãÊı */
+    /** æ‰“å°ä¿¡æ¯çš„ç¼ºçœå±‚æ•° */
     public static final int DEFAULT_LEVEL = 3;
     
     private static final String CRLF = System.getProperty("line.separator");
     
-    /** ±£´æ×ª»»¹ı³ÌÖĞµÄ×Ö·û´® */
+    /** ä¿å­˜è½¬æ¢è¿‡ç¨‹ä¸­çš„å­—ç¬¦ä¸² */
     private StringBuilder buf = null;
     
-    /** ´òÓ¡¶ÔÏóµÄ×î´ó²ãÊı */
+    /** æ‰“å°å¯¹è±¡çš„æœ€å¤§å±‚æ•° */
     private int maxLevel = -1;
     
-    /** ¼ÇÂ¼Ã¿¸ö´òÓ¡µÄ¶ÔÏó£¬·ÀÖ¹¶ÔÏóÏà»¥ÒıÓÃ¶øÔì³ÉËÀÑ­»· */
+    /** è®°å½•æ¯ä¸ªæ‰“å°çš„å¯¹è±¡ï¼Œé˜²æ­¢å¯¹è±¡ç›¸äº’å¼•ç”¨è€Œé€ æˆæ­»å¾ªç¯ */
     private Set<Integer> path = new HashSet<Integer>();
     
     public Dump()
@@ -83,7 +83,7 @@ public class Dump
             return;
         }
         
-        // ÅĞ¶Ï¶ÔÏóÊÇ·ñÖØ¸´
+        // åˆ¤æ–­å¯¹è±¡æ˜¯å¦é‡å¤
         int id = System.identityHashCode(obj);
         if (path.contains(id))
         {
@@ -121,7 +121,7 @@ public class Dump
     }
     
     /**
-     * ½«Ò»¸öMap¶ÔÏó×ª»»×Ö·û´®
+     * å°†ä¸€ä¸ªMapå¯¹è±¡è½¬æ¢å­—ç¬¦ä¸²
      * @param map
      */
     private void dumpMap(Map<?, ?> map)
@@ -144,7 +144,7 @@ public class Dump
     }
     
     /**
-     * ½«Ò»¸öList¶ÔÏó×ª»»×Ö·û´®
+     * å°†ä¸€ä¸ªListå¯¹è±¡è½¬æ¢å­—ç¬¦ä¸²
      * @param list
      */
     private void dumpList(List<?> list)
@@ -160,8 +160,8 @@ public class Dump
     }
     
     /**
-     * ½«Ò»¸öÊı×é¶ÔÏó×ª»»×Ö·û´®
-     * @param objs ´ı×ª»»µÄÊı×é
+     * å°†ä¸€ä¸ªæ•°ç»„å¯¹è±¡è½¬æ¢å­—ç¬¦ä¸²
+     * @param objs å¾…è½¬æ¢çš„æ•°ç»„
      */
     private void dumpArray(Object[] objs)
     {
@@ -181,9 +181,9 @@ public class Dump
     }
     
     /**
-     * ½«Ò»¸ö×Ô¶¨ÒåµÄÀà¶ÔÏó×ª»»×Ö·û´®
-     * @param obj ´ı×ª»»Àà¶ÔÏó
-     * @param objClass ¸Ã¶ÔÏó¶ÔÓ¦µÄÀà¶¨Òå
+     * å°†ä¸€ä¸ªè‡ªå®šä¹‰çš„ç±»å¯¹è±¡è½¬æ¢å­—ç¬¦ä¸²
+     * @param obj å¾…è½¬æ¢ç±»å¯¹è±¡
+     * @param objClass è¯¥å¯¹è±¡å¯¹åº”çš„ç±»å®šä¹‰
      */
     private void dumpClass(Object obj, Class<?> objClass)
     {
@@ -195,7 +195,7 @@ public class Dump
                 buf.append(", "); // .append(CRLF);
             }
             Field field = fields[i];
-            field.setAccessible(true); // ¹Ø±ÕjavaµÄ·ÃÎÊĞŞÊÎ·û¼ì²â
+            field.setAccessible(true); // å…³é—­javaçš„è®¿é—®ä¿®é¥°ç¬¦æ£€æµ‹
             Object value;
             try
             {
