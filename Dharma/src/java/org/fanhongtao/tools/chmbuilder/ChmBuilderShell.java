@@ -34,7 +34,7 @@ public class ChmBuilderShell extends BaseShell
 
     private Text textChmFile;
 
-    private Text textChmTitle; // CHMÎÄ¼şµÄ±êÌâ
+    private Text textChmTitle; // CHMæ–‡ä»¶çš„æ ‡é¢˜
 
     private Button btnCreateChm;
 
@@ -57,12 +57,12 @@ public class ChmBuilderShell extends BaseShell
         Button btn = null;
 
         // HTML dir
-        new Label(composite, SWT.NONE).setText("HTMLÎÄ¼şÄ¿Â¼(&H)");
+        new Label(composite, SWT.NONE).setText("HTMLæ–‡ä»¶ç›®å½•(&H)");
         textHtmlDir = new Text(composite, SWT.BORDER);
         textHtmlDir.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        textHtmlDir.setToolTipText("Ö¸¶¨Ô­Ê¼µÄHTMLÎÄ¼şËùÔÚÄ¿Â¼");
+        textHtmlDir.setToolTipText("æŒ‡å®šåŸå§‹çš„HTMLæ–‡ä»¶æ‰€åœ¨ç›®å½•");
         btn = new Button(composite, SWT.FLAT);
-        btn.setText("Ñ¡Ôñ(&S)");
+        btn.setText("é€‰æ‹©(&S)");
         btn.addSelectionListener(new SelectionAdapter()
         {
             @Override
@@ -72,13 +72,13 @@ public class ChmBuilderShell extends BaseShell
             }
         });
 
-        // CHMÖĞµÄÈ±Ê¡ÎÄ¼ş£¨Æô¶¯CHMÊ±ÏÔÊ¾µÄÎÄ¼ş£©
-        new Label(composite, SWT.NONE).setText("È±Ê¡ÎÄ¼ş(&D)");
+        // CHMä¸­çš„ç¼ºçœæ–‡ä»¶ï¼ˆå¯åŠ¨CHMæ—¶æ˜¾ç¤ºçš„æ–‡ä»¶ï¼‰
+        new Label(composite, SWT.NONE).setText("ç¼ºçœæ–‡ä»¶(&D)");
         textDefaultPage = new Text(composite, SWT.BORDER);
         textDefaultPage.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        textDefaultPage.setToolTipText("Ö¸¶¨Æô¶¯CHMÊ±ÏÔÊ¾µÄÒ³Ãæ");
+        textDefaultPage.setToolTipText("æŒ‡å®šå¯åŠ¨CHMæ—¶æ˜¾ç¤ºçš„é¡µé¢");
         btn = new Button(composite, SWT.FLAT);
-        btn.setText("Ñ¡Ôñ(&E)");
+        btn.setText("é€‰æ‹©(&E)");
         btn.addSelectionListener(new SelectionAdapter()
         {
             @Override
@@ -89,12 +89,12 @@ public class ChmBuilderShell extends BaseShell
         });
 
         // CHM file
-        new Label(composite, SWT.NONE).setText("CHMÎÄ¼şÃû(&C)");
+        new Label(composite, SWT.NONE).setText("CHMæ–‡ä»¶å(&C)");
         textChmFile = new Text(composite, SWT.BORDER);
         textChmFile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        textChmFile.setToolTipText("ÊäÈëÒªÉú³ÉµÄCHMÎÄ¼şÃû");
+        textChmFile.setToolTipText("è¾“å…¥è¦ç”Ÿæˆçš„CHMæ–‡ä»¶å");
         btn = new Button(composite, SWT.FLAT);
-        btn.setText("Ñ¡Ôñ(&O)");
+        btn.setText("é€‰æ‹©(&O)");
         btn.addSelectionListener(new SelectionAdapter()
         {
             @Override
@@ -105,14 +105,14 @@ public class ChmBuilderShell extends BaseShell
         });
 
         // CHM Title
-        new Label(composite, SWT.NONE).setText("CHMÎÄ¼ş±êÌâ(&T)");
+        new Label(composite, SWT.NONE).setText("CHMæ–‡ä»¶æ ‡é¢˜(&T)");
         textChmTitle = new Text(composite, SWT.BORDER);
         textChmTitle.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        textChmTitle.setToolTipText("ÊäÈëÒªÉú³ÉµÄCHMÎÄ¼şµÄ±êÌâ");
+        textChmTitle.setToolTipText("è¾“å…¥è¦ç”Ÿæˆçš„CHMæ–‡ä»¶çš„æ ‡é¢˜");
         new Label(composite, SWT.NONE).setText("");
 
         textChmFile.setText("d:\\java\\Apache\\Commons\\apidocs");
-        // ÉèÖÃÈ±Ê¡Öµ
+        // è®¾ç½®ç¼ºçœå€¼
         // textChmFile.setText("Apache.Lang.chm");
         // textHtmlDir.setText("d:\\java\\Apache\\Commons\\apidocs");
         // textHtmlIndex.setText("index.html");
@@ -126,7 +126,7 @@ public class ChmBuilderShell extends BaseShell
         composite.setLayoutData(gridData);
         composite.setLayout(new RowLayout());
         btnCreateChm = new Button(composite, SWT.NONE);
-        btnCreateChm.setText("Éú³ÉCHMÎÄ¼ş(&G)");
+        btnCreateChm.setText("ç”ŸæˆCHMæ–‡ä»¶(&G)");
         btnCreateChm.addSelectionListener(new SelectionAdapter()
         {
 
@@ -140,12 +140,12 @@ public class ChmBuilderShell extends BaseShell
     }
 
     /**
-     * Ö¸¶¨Ô­Ê¼HTMLÎÄ¼şµÄÄ¿Â¼
+     * æŒ‡å®šåŸå§‹HTMLæ–‡ä»¶çš„ç›®å½•
      */
     private void chooseHtmlDir()
     {
         DirectoryDialog dlg = new DirectoryDialog(getShell());
-        dlg.setText("Ñ¡ÔñÔ­Ê¼HTMLµÄÄ¿Â¼");
+        dlg.setText("é€‰æ‹©åŸå§‹HTMLçš„ç›®å½•");
 
         String tmp = textHtmlDir.getText().trim();
         if (tmp.length() != 0)
@@ -168,16 +168,16 @@ public class ChmBuilderShell extends BaseShell
     }
 
     /**
-     * Ö¸¶¨µÄHTML indexÎÄ¼şÃû
+     * æŒ‡å®šçš„HTML indexæ–‡ä»¶å
      */
     private void chooseHtmlIndexFile()
     {
         FileDialog dlg = new FileDialog(getShell(), SWT.OPEN);
-        dlg.setText("Ö¸¶¨Æô¶¯CHMÊ±µÄÈ±Ê¡ÎÄ¼ş");
+        dlg.setText("æŒ‡å®šå¯åŠ¨CHMæ—¶çš„ç¼ºçœæ–‡ä»¶");
         dlg.setFilterNames(new String[] { "HTM(*.htm); HTML(*.html)" });
         dlg.setFilterExtensions(new String[] { "*.htm; *.html" });
 
-        // ÉèÖÃÈ±Ê¡Â·¾¶
+        // è®¾ç½®ç¼ºçœè·¯å¾„
         String tmp = textDefaultPage.getText().trim();
         if (tmp.length() != 0)
         {
@@ -207,12 +207,12 @@ public class ChmBuilderShell extends BaseShell
     }
 
     /**
-     * Ö¸¶¨Éú³ÉµÄCHMÎÄ¼şÃû
+     * æŒ‡å®šç”Ÿæˆçš„CHMæ–‡ä»¶å
      */
     private void chooseChmFile()
     {
         FileDialog dlg = new FileDialog(getShell(), SWT.SAVE);
-        dlg.setText("Ö¸¶¨ÒªÉú³ÉµÄCHMÎÄ¼ş");
+        dlg.setText("æŒ‡å®šè¦ç”Ÿæˆçš„CHMæ–‡ä»¶");
         dlg.setFilterNames(new String[] { "CHM(*.chm)" });
         dlg.setFilterExtensions(new String[] { "*.chm" });
 
@@ -233,7 +233,7 @@ public class ChmBuilderShell extends BaseShell
             tmp = textHtmlDir.getText().trim();
             if (tmp.length() != 0)
             {
-                dlg.setFilterPath(new File(tmp).getParent()); // chmÎÄ¼şÍ¨³£Ó¦¸ÃÔÚHTMLÄ¿Â¼ÍâÃæÉú³É
+                dlg.setFilterPath(new File(tmp).getParent()); // chmæ–‡ä»¶é€šå¸¸åº”è¯¥åœ¨HTMLç›®å½•å¤–é¢ç”Ÿæˆ
             }
         }
 
@@ -245,7 +245,7 @@ public class ChmBuilderShell extends BaseShell
     }
 
     /**
-     * ´´½¨CHMÎÄ¼ş
+     * åˆ›å»ºCHMæ–‡ä»¶
      */
     private void generateChm()
     {
@@ -256,8 +256,8 @@ public class ChmBuilderShell extends BaseShell
         if ((chmFile.length() == 0) || (htmlDir.length() == 0) || (defaultHtml.length() == 0))
         {
             MessageBox messageBox = new MessageBox(getShell(), SWT.ICON_ERROR);
-            messageBox.setText("´íÎó");
-            messageBox.setMessage("ÎÄ¼şÃû¡¢Ä¿Â¼Ãû²»ÄÜÎª¿Õ");
+            messageBox.setText("é”™è¯¯");
+            messageBox.setMessage("æ–‡ä»¶åã€ç›®å½•åä¸èƒ½ä¸ºç©º");
             messageBox.open();
             return;
         }
@@ -266,15 +266,15 @@ public class ChmBuilderShell extends BaseShell
             ChmBuilder builder = new ChmBuilder(chmFile, htmlDir, defaultHtml, chmTitle);
             builder.run();
             MessageBox messageBox = new MessageBox(getShell(), SWT.ICON_INFORMATION);
-            messageBox.setText("ÌáÊ¾");
-            messageBox.setMessage("Éú³ÉCHMÎÄ¼ş³É¹¦¡£\nCHM ÎÄ¼şÃû: " + builder.getChmFileName());
+            messageBox.setText("æç¤º");
+            messageBox.setMessage("ç”ŸæˆCHMæ–‡ä»¶æˆåŠŸã€‚\nCHM æ–‡ä»¶å: " + builder.getChmFileName());
             messageBox.open();
         }
         catch (IOException e)
         {
             MessageBox messageBox = new MessageBox(getShell(), SWT.ICON_ERROR);
-            messageBox.setText("´íÎó");
-            messageBox.setMessage("Éú³ÉCHMÊ§°Ü.");
+            messageBox.setText("é”™è¯¯");
+            messageBox.setMessage("ç”ŸæˆCHMå¤±è´¥.");
             messageBox.open();
         }
 
@@ -285,7 +285,7 @@ public class ChmBuilderShell extends BaseShell
      */
     public static void main(String[] args)
     {
-        BasicConfigurator.configure(); // Ê¹ÓÃÈ±Ê¡ÅäÖÃ
+        BasicConfigurator.configure(); // ä½¿ç”¨ç¼ºçœé…ç½®
         new ChmBuilderShell().run("CHM Builder");
     }
 }

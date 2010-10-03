@@ -10,7 +10,7 @@ import java.nio.channels.SelectionKey;
 public class NetUtils
 {
     /**
-     * ¹Ø±Õ key ¶ÔÓ¦µÄÁ¬½Ó
+     * å…³é—­ key å¯¹åº”çš„è¿žæŽ¥
      * @param key
      */
     public static void closeKey(SelectionKey key)

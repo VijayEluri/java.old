@@ -8,7 +8,8 @@ import java.sql.Statement;
 
 public class GetIndexInfo
 {
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
+        throws Exception
     {
         Connection conn = getH2Connection();
         System.out.println("Got Connection.");
@@ -18,10 +19,10 @@ public class GetIndexInfo
         st.executeUpdate("create unique index ix_survey1 on survey (name asc, mobile asc);");
         st.executeUpdate("create index ix_survey2 on survey (email asc);");
         st.executeUpdate("insert into survey (id,name ) values (1,'nameValue')");
-
+        
         ResultSet indexInformation = null;
         DatabaseMetaData meta = conn.getMetaData();
-
+        
         // The '_' character represents any single character.
         // The '%' character represents any sequence of zero
         // or more characters.
@@ -41,7 +42,7 @@ public class GetIndexInfo
             int dbCardinality = indexInformation.getInt("CARDINALITY");
             int dbPages = indexInformation.getInt("PAGES");
             String dbFilterCondition = indexInformation.getString("FILTER_CONDITION");
-
+            
             System.out.println("index name=" + dbIndexName);
             System.out.println("table=" + dbTableName);
             System.out.println("column=" + dbColumnName);
@@ -56,46 +57,50 @@ public class GetIndexInfo
             System.out.println("pages=" + dbPages);
             System.out.println("filterCondition=" + dbFilterCondition);
         }
-
+        
         st.close();
         conn.close();
     }
-
-    private static Connection getH2Connection() throws Exception
+    
+    protected static Connection getH2Connection()
+        throws Exception
     {
         Class.forName("org.h2.Driver");
         System.out.println("Driver Loaded.");
         String url = "jdbc:h2:tcp://localhost/dharma";
         return DriverManager.getConnection(url, "sa", "");
     }
-
-    private static Connection getHSQLConnection() throws Exception
+    
+    protected static Connection getHSQLConnection()
+        throws Exception
     {
         Class.forName("org.hsqldb.jdbcDriver");
         System.out.println("Driver Loaded.");
         String url = "jdbc:hsqldb:data/tutorial";
         return DriverManager.getConnection(url, "sa", "");
     }
-
-    public static Connection getMySqlConnection() throws Exception
+    
+    protected static Connection getMySqlConnection()
+        throws Exception
     {
         String driver = "org.gjt.mm.mysql.Driver";
         String url = "jdbc:mysql://localhost/demo2s";
         String username = "oost";
         String password = "oost";
-
+        
         Class.forName(driver);
         Connection conn = DriverManager.getConnection(url, username, password);
         return conn;
     }
-
-    public static Connection getOracleConnection() throws Exception
+    
+    protected static Connection getOracleConnection()
+        throws Exception
     {
         String driver = "oracle.jdbc.driver.OracleDriver";
         String url = "jdbc:oracle:thin:@localhost:1521:caspian";
         String username = "mp";
         String password = "mp2";
-
+        
         Class.forName(driver); // load Oracle driver
         Connection conn = DriverManager.getConnection(url, username, password);
         return conn;

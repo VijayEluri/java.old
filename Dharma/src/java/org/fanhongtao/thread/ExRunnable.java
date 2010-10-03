@@ -2,10 +2,10 @@ package org.fanhongtao.thread;
 
 public abstract class ExRunnable implements Runnable
 {
-    /** 是否终止运行 */
+    /** 鏄惁缁堟杩愯 */
     private boolean stoped = false;
 
-    /** 名字 */
+    /** 鍚嶅瓧 */
     private String name = "";
 
     public synchronized boolean isStoped()

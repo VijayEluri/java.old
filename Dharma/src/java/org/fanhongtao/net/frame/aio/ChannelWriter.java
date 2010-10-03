@@ -65,7 +65,7 @@ public class ChannelWriter extends ExRunnable
     }
 
     /**
-     * ´¦Àí¿Í»§ÇëÇó,¹ÜÀíÓÃ»§µÄÁ¬½Ó³Ø,²¢»½ĞÑ¶ÓÁĞÖĞµÄÏß³Ì½øĞĞ´¦Àí
+     * å¤„ç†å®¢æˆ·è¯·æ±‚,ç®¡ç†ç”¨æˆ·çš„è¿æ¥æ± ,å¹¶å”¤é†’é˜Ÿåˆ—ä¸­çš„çº¿ç¨‹è¿›è¡Œå¤„ç†
      */
     public static void send(Request req)
     {

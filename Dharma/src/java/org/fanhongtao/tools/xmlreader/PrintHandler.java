@@ -6,27 +6,27 @@ public class PrintHandler extends DefaultHandler
 {
 
     /**
-     * ¼ÇÂ¼½âÎöºóµÄXMLÎÄ¼ş
+     * è®°å½•è§£æåçš„XMLæ–‡ä»¶
      */
     protected StringBuffer sb = new StringBuffer(1024);
 
     /**
-     * ÊÇÒÑ¾­ÊÇÒ»ĞĞµÄ¿ªÊ¼
+     * æ˜¯å·²ç»æ˜¯ä¸€è¡Œçš„å¼€å§‹
      */
     protected boolean newLine = true;
 
     /**
-     * XMLÎÄ¼şÖĞµÄµÚ¼¸²ã
+     * XMLæ–‡ä»¶ä¸­çš„ç¬¬å‡ å±‚
      */
     protected int level = 0;
 
     /**
-     * »»ĞĞ·û
+     * æ¢è¡Œç¬¦
      */
     protected static final String CRLF = System.getProperty("line.separator");
 
     /**
-     * ÊµÏÖËõ½ø
+     * å®ç°ç¼©è¿›
      */
     protected void indent()
     {
@@ -37,7 +37,7 @@ public class PrintHandler extends DefaultHandler
     }
 
     /**
-     * ·µ»Ø½âÎöºóµÄXML
+     * è¿”å›è§£æåçš„XML
      * 
      * @return
      */

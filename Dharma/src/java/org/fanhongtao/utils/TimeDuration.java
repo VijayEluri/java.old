@@ -10,12 +10,12 @@ public class TimeDuration
     private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
-     * ¿ªÊ¼Ê±¼ä
+     * å¼€å§‹æ—¶é—´
      */
     private long startTime;
 
     /**
-     * ½áÊøÊ±¼ä
+     * ç»“æŸæ—¶é—´
      */
     private long stopTime = 0;
 

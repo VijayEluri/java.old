@@ -1,7 +1,7 @@
 package org.fanhongtao.utils;
 
 /**
- * JUnit²âÊÔÊ±µÄ¸¨ÖúÀà
+ * JUnitæµ‹è¯•æ—¶çš„è¾…åŠ©ç±»
  * @author Dharma
  * @created 2010-3-11
  */

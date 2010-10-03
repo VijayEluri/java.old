@@ -8,33 +8,34 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * 将日志记录在SWT的Text控件中。
- * 由于使用了SWT控件，不太好在配置配置文件中配置Text，所以只使用在代码中。
- * 
+ * The appender to write log message into a SWT Text controller.<br>
+ * This appender can not used in the Log4j properties because I can't find
+ * a easy way to specify the which Text controller is used. So I used this 
+ * appender only in the Java Code.
  * @author Dharma
  * @created 2008-10-29
  */
 public class SwtTextLogAppender extends AppenderSkeleton
 {
-    /** 记录日志的Text控件 */
+    /** The Text controller to write log text */
     private Text text = null;
-
+    
     public SwtTextLogAppender(Layout layout, Text text)
     {
         this.layout = layout;
         this.text = text;
     }
-
+    
     public SwtTextLogAppender(Layout layout)
     {
         this(layout, null);
     }
-
+    
     public void setText(Text text)
     {
         this.text = text;
     }
-
+    
     @Override
     protected void append(LoggingEvent event)
     {
@@ -44,8 +45,8 @@ public class SwtTextLogAppender extends AppenderSkeleton
             return;
         }
         final String str = this.layout.format(event);
-
-        // 将日志信息写入Text控件
+        
+        // write log message into Text controller
         if (text != null)
         {
             Display.getDefault().syncExec(new Runnable()
@@ -57,9 +58,9 @@ public class SwtTextLogAppender extends AppenderSkeleton
                 }
             });
         }
-
+        
     }
-
+    
     @Override
     public void close()
     {
@@ -67,11 +68,11 @@ public class SwtTextLogAppender extends AppenderSkeleton
             return;
         this.closed = true;
     }
-
+    
     @Override
     public boolean requiresLayout()
     {
         return true;
     }
-
+    
 }

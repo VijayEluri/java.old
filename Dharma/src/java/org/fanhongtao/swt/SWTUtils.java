@@ -17,33 +17,33 @@ public final class SWTUtils
     }
 
     /**
-     * ½«Shell´°¿ÚÏÔÊ¾ÔÚÆÁÄ»ÖĞ¼ä
+     * å°†Shellçª—å£æ˜¾ç¤ºåœ¨å±å¹•ä¸­é—´
      * 
      * @param shell
      */
     public static void setCenter(Shell shell)
     {
-        // È¡µÃÆÁÄ»µÄ¿í¶ÈºÍ¸ß¶È£¨µ¥Î»£ºÏñËØ£©
+        // å–å¾—å±å¹•çš„å®½åº¦å’Œé«˜åº¦ï¼ˆå•ä½ï¼šåƒç´ ï¼‰
         Rectangle rtg = shell.getMonitor().getClientArea();
         int width = rtg.width;
         int height = rtg.height;
 
-        // È¡µÃshellµÄ¿í¶ÈºÍ¸ß¶È£¨µ¥Î»£ºÏñËØ£©
+        // å–å¾—shellçš„å®½åº¦å’Œé«˜åº¦ï¼ˆå•ä½ï¼šåƒç´ ï¼‰
         int x = shell.getSize().x;
         int y = shell.getSize().y;
 
-        // ¼ÆËãshell¾ÓÖĞÊ±£¬×óÉÏ½ÇµÄ×ø±ê
+        // è®¡ç®—shellå±…ä¸­æ—¶ï¼Œå·¦ä¸Šè§’çš„åæ ‡
         Point p = new Point((width - x) / 2, (height - y) / 2);
         shell.setLocation(p);
     }
 
     /**
-     * ÏÔÊ¾¶Ô»°¿ò<br>
-     * Èç¹ûÊÇJFace³ÌĞò£¬ÔòÓ¦¸ÃÊ¹ÓÃJFace·â±ÕµÄDialog¡£
-     * @param shell ¸¸shell
-     * @param style ¶Ô»°¿òµÄÀàĞÍ
-     * @param title ¶Ô»°¿òµÄTitle
-     * @param message ËùÒªÏÔÊ¾µÄÄÚÈİ
+     * æ˜¾ç¤ºå¯¹è¯æ¡†<br>
+     * å¦‚æœæ˜¯JFaceç¨‹åºï¼Œåˆ™åº”è¯¥ä½¿ç”¨JFaceå°é—­çš„Dialogã€‚
+     * @param shell çˆ¶shell
+     * @param style å¯¹è¯æ¡†çš„ç±»å‹
+     * @param title å¯¹è¯æ¡†çš„Title
+     * @param message æ‰€è¦æ˜¾ç¤ºçš„å†…å®¹
      */
     public static void showMessage(Shell shell, int style, String title, String message)
     {

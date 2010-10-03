@@ -17,33 +17,33 @@ import org.fanhongtao.log.RunLogger;
 
 
 /**
- * ½«Ö¸¶¨Ä¿Â¼ÏÂµÄ .htm/.html ÎÄ¼şÉú³É¿ÉÒÔ¹© Microsoft HTML Help WorkShop Ê¹ÓÃµÄ .hhp¡¢.hhc¡¢.hhk ÎÄ¼ş¡£<br>
- * È»ºóµ÷ÓÃ Microsoft HTML Help WorkShop ÖĞµÄ hhc.exe Éú³ÉCHMÎÄ¼ş¡£<br>
+ * å°†æŒ‡å®šç›®å½•ä¸‹çš„ .htm/.html æ–‡ä»¶ç”Ÿæˆå¯ä»¥ä¾› Microsoft HTML Help WorkShop ä½¿ç”¨çš„ .hhpã€.hhcã€.hhk æ–‡ä»¶ã€‚<br>
+ * ç„¶åè°ƒç”¨ Microsoft HTML Help WorkShop ä¸­çš„ hhc.exe ç”ŸæˆCHMæ–‡ä»¶ã€‚<br>
  * 
  * @author Dharma
  * @created 2008-11-12
  */
 public class ChmBuilder
 {
-    /** HTMLÎÄ¼şËùÔÚÄ¿Â¼ */
+    /** HTMLæ–‡ä»¶æ‰€åœ¨ç›®å½• */
     private String htmlPath = null;
 
-    /** CHMÎÄ¼şÆô¶¯Ê±ÏÔÊ¾µÄÒ³Ãæ£¨º¬Â·¾¶£© */
+    /** CHMæ–‡ä»¶å¯åŠ¨æ—¶æ˜¾ç¤ºçš„é¡µé¢ï¼ˆå«è·¯å¾„ï¼‰ */
     private String defaultPage = null;
 
-    /** ÒªÉú³ÉµÄCHMÎÄ¼şÃû£¨º¬Â·¾¶£© */
+    /** è¦ç”Ÿæˆçš„CHMæ–‡ä»¶åï¼ˆå«è·¯å¾„ï¼‰ */
     private String chmFileName = null;
 
-    /** ÒªÉú³ÉµÄCHMÎÄ¼şµÄ±êÌâ */
+    /** è¦ç”Ÿæˆçš„CHMæ–‡ä»¶çš„æ ‡é¢˜ */
     private String chmTitle = null;
 
-    /** .hhpÎÄ¼şµÄÎÄ¼şÃû£¨º¬Â·¾¶£© */
+    /** .hhpæ–‡ä»¶çš„æ–‡ä»¶åï¼ˆå«è·¯å¾„ï¼‰ */
     private String hhpFileName = null;
 
-    /** .hhcÎÄ¼şµÄÎÄ¼şÃû£¨º¬Â·¾¶£© */
+    /** .hhcæ–‡ä»¶çš„æ–‡ä»¶åï¼ˆå«è·¯å¾„ï¼‰ */
     private String hhcFileName = null;
 
-    /** .hhkÎÄ¼şµÄÎÄ¼şÃû£¨º¬Â·¾¶£© */
+    /** .hhkæ–‡ä»¶çš„æ–‡ä»¶åï¼ˆå«è·¯å¾„ï¼‰ */
     private String hhkFileName = null;
 
     /**
@@ -60,7 +60,7 @@ public class ChmBuilder
         this.defaultPage = new File(defaultPage).getAbsolutePath();
         this.chmTitle = chmTitle;
 
-        // Éú³ÉÏàÓ¦µÄÎÄ¼şÃû
+        // ç”Ÿæˆç›¸åº”çš„æ–‡ä»¶å
         String basePath = new File(htmlPath).getParent();
         String baseName = new File(chmFileName).getName();
         if (baseName.endsWith(".chm"))
@@ -96,7 +96,7 @@ public class ChmBuilder
     }
 
     /**
-     * Éú³É .hhp ÎÄ¼ş
+     * ç”Ÿæˆ .hhp æ–‡ä»¶
      * @throws IOException 
      */
     private void generateHHP() throws IOException
@@ -111,14 +111,14 @@ public class ChmBuilder
         pw.println("Display compile progress=Yes");
         pw.println("Full-text search=Yes");
         pw.println("Index file=" + hhkFileName);
-        pw.println("Language=0x804 ÖĞÎÄ(ÖĞ¹ú)");
+        pw.println("Language=0x804 ä¸­æ–‡(ä¸­å›½)");
         if ((chmTitle != null) && (chmTitle.trim().length() > 0))
         {
             pw.println("Title=" + chmTitle);
         }
         pw.println("");
 
-        // Ö¸¶¨WindowsÊôĞÔ£¬Ö÷ÒªÊÇÎªÁËÊµÏÖ ¡°ÊéÇ©¡±¹¦ÄÜ
+        // æŒ‡å®šWindowså±æ€§ï¼Œä¸»è¦æ˜¯ä¸ºäº†å®ç° â€œä¹¦ç­¾â€åŠŸèƒ½
         pw.println("[WINDOWS]");
         StringBuffer sb = new StringBuffer(1024);
         sb.append("win1=,\"");
@@ -162,7 +162,7 @@ public class ChmBuilder
     }
 
     /**
-     * Éú³É .hhc ÎÄ¼ş
+     * ç”Ÿæˆ .hhc æ–‡ä»¶
      * @throws IOException 
      */
     private void generateHHC() throws IOException
@@ -223,7 +223,7 @@ public class ChmBuilder
     }
 
     /**
-     * Éú³É .hhk ÎÄ¼ş
+     * ç”Ÿæˆ .hhk æ–‡ä»¶
      * @throws IOException 
      */
     private void generateHHK() throws IOException
@@ -269,7 +269,7 @@ public class ChmBuilder
     }
 
     /**
-     * »ñÈ¡HTMLÎÄ¼şµÄ<title>ÊôĞÔ
+     * è·å–HTMLæ–‡ä»¶çš„<title>å±æ€§
      * @param file
      * @return
      * @throws IOException
@@ -284,7 +284,7 @@ public class ChmBuilder
         {
             int startIndex = 0;
             String temp = line.toLowerCase();
-            if (findStatus == 0) // »¹Ã»ÓĞÕÒµ½¹ı <title>
+            if (findStatus == 0) // è¿˜æ²¡æœ‰æ‰¾åˆ°è¿‡ <title>
             {
                 startIndex = temp.indexOf("<title>");
                 if (startIndex != -1)
@@ -292,16 +292,16 @@ public class ChmBuilder
                     startIndex += 7;
                     findStatus = 1;
                     int stopIndex = temp.indexOf("</title>", startIndex);
-                    if (stopIndex != -1) // Ò»ĞĞÖĞÍ¬Ê±ÓĞ<title>ºÍ</title>
+                    if (stopIndex != -1) // ä¸€è¡Œä¸­åŒæ—¶æœ‰<title>å’Œ</title>
                     {
                         findStatus = 2;
                         title = line.substring(startIndex, stopIndex);
                         break;
                     }
-                    title = line.substring(startIndex); // ÓĞ¿ÉÄÜ<title>ºóÃæÓĞÄÚÈİ
+                    title = line.substring(startIndex); // æœ‰å¯èƒ½<title>åé¢æœ‰å†…å®¹
                 }
             }
-            else if (findStatus == 1) // ÒÑ¾­ÕÒµ½¹ı<title>
+            else if (findStatus == 1) // å·²ç»æ‰¾åˆ°è¿‡<title>
             {
                 startIndex = temp.indexOf("</title>");
                 if (startIndex != -1)
@@ -327,7 +327,7 @@ public class ChmBuilder
     }
 
     /**
-     * Éú³É .chm ÎÄ¼ş
+     * ç”Ÿæˆ .chm æ–‡ä»¶
      * @throws IOException
      */
     private void generateCHM() throws IOException

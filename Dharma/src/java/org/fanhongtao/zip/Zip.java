@@ -10,7 +10,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Ê¹ÓÃ JDK ×Ô´øµÄjava.util.zip°ü¶ÔÎÄ¼ş»òÕßÄ¿Â¼½øĞĞÑ¹Ëõ
+ * ä½¿ç”¨ JDK è‡ªå¸¦çš„java.util.zipåŒ…å¯¹æ–‡ä»¶æˆ–è€…ç›®å½•è¿›è¡Œå‹ç¼©
  * @author Dharma
  * @created 2010-5-14
  */
@@ -27,9 +27,9 @@ public class Zip
     }
 
     /**
-     * ¶ÔÒ»¸öÎÄ¼ş»òÄ¿Â¼£¨º¬Æä×ÓÄ¿Â¼£©Ñ¹Ëõ
-     * @param srcPath ´ıÑ¹ËõµÄÎÄ¼ş»òÄ¿Â¼Ãû
-     * @param zipFileName Éú³ÉÑ¹ËõÎÄ¼şÃû
+     * å¯¹ä¸€ä¸ªæ–‡ä»¶æˆ–ç›®å½•ï¼ˆå«å…¶å­ç›®å½•ï¼‰å‹ç¼©
+     * @param srcPath å¾…å‹ç¼©çš„æ–‡ä»¶æˆ–ç›®å½•å
+     * @param zipFileName ç”Ÿæˆå‹ç¼©æ–‡ä»¶å
      */
     public void zipFile(String srcPath, String zipFileName)
     {
@@ -46,10 +46,10 @@ public class Zip
     }
 
     /**
-     * µİ¹éÊµÏÖÑ¹ËõÄ¿Â¼¼°Æä×ÓÄ¿Â¼
-     * @param fDir ÒªÑ¹ËõµÄÄ¿Â¼»òÕßÎÄ¼ş
-     * @param pName ¸¸Ñ¹Ëõ¼ÇÂ¼Ãû³Æ£¬µÚÒ»´Îµ÷ÓÃÓ¦¸Ã±»ÉèÖÃÎªÒ»¸ö¿Õ×Ö·û´®""
-     * @param zos Ñ¹ËõÊä³öÁ÷
+     * é€’å½’å®ç°å‹ç¼©ç›®å½•åŠå…¶å­ç›®å½•
+     * @param fDir è¦å‹ç¼©çš„ç›®å½•æˆ–è€…æ–‡ä»¶
+     * @param pName çˆ¶å‹ç¼©è®°å½•åç§°ï¼Œç¬¬ä¸€æ¬¡è°ƒç”¨åº”è¯¥è¢«è®¾ç½®ä¸ºä¸€ä¸ªç©ºå­—ç¬¦ä¸²""
+     * @param zos å‹ç¼©è¾“å‡ºæµ
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -57,14 +57,14 @@ public class Zip
     {
         if (fDir.isDirectory())
         {
-            // Èç¹ûÎªÄ¿Â¼£¬ZipEntryÃû³ÆµÄÎ²²¿Ó¦¸ÃÒÔ·´Ğ±¸Ü"/"½áÎ²
+            // å¦‚æœä¸ºç›®å½•ï¼ŒZipEntryåç§°çš„å°¾éƒ¨åº”è¯¥ä»¥åæ–œæ "/"ç»“å°¾
             zos.putNextEntry(new ZipEntry(pName + fDir.getName() + "/"));
             File[] files = fDir.listFiles();
             if (files != null)
             {
                 for (int i = 0; i < files.length; i++)
                 {
-                    // ½øĞĞµİ¹é£¬Í¬Ê±´«µİ¸¸ÎÄ¼şZipEntryµÄÃû³Æ£¬»¹ÓĞÑ¹ËõÊä³öÁ÷
+                    // è¿›è¡Œé€’å½’ï¼ŒåŒæ—¶ä¼ é€’çˆ¶æ–‡ä»¶ZipEntryçš„åç§°ï¼Œè¿˜æœ‰å‹ç¼©è¾“å‡ºæµ
                     RecursiveZip(files[i], pName + fDir.getName() + "/", zos);
                 }
             }
@@ -73,7 +73,7 @@ public class Zip
         {
             byte[] bt = new byte[2048];
             ZipEntry ze = new ZipEntry(pName + fDir.getName());
-            // ÉèÖÃÑ¹ËõÇ°µÄÎÄ¼ş´óĞ¡
+            // è®¾ç½®å‹ç¼©å‰çš„æ–‡ä»¶å¤§å°
             ze.setSize(fDir.length());
             zos.putNextEntry(ze);
             FileInputStream fis = new FileInputStream(fDir);

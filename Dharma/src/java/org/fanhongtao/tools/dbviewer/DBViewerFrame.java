@@ -36,7 +36,7 @@ public class DBViewerFrame extends JFrame
 
     private DBConfig dialog;
 
-    /** ÏÔÊ¾Êı¾İ¿âÖĞ±íµÄList */
+    /** æ˜¾ç¤ºæ•°æ®åº“ä¸­è¡¨çš„List */
     private JList listTables;
 
     private JTable tablePrimaryKey;
@@ -98,7 +98,7 @@ public class DBViewerFrame extends JFrame
         listTables = new JList();
         listTables.setMinimumSize(new Dimension(100, 200));
         // listTables.setSize(100, 200);
-        listTables.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // ÉèÖÃ¡°µ¥Ñ¡¡±
+        listTables.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // è®¾ç½®â€œå•é€‰â€
         listTables.addListSelectionListener(new ListSelectionListener()
         {
             @Override
@@ -125,7 +125,7 @@ public class DBViewerFrame extends JFrame
         JScrollPane pane = new JScrollPane(tablePrimaryKey);
         tabbedPane.addTab("Primary Key", pane);
 
-        // ´´½¨Ê±Ö¸¶¨±íÍ·¼°Êı¾İ¡£²»·½±ã£¬ĞŞ¸Ä³ÉÊ¹ÓÃ TableModel µÄ·½Ê½
+        // åˆ›å»ºæ—¶æŒ‡å®šè¡¨å¤´åŠæ•°æ®ã€‚ä¸æ–¹ä¾¿ï¼Œä¿®æ”¹æˆä½¿ç”¨ TableModel çš„æ–¹å¼
         // String[] columnNames = { "Index", "Column" };
         // Object[][] cells = { { "", "" } };
         // tableIndex = new JTable(cells, columnNames);
@@ -144,7 +144,7 @@ public class DBViewerFrame extends JFrame
     }
 
     /**
-     * Á¬½ÓÊı¾İ¿â£¬²¢¸üĞÂ×ó±ßµÄ¡°±í¡±ÁĞ±í¡£
+     * è¿æ¥æ•°æ®åº“ï¼Œå¹¶æ›´æ–°å·¦è¾¹çš„â€œè¡¨â€åˆ—è¡¨ã€‚
      */
     private void connectDB()
     {
@@ -181,13 +181,13 @@ public class DBViewerFrame extends JFrame
     }
 
     /**
-     * ²é¿´Ö¸¶¨±íµÄ±í½á¹¹
-     * @param tableName ±íÃû
+     * æŸ¥çœ‹æŒ‡å®šè¡¨çš„è¡¨ç»“æ„
+     * @param tableName è¡¨å
      * @throws SQLException 
      */
     private void viewTable(String tableName) throws SQLException
     {
-        // ÉèÖÃ±íµÄ¡°Ö÷¼ü¡±ĞÅÏ¢
+        // è®¾ç½®è¡¨çš„â€œä¸»é”®â€ä¿¡æ¯
         DatabaseMetaData dbMeta = connection.getMetaData();
         ResultSet rs = dbMeta.getPrimaryKeys(null, null, tableName);
         // tablePrimaryKey.removeAll();
@@ -204,12 +204,12 @@ public class DBViewerFrame extends JFrame
         System.err.println("PK_NAME : "+pkRSet.getObject(6)); 
          */
 
-        // ÉèÖÃ±íµÄ¡°Ë÷Òı¡±ĞÅÏ¢
+        // è®¾ç½®è¡¨çš„â€œç´¢å¼•â€ä¿¡æ¯
         rs = dbMeta.getIndexInfo(null, null, tableName, false, false);
         tableIndex.setModel(new IndexTableModel(rs));
         rs.close();
 
-        // ÉèÖÃ±íµÄ¡°×Ö¶Î¡±ĞÅÏ¢
+        // è®¾ç½®è¡¨çš„â€œå­—æ®µâ€ä¿¡æ¯
         // ResultSet rs = dbMeta.getColumns(null, null, tableName, null);
         Statement statement = connection.createStatement();
         ResultSet resultset = statement.executeQuery("select * from " + tableName + " where 1!=1");

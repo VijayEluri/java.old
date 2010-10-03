@@ -19,19 +19,19 @@ import org.fanhongtao.net.frame.MsgInfo;
 
 
 /**
- * ÊµÏÖÏÔÊ¾ÏêÏ¸µÄÏûÏ¢
+ * å®ç°æ˜¾ç¤ºè¯¦ç»†çš„æ¶ˆæ¯
  * @author Dharma
  * @created 2008-11-26
  */
 public class DetailMessageDialog extends Dialog
 {
     /**
-     * ÏûÏ¢
+     * æ¶ˆæ¯
      */
     private MsgInfo msgInfo;
 
     /**
-     * ÓÃÓÚÏÔÊ¾ĞÅÏ¢µÄÎÄ±¾¿ò
+     * ç”¨äºæ˜¾ç¤ºä¿¡æ¯çš„æ–‡æœ¬æ¡†
      */
     private Text textInfo = null;
 
@@ -76,7 +76,7 @@ public class DetailMessageDialog extends Dialog
 
         });
         b1.setSelection(true);
-        showAsciiMessage(); // È±Ê¡°´ASCIIĞÎÊ½ÏÔÊ¾
+        showAsciiMessage(); // ç¼ºçœæŒ‰ASCIIå½¢å¼æ˜¾ç¤º
 
         Button b2 = new Button(c1, SWT.RADIO);
         b2.setText("&HEX");

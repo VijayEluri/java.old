@@ -20,39 +20,39 @@ public class Dump
 {
     /** 打印信息的缺省层数 */
     public static final int DEFAULT_LEVEL = 3;
-
+    
     private static final String CRLF = System.getProperty("line.separator");
-
+    
     /** 保存转换过程中的字符串 */
     private StringBuilder buf = null;
-
+    
     /** 打印对象的最大层数 */
     private int maxLevel = -1;
-
+    
     /** 记录每个打印的对象，防止对象相互引用而造成死循环 */
     private Set<Integer> path = new HashSet<Integer>();
-
+    
     public Dump()
     {
         this(DEFAULT_LEVEL);
     }
-
+    
     public Dump(int maxLevel)
     {
         buf = new StringBuilder(1024);
         this.maxLevel = maxLevel;
     }
-
+    
     // public String toString(int i)
     // {
     // return Integer.toString(i);
     // }
-
+    
     public String toString(Object obj)
     {
         return toString(null, obj);
     }
-
+    
     public String toString(String prefix, Object obj)
     {
         if (null != prefix)
@@ -62,8 +62,7 @@ public class Dump
         dumpObj(obj);
         return buf.toString();
     }
-
-    @SuppressWarnings("unchecked")
+    
     private void dumpObj(Object obj)
     {
         if (path.size() > maxLevel)
@@ -71,7 +70,7 @@ public class Dump
             buf.append("Too many level!");
             return;
         }
-
+        
         if (null == obj)
         {
             buf.append("null");
@@ -83,7 +82,7 @@ public class Dump
             buf.append(obj);
             return;
         }
-
+        
         // 判断对象是否重复
         int id = System.identityHashCode(obj);
         if (path.contains(id))
@@ -95,11 +94,11 @@ public class Dump
         begin();
         if (obj instanceof List)
         {
-            dumpList((List) obj);
+            dumpList((List<?>) obj);
         }
         else if (obj instanceof Map)
         {
-            dumpMap((Map) obj);
+            dumpMap((Map<?, ?>) obj);
         }
         else if (obj instanceof byte[])
         {
@@ -107,7 +106,7 @@ public class Dump
         }
         else
         {
-            Class objClass = obj.getClass();
+            Class<?> objClass = obj.getClass();
             if (objClass.isArray())
             {
                 dumpArray((Object[]) obj);
@@ -120,15 +119,14 @@ public class Dump
         end();
         path.remove(id);
     }
-
+    
     /**
      * 将一个Map对象转换字符串
      * @param map
      */
-    @SuppressWarnings("unchecked")
-    private void dumpMap(Map map)
+    private void dumpMap(Map<?, ?> map)
     {
-        Iterator iter = map.entrySet().iterator();
+        Iterator<?> iter = map.entrySet().iterator();
         // while (iter.hasNext())
         for (int i = 0; i < map.entrySet().size(); i++)
         {
@@ -136,21 +134,20 @@ public class Dump
             {
                 buf.append(", ").append(CRLF);
             }
-
-            Map.Entry entry = (Map.Entry) iter.next();
+            
+            Map.Entry<?, ?> entry = (Map.Entry<?, ?>) iter.next();
             buf.append("key: ");
             dumpObj(entry.getKey());
             buf.append(", value: ");
             dumpObj(entry.getValue());
         }
     }
-
+    
     /**
      * 将一个List对象转换字符串
      * @param list
      */
-    @SuppressWarnings("unchecked")
-    private void dumpList(List list)
+    private void dumpList(List<?> list)
     {
         for (int i = 0; i < list.size(); i++)
         {
@@ -161,7 +158,7 @@ public class Dump
             dumpObj(list.get(i));
         }
     }
-
+    
     /**
      * 将一个数组对象转换字符串
      * @param objs 待转换的数组
@@ -177,19 +174,18 @@ public class Dump
             dumpObj(objs[i]);
         }
     }
-
+    
     private void dumpByteArray(byte[] bytes)
     {
         buf.append(StringUtils.toHexString(bytes));
     }
-
+    
     /**
      * 将一个自定义的类对象转换字符串
      * @param obj 待转换类对象
      * @param objClass 该对象对应的类定义
      */
-    @SuppressWarnings("unchecked")
-    private void dumpClass(Object obj, Class objClass)
+    private void dumpClass(Object obj, Class<?> objClass)
     {
         Field[] fields = objClass.getDeclaredFields();
         for (int i = 0; i < fields.length; i++)
@@ -214,12 +210,12 @@ public class Dump
             dumpObj(value);
         }
     }
-
+    
     private void begin()
     {
         buf.append('{');
     }
-
+    
     private void end()
     {
         buf.append('}');

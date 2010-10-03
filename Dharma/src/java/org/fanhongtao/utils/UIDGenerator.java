@@ -1,27 +1,27 @@
 package org.fanhongtao.utils;
 
 /**
- * Éú³ÉÎ¨Ò»µÄ±àºÅĞòºÅÉú³ÉÆ÷£¬ËùÉú³ÉµÄĞòºÅÎª ¡°Ö¸¶¨µÄÇ°×º + ĞòºÅ¡±£¬ĞòºÅ´Ó0¿ªÊ¼£¬ÉÏÏŞÎª<br>
- * Ä£·ÂApacheµÄaxiomÖĞµÄUUIDGenerator¶øĞ´³É¡£
+ * ç”Ÿæˆå”¯ä¸€çš„ç¼–å·åºå·ç”Ÿæˆå™¨ï¼Œæ‰€ç”Ÿæˆçš„åºå·ä¸º â€œæŒ‡å®šçš„å‰ç¼€ + åºå·â€ï¼Œåºå·ä»0å¼€å§‹ï¼Œä¸Šé™ä¸º<br>
+ * æ¨¡ä»¿Apacheçš„axiomä¸­çš„UUIDGeneratorè€Œå†™æˆã€‚
  * 
  * @author Dharma
  * @created 2008-10-25
  */
 public class UIDGenerator
 {
-    /** IDµÄÇ°×º */
+    /** IDçš„å‰ç¼€ */
     private static String baseUID = null;
 
-    /** IDµÄĞòºÅ */
+    /** IDçš„åºå· */
     private static long incrementingValue = 0;
 
-    /** IDĞòºÅµÄ×î´óÖµ */
+    /** IDåºå·çš„æœ€å¤§å€¼ */
     private static long maxValue = 0;
 
-    /** ×Ö·ûĞÎÊ½µÄIDĞòºÅ×î´óÖµµÄÓ¦³¤¶È */
+    /** å­—ç¬¦å½¢å¼çš„IDåºå·æœ€å¤§å€¼çš„åº”é•¿åº¦ */
     private static int maxValueLen = 0;
 
-    /** ÓÃÓÚĞòºÅÇ°²¹0µÄ×Ö·ûÖĞÊı×é */
+    /** ç”¨äºåºå·å‰è¡¥0çš„å­—ç¬¦ä¸­æ•°ç»„ */
     private static String ZEROS[] = null;
 
     static
@@ -30,9 +30,9 @@ public class UIDGenerator
     }
 
     /**
-     * ³õÊ¼»¯ĞòºÅÉú³ÉÆ÷
-     * @param baseUID ĞòºÅÇ°×º
-     * @param maxValue ĞòºÅµÄ×î´óÖµ
+     * åˆå§‹åŒ–åºå·ç”Ÿæˆå™¨
+     * @param baseUID åºå·å‰ç¼€
+     * @param maxValue åºå·çš„æœ€å¤§å€¼
      */
     public static void init(String baseUID, long maxValue)
     {
@@ -50,8 +50,8 @@ public class UIDGenerator
     }
 
     /**
-     * ·µ»ØÒ»¸öÎ¨Ò»µÄID¡£ID³¤¶È¹Ì¶¨Îª: baseUID³¤¶È + 13£¨ÏµÍ³Ê±¼äµÄ³¤¶È£© + maxValue³¤¶È
-     * µ±ĞòºÅ³¤¶ÈĞ¡ÓÚmaxValueµÄ³¤¶ÈÊ±£¬»áÔÚĞòºÅµÄÇ°Ãæ²¹0 ¡£
+     * è¿”å›ä¸€ä¸ªå”¯ä¸€çš„IDã€‚IDé•¿åº¦å›ºå®šä¸º: baseUIDé•¿åº¦ + 13ï¼ˆç³»ç»Ÿæ—¶é—´çš„é•¿åº¦ï¼‰ + maxValueé•¿åº¦
+     * å½“åºå·é•¿åº¦å°äºmaxValueçš„é•¿åº¦æ—¶ï¼Œä¼šåœ¨åºå·çš„å‰é¢è¡¥0 ã€‚
      * 
      * @return string
      */
@@ -63,11 +63,11 @@ public class UIDGenerator
         }
 
         /*
-         * System.currentTimeMillis()·µ»ØµÄÊÇ´Ó1970-01-01¿ªÊ¼µÄºÁÃëÊı¡£ 
-         * µ±·µ»ØÖµÎª 9999999999xxx(10¸ö9)Ê±£¬¹²ÊÇ 9999999999/3600/24/365 = 317 Äê¡£ 
-         * ¼´ÊÇ ¹«Ôª 2287 ÄêÖ®ºóµÄÊÂÇéÁË¡£ËùÒÔ¿ÉÒÔ¹Ì¶¨ÈÏÎªÊÇ13Î»Êı¡£
+         * System.currentTimeMillis()è¿”å›çš„æ˜¯ä»1970-01-01å¼€å§‹çš„æ¯«ç§’æ•°ã€‚ 
+         * å½“è¿”å›å€¼ä¸º 9999999999xxx(10ä¸ª9)æ—¶ï¼Œå…±æ˜¯ 9999999999/3600/24/365 = 317 å¹´ã€‚ 
+         * å³æ˜¯ å…¬å…ƒ 2287 å¹´ä¹‹åçš„äº‹æƒ…äº†ã€‚æ‰€ä»¥å¯ä»¥å›ºå®šè®¤ä¸ºæ˜¯13ä½æ•°ã€‚
          * 
-         * »ùÓÚĞÔÄÜ¿¼ÂÇ£¬²»Ê¹ÓÃ String.formatµÄĞÎÊ½£¬¶øÊÇÊÖ¹¤Æ´½Ó×Ö·û´®¡£
+         * åŸºäºæ€§èƒ½è€ƒè™‘ï¼Œä¸ä½¿ç”¨ String.formatçš„å½¢å¼ï¼Œè€Œæ˜¯æ‰‹å·¥æ‹¼æ¥å­—ç¬¦ä¸²ã€‚
          */
         StringBuffer buf = new StringBuffer(64);
         buf.append(baseUID);

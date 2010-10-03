@@ -46,12 +46,12 @@ public class TagCalcShell extends BaseShell
         new Label(composite, SWT.NONE).setText("&Tag");
         tagField = new Text(composite, SWT.BORDER);
         tagField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        tagField.setToolTipText("ÊäÈëÒª¼ÆËãµÄTagÖµ");
+        tagField.setToolTipText("è¾“å…¥è¦è®¡ç®—çš„Tagå€¼");
 
-        new Label(composite, SWT.NONE).setText("½á¹û(&R)");
+        new Label(composite, SWT.NONE).setText("ç»“æœ(&R)");
         resultArea = new Text(composite, SWT.BORDER | SWT.MULTI);
         resultArea.setLayoutData(new GridData(GridData.FILL_BOTH));
-        resultArea.setToolTipText("¼ÆËã½á¹û");
+        resultArea.setToolTipText("è®¡ç®—ç»“æœ");
     }
 
     private void createButtons(Composite parent)
@@ -62,7 +62,7 @@ public class TagCalcShell extends BaseShell
         composite.setLayoutData(gridData);
         composite.setLayout(new RowLayout());
         btnCreateChm = new Button(composite, SWT.NONE);
-        btnCreateChm.setText("¼ÆËã(&C)");
+        btnCreateChm.setText("è®¡ç®—(&C)");
         btnCreateChm.addSelectionListener(new SelectionAdapter()
         {
 

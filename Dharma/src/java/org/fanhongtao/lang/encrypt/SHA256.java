@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException;
 
 import org.fanhongtao.lang.StringUtils;
 
-
 /**
  * @author Dharma
  * @created 2008-10-18
@@ -15,12 +14,11 @@ public class SHA256
     private SHA256()
     {
     }
-
+    
     /**
-     * 获取一个字符串的SHA-256摘要
-     * 
+     * Get SHA256 digest of a string
      * @param input
-     * @return
+     * @return SHA256 digest
      */
     public static String encrypt(String input)
     {
@@ -37,7 +35,7 @@ public class SHA256
         }
         return result;
     }
-
+    
     /**
      * @param args
      */
@@ -45,5 +43,5 @@ public class SHA256
     {
         System.out.println(SHA256.encrypt("hello"));
     }
-
+    
 }

@@ -11,7 +11,7 @@ import org.apache.log4j.PatternLayout;
 public final class LogUtils
 {
     /**
-     * 按最简方式初始化日志系统
+     * Initiate log4j in the a simply way.
      */
     public static void initBasicLog()
     {
@@ -20,16 +20,14 @@ public final class LogUtils
         // changeRootLayout("%r [%t] [%F:%L] %p %c %x - %m%n");
         changeRootLayout("%d{yyyy-MM-dd HH:mm:ss} [%t] [%F:%L] %p - %m%n");
     }
-
+    
     /**
-     * 修改Root Logger对应的Layout。
-     * 适用于写小程序时将Logger当println来使用。
-     * @param pattern 
+     * Change the Layout of <i>Root Logger</i>.
+     * @param pattern New pattern
      */
-    @SuppressWarnings("unchecked")
     public static void changeRootLayout(String pattern)
     {
-        Enumeration enmu = Logger.getRootLogger().getAllAppenders();
+        Enumeration<?> enmu = Logger.getRootLogger().getAllAppenders();
         while (enmu.hasMoreElements())
         {
             Appender a = (Appender) enmu.nextElement();

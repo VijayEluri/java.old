@@ -18,7 +18,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 /**
- * »°µ¥¶ÁÈ¡Æ÷£¬ÊµÏÖ¿ìËÙ²é¿´»°µ¥×Ö¶ÎµÄÖµ¼°¶ÔÓ¦µÄº¬Òå
+ * è¯å•è¯»å–å™¨ï¼Œå®ç°å¿«é€ŸæŸ¥çœ‹è¯å•å­—æ®µçš„å€¼åŠå¯¹åº”çš„å«ä¹‰
  * 
  * @author Dharma
  * @created 2009-5-6
@@ -108,8 +108,8 @@ class ViewerFrame extends JFrame
     }
 
     /**
-     * ´ÓXMLÎÄ¼şÖĞ¶ÁÈ¡»°µ¥¸ñÊ½
-     * @param xmlFileName XMLÎÄ¼şÃû
+     * ä»XMLæ–‡ä»¶ä¸­è¯»å–è¯å•æ ¼å¼
+     * @param xmlFileName XMLæ–‡ä»¶å
      * @return
      */
     private RecordInfo readFromXml(String xmlFileName)
@@ -135,7 +135,7 @@ class ViewerFrame extends JFrame
     }
 
     /**
-     * ½âÎöÔÚÎÄ±¾¿òÖĞÊäÈëµÄ»°µ¥
+     * è§£æåœ¨æ–‡æœ¬æ¡†ä¸­è¾“å…¥çš„è¯å•
      */
     private void parseRecord()
     {

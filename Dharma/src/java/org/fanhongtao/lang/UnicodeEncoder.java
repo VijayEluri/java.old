@@ -3,11 +3,11 @@ package org.fanhongtao.lang;
 public class UnicodeEncoder
 {
     /**
-     * ½«Ò»¸öUnicode×Ö·û´®×ª»»³ÉĞ¡Ğ´µÄHexĞÎÊ½µÄ×Ö·û´®¡£<br>
-     * Èç£º½«"A"×ª»»³É"0041", "Äã"×ª»»³É"4f60"
+     * å°†ä¸€ä¸ªUnicodeå­—ç¬¦ä¸²è½¬æ¢æˆå°å†™çš„Hexå½¢å¼çš„å­—ç¬¦ä¸²ã€‚<br>
+     * å¦‚ï¼šå°†"A"è½¬æ¢æˆ"0041", "ä½ "è½¬æ¢æˆ"4f60"
      * 
-     * @param unicodeStr Unicode×Ö·û´®
-     * @return ¶ÔÓ¦µÄHexĞÎÊ½µÄ×Ö·û´®
+     * @param unicodeStr Unicodeå­—ç¬¦ä¸²
+     * @return å¯¹åº”çš„Hexå½¢å¼çš„å­—ç¬¦ä¸²
      */
     public static String encode(String unicodeStr)
     {
@@ -30,10 +30,10 @@ public class UnicodeEncoder
     }
 
     /**
-     * ½«HexĞÎÊ½µÄ×Ö·û´®×ª»»³ÉÆä¶ÔÓ¦µÄUnicode´®
+     * å°†Hexå½¢å¼çš„å­—ç¬¦ä¸²è½¬æ¢æˆå…¶å¯¹åº”çš„Unicodeä¸²
      * 
-     * @param hexStr HexĞÎÊ½µÄ×Ö·û´®
-     * @return ¶ÔÓ¦µÄUnicode×Ö·û´®
+     * @param hexStr Hexå½¢å¼çš„å­—ç¬¦ä¸²
+     * @return å¯¹åº”çš„Unicodeå­—ç¬¦ä¸²
      */
     public static String decode(String hexStr)
     {

@@ -24,16 +24,16 @@ import org.fanhongtao.utils.TimeDuration;
 
 
 /**
- * ÁĞ³öÖ¸¶¨Ä¿Â¼ÏÂÎÄ¼ş
+ * åˆ—å‡ºæŒ‡å®šç›®å½•ä¸‹æ–‡ä»¶
  * @author Dharma
  * @created 2009-3-31
  */
 public class DirShell extends BaseShell
 {
-    /** ËùÒª²éÑ¯µÄÄ¿Â¼ */
+    /** æ‰€è¦æŸ¥è¯¢çš„ç›®å½• */
     private Text textPath;
 
-    /** ±£´æÏÔÊ¾ĞÅÏ¢µÄÎÄ±¾ */
+    /** ä¿å­˜æ˜¾ç¤ºä¿¡æ¯çš„æ–‡æœ¬ */
     private Text textDetail;
 
     @Override
@@ -41,30 +41,30 @@ public class DirShell extends BaseShell
     {
         shell.setLayout(new GridLayout());
 
-        // ´´½¨Ñ¡ÔñÄ¿Â¼µÄ°´Å¥
+        // åˆ›å»ºé€‰æ‹©ç›®å½•çš„æŒ‰é’®
         Composite composite = new Composite(shell, SWT.NONE);
         composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         composite.setLayout(new FillLayout());
-        DirChooser chooser = new DirChooser(composite, "Ä¿Â¼(&D)", "ËùÒª²éÑ¯µÄÄ¿Â¼", "Ñ¡Ôñ(&C)", "Ñ¡ÔñÄ¿Â¼");
+        DirChooser chooser = new DirChooser(composite, "ç›®å½•(&D)", "æ‰€è¦æŸ¥è¯¢çš„ç›®å½•", "é€‰æ‹©(&C)", "é€‰æ‹©ç›®å½•");
         textPath = chooser.getTextPath();
 
-        // ´´½¨ÏÔÊ¾ÎÄ¼şĞÅÏ¢µÄÎÄ±¾Óò
+        // åˆ›å»ºæ˜¾ç¤ºæ–‡ä»¶ä¿¡æ¯çš„æ–‡æœ¬åŸŸ
         composite = new Composite(shell, SWT.NONE);
         composite.setLayoutData(new GridData(GridData.FILL_BOTH));
         composite.setLayout(new FillLayout());
         textDetail = new Text(composite, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
 
-        // Í¨¹ıLog4JÔÚÎÄ±¾ÓòÀïÏÔÊ¾ÄÚÈİ
+        // é€šè¿‡Log4Jåœ¨æ–‡æœ¬åŸŸé‡Œæ˜¾ç¤ºå†…å®¹
         SwtTextLogAppender appender = new SwtTextLogAppender(new PatternLayout("%m"), textDetail);
-        Logger.getRootLogger().removeAllAppenders(); // É¾³ıÔ­À´µÄAppender(¼´£º²»ÔÚ¿ØÖÆÌ¨ÉÏÏÔÊ¾)
+        Logger.getRootLogger().removeAllAppenders(); // åˆ é™¤åŸæ¥çš„Appender(å³ï¼šä¸åœ¨æ§åˆ¶å°ä¸Šæ˜¾ç¤º)
         Logger.getRootLogger().addAppender(appender);
 
-        // ´´½¨¿ªÊ¼°´Å¥
+        // åˆ›å»ºå¼€å§‹æŒ‰é’®
         composite = new Composite(shell, SWT.NONE);
         composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         composite.setLayout(new FillLayout());
         Button btnStart = new Button(composite, SWT.NONE);
-        btnStart.setText("¿ªÊ¼(&S)");
+        btnStart.setText("å¼€å§‹(&S)");
         btnStart.addSelectionListener(new SelectionAdapter()
         {
 
@@ -75,7 +75,7 @@ public class DirShell extends BaseShell
                 String pathName = textPath.getText();
                 File file = new File(pathName);
                 Dir.dir(file);
-                SWTUtils.showMessage(getShell(), SWT.NONE, "½áÊø", StringUtils.CRLF + dur);
+                SWTUtils.showMessage(getShell(), SWT.NONE, "ç»“æŸ", StringUtils.CRLF + dur);
             }
 
         });
@@ -86,7 +86,7 @@ public class DirShell extends BaseShell
      */
     public static void main(String[] args)
     {
-        BasicConfigurator.configure(); // Ê¹ÓÃÈ±Ê¡ÅäÖÃ
+        BasicConfigurator.configure(); // ä½¿ç”¨ç¼ºçœé…ç½®
         new DirShell().run("Dir");
     }
 }

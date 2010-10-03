@@ -7,7 +7,7 @@ import org.fanhongtao.net.frame.aio.ChannelWriter;
 
 
 /**
- * ÊµÏÖ½«ÏûÏ¢Ô­Ñù·µ»Ø¸ø¿Í»§¶Ë
+ * å®ç°å°†æ¶ˆæ¯åŸæ ·è¿”å›ç»™å®¢æˆ·ç«¯
  * @author Dharma
  * @created 2009-5-2
  */
@@ -19,7 +19,7 @@ public class EchoHandler extends HandlerAdapter
     {
         MsgInfo msg = req.getMsgInfo();
         byte[] data = msg.getMsg();
-        if ((data.length == 1) && (data[0] == 0x03)) // Ctrl-C ÖĞ¶ÏÁ¬½Ó
+        if ((data.length == 1) && (data[0] == 0x03)) // Ctrl-C ä¸­æ–­è¿æ¥
         {
             NetUtils.closeKey(req.getKey());
             return;

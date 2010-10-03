@@ -3,7 +3,7 @@ package org.fanhongtao.middleman.core;
 import org.fanhongtao.net.frame.MsgInfo;
 
 /**
- * ¾ßÓĞ¼ÇÂ¼ÏûÏ¢¹¦ÄÜµÄ´°Ìå
+ * å…·æœ‰è®°å½•æ¶ˆæ¯åŠŸèƒ½çš„çª—ä½“
  * @author Dharma
  * @created 2008-11-26
  */

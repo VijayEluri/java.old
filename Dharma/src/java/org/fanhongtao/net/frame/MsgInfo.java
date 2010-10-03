@@ -9,37 +9,37 @@ import org.fanhongtao.lang.StringUtils;
 public class MsgInfo
 {
     /**
-     * ÏûÏ¢µÄ±àºÅ
+     * æ¶ˆæ¯çš„ç¼–å·
      */
     private int serial = 0;
 
     /**
-     * ½ÓÊÕ£¨·¢ËÍ£©ÏûÏ¢µÄÊ±¼ä
+     * æ¥æ”¶ï¼ˆå‘é€ï¼‰æ¶ˆæ¯çš„æ—¶é—´
      */
     private long time = 0;
 
     /**
-     * ½ÓÊÕ»ò·¢ËÍµÄÏûÏ¢
+     * æ¥æ”¶æˆ–å‘é€çš„æ¶ˆæ¯
      */
     private byte[] msg = null;
 
     /**
-     * ·¢ËÍ¶ËµÄIP
+     * å‘é€ç«¯çš„IP
      */
     private String srcIP = null;
 
     /**
-     * ·¢ËÍ¶ËµÄPort
+     * å‘é€ç«¯çš„Port
      */
     private int srcPort = 0;
 
     /**
-     * ½ÓÊÕ¶ËµÄIP
+     * æ¥æ”¶ç«¯çš„IP
      */
     private String destIP = null;
 
     /**
-     * ½ÓÊÕ¶ËµÄPort
+     * æ¥æ”¶ç«¯çš„Port
      */
     private int destPort = 0;
 

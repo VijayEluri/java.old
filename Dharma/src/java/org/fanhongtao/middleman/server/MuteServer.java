@@ -15,7 +15,7 @@ import org.fanhongtao.middleman.core.IMessageWindow;
 
 
 /**
- * Ö»½ÓÊÕÏûÏ¢£¬²»¸ø¿Í»§¶Ë»Ø¸´ÈÎºÎÏûÏ¢¡£
+ * åªæ¥æ”¶æ¶ˆæ¯ï¼Œä¸ç»™å®¢æˆ·ç«¯å›å¤ä»»ä½•æ¶ˆæ¯ã€‚
  * 
  * @author Dharma
  * @created 2008-10-29
@@ -24,7 +24,7 @@ public class MuteServer extends AsyncObject implements Runnable
 {
     private static Logger logger = Logger.getLogger(MuteServer.class);
 
-    /** ·şÎñ¶Ë¿Ú */
+    /** æœåŠ¡ç«¯å£ */
     private int port = 0;
 
     private ServerSocketChannel serverChannel = null;
@@ -41,12 +41,12 @@ public class MuteServer extends AsyncObject implements Runnable
     {
         logger.info("Try to start server with port " + port);
 
-        // Éú³ÉÒ»¸öÕìÌı¶Ë
+        // ç”Ÿæˆä¸€ä¸ªä¾¦å¬ç«¯
         try
         {
             serverChannel = ServerSocketChannel.open();
-            serverChannel.configureBlocking(false); // ½«ÕìÌı¶ËÉèÎªÒì²½·½Ê½
-            // ÕìÌı¶Ë°ó¶¨µ½Ò»¸ö¶Ë¿Ú
+            serverChannel.configureBlocking(false); // å°†ä¾¦å¬ç«¯è®¾ä¸ºå¼‚æ­¥æ–¹å¼
+            // ä¾¦å¬ç«¯ç»‘å®šåˆ°ä¸€ä¸ªç«¯å£
             serverChannel.socket().bind(new InetSocketAddress(port));
 
         }
@@ -66,9 +66,9 @@ public class MuteServer extends AsyncObject implements Runnable
         logger.debug("Try to accept client...");
         try
         {
-            selector = Selector.open(); // Éú³ÉÒ»¸öĞÅºÅ¼àÊÓÆ÷
+            selector = Selector.open(); // ç”Ÿæˆä¸€ä¸ªä¿¡å·ç›‘è§†å™¨
 
-            // ÉèÖÃÕìÌı¶ËËùÑ¡µÄÒì²½ĞÅºÅOP_ACCEPT, ÕâÑù²ÅÄÜ¹»ĞÂµÄÁ¬½Ó
+            // è®¾ç½®ä¾¦å¬ç«¯æ‰€é€‰çš„å¼‚æ­¥ä¿¡å·OP_ACCEPT, è¿™æ ·æ‰èƒ½å¤Ÿæ–°çš„è¿æ¥
             serverChannel.register(selector, SelectionKey.OP_ACCEPT);
 
             int count = 0;
@@ -81,7 +81,7 @@ public class MuteServer extends AsyncObject implements Runnable
                 }
                 else
                 {
-                    // Ã»ÓĞÖ¸¶¨µÄI/OÊÂ¼ş·¢Éú
+                    // æ²¡æœ‰æŒ‡å®šçš„I/Oäº‹ä»¶å‘ç”Ÿ
                     count++;
                     if (count > 10)
                     {
@@ -100,7 +100,7 @@ public class MuteServer extends AsyncObject implements Runnable
     }
 
     /**
-     * ´¦ÀíIOÊÂ¼ş
+     * å¤„ç†IOäº‹ä»¶
      * 
      * @param selector
      * @throws IOException
@@ -113,16 +113,16 @@ public class MuteServer extends AsyncObject implements Runnable
             SelectionKey key = iterator.next();
             if (key.isAcceptable())
             {
-                // ÕìÌı¶ËĞÅºÅ´¥·¢
+                // ä¾¦å¬ç«¯ä¿¡å·è§¦å‘
                 ServerSocketChannel server = (ServerSocketChannel) key.channel();
 
-                // ½ÓÊÜÒ»¸öĞÂµÄÁ¬½Ó
+                // æ¥å—ä¸€ä¸ªæ–°çš„è¿æ¥
                 SocketChannel client = server.accept();
                 client.configureBlocking(false);
 
-                // ÉèÖÃ¸ÃsocketµÄÒì²½ĞÅºÅOP_READ
-                // µ±socketÖĞÓĞÊı¾İÊ±£¬»á´¥·¢ processIOEvent
-                // Í¨¹ı key.isReadable() ÅĞ¶Ï£¬×îÖÕµ÷ÓÃ receiveDataFromClient()
+                // è®¾ç½®è¯¥socketçš„å¼‚æ­¥ä¿¡å·OP_READ
+                // å½“socketä¸­æœ‰æ•°æ®æ—¶ï¼Œä¼šè§¦å‘ processIOEvent
+                // é€šè¿‡ key.isReadable() åˆ¤æ–­ï¼Œæœ€ç»ˆè°ƒç”¨ receiveDataFromClient()
                 client.register(selector, SelectionKey.OP_READ);
                 onAccept(client);
                 logger.info("Accept a client , port is " + client.socket().getPort());
@@ -130,7 +130,7 @@ public class MuteServer extends AsyncObject implements Runnable
             if (key.isReadable())
             {
                 logger.debug("Receive date from client");
-                // Ä³socket¿É¶ÁĞÅºÅ
+                // æŸsocketå¯è¯»ä¿¡å·
                 receiveDataFromClient(key);
             }
             iterator.remove();
@@ -138,7 +138,7 @@ public class MuteServer extends AsyncObject implements Runnable
     }
 
     /**
-     * »ñµÃÒ»¸ö¿Í»§¶ËµÄÁ´½Ó
+     * è·å¾—ä¸€ä¸ªå®¢æˆ·ç«¯çš„é“¾æ¥
      * @param client
      */
     protected void onAccept(SocketChannel client)
@@ -146,44 +146,44 @@ public class MuteServer extends AsyncObject implements Runnable
     }
 
     /**
-     * ´¦ÀíÀ´×Ô¿Í»§¶ËµÄÏûÏ¢
+     * å¤„ç†æ¥è‡ªå®¢æˆ·ç«¯çš„æ¶ˆæ¯
      * 
-     * @param key ´ú±í¶ÔÓ¦µÄ¿Í»§¶Ë
+     * @param key ä»£è¡¨å¯¹åº”çš„å®¢æˆ·ç«¯
      * 
      */
     public void receiveDataFromClient(SelectionKey key)
     {
-        // ÓÉkey»ñÈ¡Ö¸¶¨socketchannelµÄÒıÓÃ
+        // ç”±keyè·å–æŒ‡å®šsocketchannelçš„å¼•ç”¨
         SocketChannel clientChannel = (SocketChannel) key.channel();
         readBuffer.clear();
 
         try
         {
-            // ¶ÁÈ¡Êı¾İµ½readBuffer
+            // è¯»å–æ•°æ®åˆ°readBuffer
             while (clientChannel.read(readBuffer) > 0)
             {
                 ; // do nothing
             }
-            // È·±£ readBuffer ¿É¶Á
+            // ç¡®ä¿ readBuffer å¯è¯»
             readBuffer.flip();
 
-            // ¶ÁÈë×Ö½ÚÎª0, ÔòÈÏÎªÊÇ¿Í»§¶ËÒÑ¾­¶ÏÁ¬
+            // è¯»å…¥å­—èŠ‚ä¸º0, åˆ™è®¤ä¸ºæ˜¯å®¢æˆ·ç«¯å·²ç»æ–­è¿
             if (readBuffer.limit() == 0)
             {
                 throw new IOException("Read 0 bytes from socket.");
             }
 
-            // ½«½ÓÊÕµ½µÄÏûÏ¢¼ÇÂ¼ÏÂÀ´
+            // å°†æ¥æ”¶åˆ°çš„æ¶ˆæ¯è®°å½•ä¸‹æ¥
             logReceivedMessage(clientChannel);
 
             /* 
-             * // ½« readBuffer ÄÚÈİ¿½Èë writeBuffer
+             * // å°† readBuffer å†…å®¹æ‹·å…¥ writeBuffer
              
             writeBuffer.clear();
             writeBuffer.put(readBuffer);
             writeBuffer.flip();
 
-            // ½«Êı¾İ·µ»Ø¸ø¿Í»§¶Ë
+            // å°†æ•°æ®è¿”å›ç»™å®¢æˆ·ç«¯
             while (writeBuffer.hasRemaining())
             {
                 clientChannel.write(writeBuffer);
@@ -212,7 +212,7 @@ public class MuteServer extends AsyncObject implements Runnable
      */
     public static void main(String[] args)
     {
-        BasicConfigurator.configure(); // Ê¹ÓÃÈ±Ê¡ÅäÖÃ
+        BasicConfigurator.configure(); // ä½¿ç”¨ç¼ºçœé…ç½®
 
         int port = 8088;
         if (args.length == 1)

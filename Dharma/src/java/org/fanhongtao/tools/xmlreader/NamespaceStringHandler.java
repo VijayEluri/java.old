@@ -23,11 +23,11 @@ public class NamespaceStringHandler extends StringHandler
         sb.append(name);
         addAttributes(attributes);
 
-        // 增加新的名字空间
-        if (uri.length() != 0) // 有可能元素没有对应的名字空间
+        // 澧炲姞鏂扮殑鍚嶅瓧绌洪棿
+        if (uri.length() != 0) // 鏈夊彲鑳藉厓绱犳病鏈夊搴旂殑鍚嶅瓧绌洪棿
         {
             String value = uriMap.get(uri);
-            if (value == null) // 新的名字空间
+            if (value == null) // 鏂扮殑鍚嶅瓧绌洪棿
             {
                 uriMap.put(uri, uri);
                 int index = name.lastIndexOf(localName);

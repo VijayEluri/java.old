@@ -35,7 +35,7 @@ public class ChmBuilderFrame extends JFrame
         JPanel panel = new JPanel();
         // panel.setLayout(new BorderLayout());
         // panel = new JPanel();
-        // ´´½¨ÊäÈëÑ¡ÏîµÄ¿Ø¼ş
+        // åˆ›å»ºè¾“å…¥é€‰é¡¹çš„æ§ä»¶
         panel.setLayout(new GridLayout(0, 2));
         add(panel, BorderLayout.CENTER);
 
@@ -57,7 +57,7 @@ public class ChmBuilderFrame extends JFrame
         textDefaultHtml = new JTextField();
         panel.add(textDefaultHtml);
 
-        // ÉèÖÃÈ±Ê¡Öµ
+        // è®¾ç½®ç¼ºçœå€¼
         textChmFile.setText("Apache.Lang.chm");
         textHtmlDir.setText("d:\\java\\Apache\\Commons\\apidocs");
         textDefaultHtml.setText("index.html");

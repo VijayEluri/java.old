@@ -12,19 +12,19 @@ import org.fanhongtao.net.frame.Request;
 public interface IHandler
 {
     /**
-     * ´¦Àí½¨Á¢Á¬½ÓµÄÊÂ¼ş
+     * å¤„ç†å»ºç«‹è¿æ¥çš„äº‹ä»¶
      * @param clientKey
      */
     public void onAccept(SelectionKey clientKey);
 
     /**
-     * ´¦ÀíÏûÏ¢
-     * @param req ÇëÇóÏûÏ¢
+     * å¤„ç†æ¶ˆæ¯
+     * @param req è¯·æ±‚æ¶ˆæ¯
      */
     public void onMessage(Request req);
 
     /**
-     * ´¦ÀíÁ¬½Ó¶Ï¿ªµÄÊÂ¼ş
+     * å¤„ç†è¿æ¥æ–­å¼€çš„äº‹ä»¶
      * @param clientKey
      */
     public void onClose(SelectionKey clientKey);

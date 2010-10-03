@@ -45,7 +45,7 @@ public class StringHandler extends PrintHandler
     }
 
     /**
-     * 将元素的属性加入字符串
+     * 灏嗗厓绱犵殑灞炴�у姞鍏ュ瓧绗︿覆
      * 
      * @param attributes
      */

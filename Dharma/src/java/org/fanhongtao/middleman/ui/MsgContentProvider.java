@@ -12,22 +12,22 @@ import org.eclipse.jface.viewers.Viewer;
  */
 public class MsgContentProvider implements IStructuredContentProvider
 {
-
+    
     @Override
     public Object[] getElements(Object inputElement)
     {
-        // 这里假设给TableViewer的数据源（input）是一个List对象
-        return ((List) inputElement).toArray();
+        // 杩欓噷鍋囪缁橳ableViewer鐨勬暟鎹簮锛坕nput锛夋槸涓�涓狶ist瀵硅薄
+        return ((List<?>) inputElement).toArray();
     }
-
+    
     @Override
     public void dispose()
     {
     }
-
+    
     @Override
     public void inputChanged(Viewer viewer, Object oldInput, Object newInput)
     {
     }
-
+    
 }

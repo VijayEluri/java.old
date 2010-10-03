@@ -10,7 +10,7 @@ import org.fanhongtao.middleman.core.IMessageWindow;
 
 
 /**
- * ½«½ÓÊÕµ½µÄÏûÏ¢Ô­Ñù·µ»Ø¸ø¿Í»§¶Ë
+ * å°†æ¥æ”¶åˆ°çš„æ¶ˆæ¯åŸæ ·è¿”å›ç»™å®¢æˆ·ç«¯
  *  
  * @author Dharma
  * @created 2008-11-26
@@ -25,45 +25,45 @@ public class EchoServer extends MuteServer
     }
 
     /**
-     * ´¦ÀíÀ´×Ô¿Í»§¶ËµÄÏûÏ¢
+     * å¤„ç†æ¥è‡ªå®¢æˆ·ç«¯çš„æ¶ˆæ¯
      * 
-     * @param key ´ú±í¶ÔÓ¦µÄ¿Í»§¶Ë
+     * @param key ä»£è¡¨å¯¹åº”çš„å®¢æˆ·ç«¯
      * 
      */
     public void receiveDataFromClient(SelectionKey key)
     {
-        // ÓÉkey»ñÈ¡Ö¸¶¨socketchannelµÄÒıÓÃ
+        // ç”±keyè·å–æŒ‡å®šsocketchannelçš„å¼•ç”¨
         SocketChannel clientChannel = (SocketChannel) key.channel();
         readBuffer.clear();
 
         try
         {
-            // ¶ÁÈ¡Êı¾İµ½readBuffer
+            // è¯»å–æ•°æ®åˆ°readBuffer
             while (clientChannel.read(readBuffer) > 0)
             {
                 ; // do nothing
             }
-            // È·±£ readBuffer ¿É¶Á
+            // ç¡®ä¿ readBuffer å¯è¯»
             readBuffer.flip();
 
-            // ¶ÁÈë×Ö½ÚÎª0, ÔòÈÏÎªÊÇ¿Í»§¶ËÒÑ¾­¶ÏÁ¬
+            // è¯»å…¥å­—èŠ‚ä¸º0, åˆ™è®¤ä¸ºæ˜¯å®¢æˆ·ç«¯å·²ç»æ–­è¿
             if (readBuffer.limit() == 0)
             {
                 throw new IOException("Read 0 bytes from socket.");
             }
 
-            // ½«½ÓÊÕµ½µÄÏûÏ¢¼ÇÂ¼ÏÂÀ´
+            // å°†æ¥æ”¶åˆ°çš„æ¶ˆæ¯è®°å½•ä¸‹æ¥
             logReceivedMessage(clientChannel);
 
-            // ½« readBuffer ÄÚÈİ¿½Èë writeBuffer
+            // å°† readBuffer å†…å®¹æ‹·å…¥ writeBuffer
             writeBuffer.clear();
             writeBuffer.put(readBuffer);
             writeBuffer.flip();
 
-            // ¼ÇÂ¼ÏÂ·¢ËÍ¸ø¿Í»§¶ËµÄÏûÏ¢
+            // è®°å½•ä¸‹å‘é€ç»™å®¢æˆ·ç«¯çš„æ¶ˆæ¯
             logWritedMessage(clientChannel);
 
-            // ½«Êı¾İ·µ»Ø¸ø¿Í»§¶Ë
+            // å°†æ•°æ®è¿”å›ç»™å®¢æˆ·ç«¯
             while (writeBuffer.hasRemaining())
             {
                 clientChannel.write(writeBuffer);
@@ -91,7 +91,7 @@ public class EchoServer extends MuteServer
      */
     public static void main(String[] args)
     {
-        BasicConfigurator.configure(); // Ê¹ÓÃÈ±Ê¡ÅäÖÃ
+        BasicConfigurator.configure(); // ä½¿ç”¨ç¼ºçœé…ç½®
 
         int port = 8088;
         if (args.length == 1)

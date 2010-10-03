@@ -4,41 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 记录数据库中一张表的表结构
+ * The table structure
  * @author Dharma
  * @created 2009-6-3
  */
 public class Table
 {
-    /** 表名 */
+    /** Table's name */
     private String name;
-
-    /** 表中的字段 */
+    
+    /** Columns of the table */
     private Column[] columns;
-
-    /** 在读取XML文件时使用的列表，读取成功后，只使用 columns */
+    
+    /** This list is used when reading from XML.<br>
+     * After reading, we only use columns */
     private List<Column> columnList = new ArrayList<Column>();
-
+    
     public String getName()
     {
         return name;
     }
-
+    
     public void setName(String name)
     {
         this.name = name;
     }
-
+    
     public void adjust()
     {
         columns = columnList.toArray(new Column[] {});
     }
-
+    
     public void addColumn(Column column)
     {
         columnList.add(column);
     }
-
+    
     @Override
     public String toString()
     {
@@ -55,5 +56,5 @@ public class Table
         }
         return buf.toString();
     }
-
+    
 }

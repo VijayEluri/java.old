@@ -14,7 +14,7 @@ import org.fanhongtao.middleman.core.AsyncObject;
 
 
 /**
- * ÊµÏÖÒì²½µÄ¿Í»§¶Ë
+ * å®ç°å¼‚æ­¥çš„å®¢æˆ·ç«¯
  * @author Dharma
  * @created 2008-11-26
  */
@@ -23,22 +23,22 @@ class AsyncClient extends AsyncObject implements Runnable
     private static Logger logger = Logger.getLogger(AsyncClient.class);
 
     /**
-     * Óë·şÎñÆ÷Ö®¼äµÄÁ´½Ó
+     * ä¸æœåŠ¡å™¨ä¹‹é—´çš„é“¾æ¥
      */
     private SocketChannel clientChannel;
 
     /**
-     * ·şÎñÆ÷IP
+     * æœåŠ¡å™¨IP
      */
     private String host;
 
     /**
-     * ·şÎñÆ÷¶Ë¿Ú
+     * æœåŠ¡å™¨ç«¯å£
      */
     private int port;
 
     /**
-     * ´ı·¢ËÍÏûÏ¢µÄ¶ÓÁĞ
+     * å¾…å‘é€æ¶ˆæ¯çš„é˜Ÿåˆ—
      */
     private ArrayList<byte[]> sendList = new ArrayList<byte[]>();
 
@@ -53,13 +53,13 @@ class AsyncClient extends AsyncObject implements Runnable
         logger.info("Try to connect to " + host + " : " + port);
         try
         {
-            // Éú³ÉÒ»¸ösocketchannel, ²¢Á¬½Óµ½ Server
+            // ç”Ÿæˆä¸€ä¸ªsocketchannel, å¹¶è¿æ¥åˆ° Server
             InetSocketAddress addr = new InetSocketAddress(host, port);
             clientChannel = SocketChannel.open(addr);
             logger.info("connection has been established, local port is " + clientChannel.socket().getLocalPort());
-            clientChannel.configureBlocking(false); // ÉèÖÃÎª·Ç×èÈû·½Ê½
+            clientChannel.configureBlocking(false); // è®¾ç½®ä¸ºéé˜»å¡æ–¹å¼
 
-            Selector selector = Selector.open(); // Éú³ÉÒ»¸öĞÅºÅ¼àÊÓÆ÷
+            Selector selector = Selector.open(); // ç”Ÿæˆä¸€ä¸ªä¿¡å·ç›‘è§†å™¨
             clientChannel.register(selector, SelectionKey.OP_READ);
 
             while (!isQuit())
@@ -87,7 +87,7 @@ class AsyncClient extends AsyncObject implements Runnable
     }
 
     /**
-     * ½«·¢ËÍ¶ÓÁĞÖĞµÄÏûÏ¢·¢ËÍ³öÈ¥
+     * å°†å‘é€é˜Ÿåˆ—ä¸­çš„æ¶ˆæ¯å‘é€å‡ºå»
      * @throws IOException 
      */
     private void sendMessage() throws IOException
@@ -96,14 +96,14 @@ class AsyncClient extends AsyncObject implements Runnable
         {
             if (sendList.size() > 0)
             {
-                // Ã¿´ÎÖ»·¢ËÍÒ»¸öÏûÏ¢£¬ÒÔ·ÀÖ¹²úÉúµÄÏûÏ¢Ì«¶à
+                // æ¯æ¬¡åªå‘é€ä¸€ä¸ªæ¶ˆæ¯ï¼Œä»¥é˜²æ­¢äº§ç”Ÿçš„æ¶ˆæ¯å¤ªå¤š
                 byte[] msg = sendList.remove(0);
                 writeBuffer.clear();
                 writeBuffer.put(msg);
                 writeBuffer.flip();
                 logWritedMessage(clientChannel);
 
-                // ·¢ËÍÏûÏ¢
+                // å‘é€æ¶ˆæ¯
                 while (writeBuffer.hasRemaining())
                 {
                     clientChannel.write(writeBuffer);
@@ -123,7 +123,7 @@ class AsyncClient extends AsyncObject implements Runnable
     }
 
     /**
-     * ´¦ÀíIOÊÂ¼ş
+     * å¤„ç†IOäº‹ä»¶
      * 
      * @param selector
      * @throws IOException
@@ -144,7 +144,7 @@ class AsyncClient extends AsyncObject implements Runnable
     }
 
     /**
-     * ¶ÁÈ¡server¶Ë·¢»ØµÄÊı¾İ£¬²¢ÏÔÊ¾
+     * è¯»å–serverç«¯å‘å›çš„æ•°æ®ï¼Œå¹¶æ˜¾ç¤º
      * 
      * @throws IOException
      */

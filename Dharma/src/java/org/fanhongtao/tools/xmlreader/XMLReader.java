@@ -32,13 +32,13 @@ import org.xml.sax.SAXException;
 public class XMLReader extends BaseShell
 {
 
-    // ĞèÒª½âÎöµÄXMLÎÄ¼ş
+    // éœ€è¦è§£æçš„XMLæ–‡ä»¶
     private Text textXML = null;
 
-    // ½âÎöºóµÄXMLÎÄ¼ş
+    // è§£æåçš„XMLæ–‡ä»¶
     private Text textDetail = null;
 
-    // ÏµÍ³ÔËĞĞ¹ı³ÌÖĞµÄÌáÊ¾ĞÅÏ¢
+    // ç³»ç»Ÿè¿è¡Œè¿‡ç¨‹ä¸­çš„æç¤ºä¿¡æ¯
     private Text textInfo = null;
 
     /*
@@ -86,7 +86,7 @@ public class XMLReader extends BaseShell
         SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
         sashForm.setLayoutData(BorderData.CENTER);
 
-        // ´´½¨ÊäÈëÔ­Ê¼XMLÄÚÈİµÄ¿Ø¼ş
+        // åˆ›å»ºè¾“å…¥åŸå§‹XMLå†…å®¹çš„æ§ä»¶
         Composite composite = new Composite(sashForm, SWT.NONE);
         composite.setLayout(new GridLayout());
         Label label = new Label(composite, SWT.NONE);
@@ -96,7 +96,7 @@ public class XMLReader extends BaseShell
         textXML.setLayoutData(new GridData(GridData.FILL_BOTH));
         textXML.setText(DETAULT_XML);
 
-        // ´´½¨ÏÔÊ¾·ÖÎöºóµÄXMLµÄ¿Ø¼ş
+        // åˆ›å»ºæ˜¾ç¤ºåˆ†æåçš„XMLçš„æ§ä»¶
         composite = new Composite(sashForm, SWT.NONE);
         composite.setLayout(new GridLayout());
         label = new Label(composite, SWT.NONE);
@@ -113,7 +113,7 @@ public class XMLReader extends BaseShell
     }
 
     /**
-     * Ê¹ÓÃÖ¸¶¨µÄ½âÎöÆ÷£¬½âÎöXMLÎÄ¼ş
+     * ä½¿ç”¨æŒ‡å®šçš„è§£æå™¨ï¼Œè§£æXMLæ–‡ä»¶
      * 
      * @throws SAXException
      * @throws ParserConfigurationException

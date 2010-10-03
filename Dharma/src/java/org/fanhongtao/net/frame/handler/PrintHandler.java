@@ -6,7 +6,7 @@ import org.fanhongtao.net.frame.Request;
 
 
 /**
- * 将接收到的消息记录到日志
+ * 灏嗘帴鏀跺埌鐨勬秷鎭褰曞埌鏃ュ織
  * @author Dharma
  * @created 2009-5-2
  */

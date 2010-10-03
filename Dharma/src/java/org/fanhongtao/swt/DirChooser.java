@@ -15,26 +15,26 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * ÊµÏÖ¶ÔÄ¿Â¼Ñ¡ÔñµÄ·â×°
+ * å®ç°å¯¹ç›®å½•é€‰æ‹©çš„å°è£…
  * @author Dharma
  * @created 2009-3-31
  */
 public class DirChooser
 {
-    /** ·ÅÖÃ¿Ø¼şµÄComposite */
+    /** æ”¾ç½®æ§ä»¶çš„Composite */
     private Composite composite;
 
-    /** ±£´æËùÑ¡ÔñÂ·¾¶µÄÎÄ±¾Óò */
+    /** ä¿å­˜æ‰€é€‰æ‹©è·¯å¾„çš„æ–‡æœ¬åŸŸ */
     private Text textPath;
 
     /**
-     * µ÷ÓÃ¶¼±ØĞë¶Ô·µ»ØµÄ Composite ¶ÔÏóÉèÖÃÎ»ÖÃ£¬Èç£º<br>  
+     * è°ƒç”¨éƒ½å¿…é¡»å¯¹è¿”å›çš„ Composite å¯¹è±¡è®¾ç½®ä½ç½®ï¼Œå¦‚ï¼š<br>  
      *   composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-     * @param parent ¸¸¿Ø¼ş
-     * @param labelText ¿Ø¼şÎÄ±¾
-     * @param tipText ÏÔÊ¾ËùÑ¡ÔñÂ·¾¶µÄÎÄ±¾ÓòÉÏµÄÌáÊ¾ĞÅÏ¢£¬¿ÉÒÔÎª null
-     * @param btnText Ñ¡Ôñ°´Å¥ÉÏÏÔÊ¾µÄÎÄ×Ö
-     * @param titleText °´ÏÂ°´Å¥ºó£¬µ¯³öµÄÌáÊ¾¿òÉÏÏÔÊ¾µÄÎÄ×Ö
+     * @param parent çˆ¶æ§ä»¶
+     * @param labelText æ§ä»¶æ–‡æœ¬
+     * @param tipText æ˜¾ç¤ºæ‰€é€‰æ‹©è·¯å¾„çš„æ–‡æœ¬åŸŸä¸Šçš„æç¤ºä¿¡æ¯ï¼Œå¯ä»¥ä¸º null
+     * @param btnText é€‰æ‹©æŒ‰é’®ä¸Šæ˜¾ç¤ºçš„æ–‡å­—
+     * @param titleText æŒ‰ä¸‹æŒ‰é’®åï¼Œå¼¹å‡ºçš„æç¤ºæ¡†ä¸Šæ˜¾ç¤ºçš„æ–‡å­—
      * 
      */
     public DirChooser(Composite parent, String labelText, String tipText, String btnText, final String titleText)

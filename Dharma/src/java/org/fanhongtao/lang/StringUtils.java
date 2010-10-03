@@ -9,16 +9,14 @@ import java.util.Locale;
  */
 public class StringUtils
 {
-    /** »»ĞĞ·û */
     public static final String CRLF = System.getProperty("line.separator");
-
-    /** Ê®Áù½øÖÆµÄ·ûºÅ */
+    
     private static final char[] HEX = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-
+    
     /**
-     * ½«byteÊı×é×ª»»³ÉÊ®Áù½øÖÆµÄ×Ö·û´®
+     * å°†byteæ•°ç»„è½¬æ¢æˆåå…­è¿›åˆ¶çš„å­—ç¬¦ä¸²
      * @param bytes
-     * @return ×ª»»ºóµÄ×Ö·û´®
+     * @return è½¬æ¢åçš„å­—ç¬¦ä¸²
      */
     public static String bytesToHexString(byte[] bytes)
     {
@@ -33,38 +31,38 @@ public class StringUtils
         }
         return sb.toString();
     }
-
+    
     /**
-     * ½«×Ö·û´®×ª»»³ÉÀàËÆÓÚUltraEditÖĞµÄÊ®Áù½øÖÆµÄĞÎÊ½ÏÔÊ¾
+     * å°†å­—ç¬¦ä¸²è½¬æ¢æˆç±»ä¼¼äºUltraEditä¸­çš„åå…­è¿›åˆ¶çš„å½¢å¼æ˜¾ç¤º
      * @param str 
-     * @return ×ª»»ºóµÄ×Ö·û´®
+     * @return è½¬æ¢åçš„å­—ç¬¦ä¸²
      */
     public static String toHexString(String str)
     {
         byte[] bytes = str.getBytes();
         return toHexString(bytes);
     }
-
+    
     /**
-     * ½«byteÊı¾İ×ª»»³ÉÀàËÆÓÚUltraEditÖĞµÄÊ®Áù½øÖÆµÄĞÎÊ½ÏÔÊ¾
-     * @param bytes ĞèÒª×ª»»µÄÊı×é
-     * @return ×ª»»ºóµÄ×Ö·û´®
+     * å°†byteæ•°æ®è½¬æ¢æˆç±»ä¼¼äºUltraEditä¸­çš„åå…­è¿›åˆ¶çš„å½¢å¼æ˜¾ç¤º
+     * @param bytes éœ€è¦è½¬æ¢çš„æ•°ç»„
+     * @return è½¬æ¢åçš„å­—ç¬¦ä¸²
      */
     public static String toHexString(byte[] bytes)
     {
         final int INCREMENT = 0x10;
         StringBuffer sb = new StringBuffer(1024);
         Formatter format = new Formatter(sb, Locale.US);
-
+        
         byte b;
         int j;
         int count = 0;
         for (int i = 0; i < bytes.length; i += INCREMENT)
         {
-            // Ğ´ĞòºÅ
+            // å†™åºå·
             format.format("%08Xh:", i);
-
-            // Ğ´Ê®Áù½øÖÆµÄÂëÁ÷
+            
+            // å†™åå…­è¿›åˆ¶çš„ç æµ
             for (j = 0; j < INCREMENT && i + j < bytes.length; j++)
             {
                 b = bytes[j + i];
@@ -78,32 +76,32 @@ public class StringUtils
                 }
             }
             count = j;
-
-            // ²¹¿Õ¸ñ¼°·Ö¸ô·û
+            
+            // è¡¥ç©ºæ ¼åŠåˆ†éš”ç¬¦
             for (; j < INCREMENT; j++)
             {
                 sb.append("   ");
             }
             sb.append(" ; ");
-
-            // Ğ´Ô­Ê¼µÄ×Ö·û
+            
+            // å†™åŸå§‹çš„å­—ç¬¦
             sb.append(new String(bytes, i, count));
-
+            
             sb.append(CRLF);
         }
-
+        
         return sb.toString();
     }
-
+    
     public static void main(String args[])
     {
-        // È«ÊÇÓ¢ÎÄ×Ö·ûµÄÇé¿ö
+        // å…¨æ˜¯è‹±æ–‡å­—ç¬¦çš„æƒ…å†µ
         System.out.println(StringUtils.toHexString("hello, world. this is a test, and hope you can enjoy"));
-
-        // È«ÊÇºº×ÖµÄÇé¿ö
-        System.out.println(StringUtils.toHexString("ÄãºÃ£¬ÕâÊÇÒ»¸ö²âÊÔ³ÌĞò"));
-
-        // ²âÊÔÔÚºº×ÖÖĞ¼ä»»ĞĞµÄÇé¿ö
-        System.out.println(StringUtils.toHexString("hello, world. tÄãºÃhis is a test, and hope you can enjoy"));
+        
+        // å…¨æ˜¯æ±‰å­—çš„æƒ…å†µ
+        System.out.println(StringUtils.toHexString("ä½ å¥½ï¼Œè¿™æ˜¯ä¸€ä¸ªæµ‹è¯•ç¨‹åº"));
+        
+        // æµ‹è¯•åœ¨æ±‰å­—ä¸­é—´æ¢è¡Œçš„æƒ…å†µ
+        System.out.println(StringUtils.toHexString("hello, world. tä½ å¥½his is a test, and hope you can enjoy"));
     }
 }

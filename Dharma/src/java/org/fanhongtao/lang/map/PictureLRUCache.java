@@ -10,42 +10,40 @@ import java.util.Map;
  */
 public class PictureLRUCache extends LinkedHashMap<String, Picture>
 {
-
     private static final long serialVersionUID = 2688432395514283574L;
-
-    // 三个系统参数
+    
     private static int sysUpperLimit = 90;
-
+    
     private static int sysLowerLimit = 80;
-
+    
     private static long sysMaxCacheSize = 1000;
-
+    
     private long upperLimit = sysMaxCacheSize / 100 * sysUpperLimit;
-
+    
     private long lowerLimit = sysMaxCacheSize / 100 * sysLowerLimit;
-
+    
     private long cacheSize;
-
+    
     public PictureLRUCache()
     {
         this(16, (float) 0.75);
     }
-
+    
     public PictureLRUCache(int initialCapacity, float loadFactor)
     {
         super(initialCapacity, loadFactor, true);
     }
-
+    
     public long getUpperLimit()
     {
         return upperLimit;
     }
-
+    
     public long getLowerLimit()
     {
         return lowerLimit;
     }
-
+    
     public void show(String title)
     {
         System.out.print("\t" + title + " : ");
@@ -56,9 +54,10 @@ public class PictureLRUCache extends LinkedHashMap<String, Picture>
         }
         System.out.println();
     }
-
+    
     /**
-     * 强制删除缓存中的内容。删除后缓存的内容应该在下限以上。
+     * Delete content in the cache.<br>
+     * After delete, the number of content is <i>lowerLimit</i> or a bit more than that.
      */
     public void forceDelete()
     {
@@ -75,7 +74,7 @@ public class PictureLRUCache extends LinkedHashMap<String, Picture>
             iterator.remove();
         }
     }
-
+    
     @Override
     public Picture put(String key, Picture value)
     {
@@ -87,7 +86,7 @@ public class PictureLRUCache extends LinkedHashMap<String, Picture>
         }
         return oldPicture;
     }
-
+    
     @Override
     public Picture remove(Object key)
     {
@@ -98,7 +97,7 @@ public class PictureLRUCache extends LinkedHashMap<String, Picture>
         }
         return picture;
     }
-
+    
     @Override
     protected boolean removeEldestEntry(java.util.Map.Entry<String, Picture> arg0)
     {
@@ -119,33 +118,33 @@ public class PictureLRUCache extends LinkedHashMap<String, Picture>
 class Picture
 {
     private int size;
-
+    
     private String name;
-
+    
     public Picture(int size, String name)
     {
         this.size = size;
         this.name = name;
     }
-
+    
     public int getSize()
     {
         return size;
     }
-
+    
     public void setSize(int size)
     {
         this.size = size;
     }
-
+    
     public String getName()
     {
         return name;
     }
-
+    
     public void setName(String name)
     {
         this.name = name;
     }
-
+    
 }

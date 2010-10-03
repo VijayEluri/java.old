@@ -20,10 +20,10 @@ public class ApplicationWindowEx extends ApplicationWindow
 
     protected void initLog(String log4jFile)
     {
-        // ³õÊ¼»¯ÈÕÖ¾
+        // åˆå§‹åŒ–æ—¥å¿—
         if (log4jFile == null)
         {
-            BasicConfigurator.configure(); // Ê¹ÓÃÈ±Ê¡ÅäÖÃ
+            BasicConfigurator.configure(); // ä½¿ç”¨ç¼ºçœé…ç½®
         }
         else
         {

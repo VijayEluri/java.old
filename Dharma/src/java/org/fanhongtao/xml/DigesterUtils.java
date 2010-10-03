@@ -21,20 +21,20 @@ public final class DigesterUtils
 {
 
     /**
-     * ´ÓXMLÎÄ¼şÖĞ¶ÁÈ¡Êı¾İ
-     * @param obj ±£´æÊı¾İµÄ¶ÔÏó
-     * @param inputUrl ËùÒª¶ÁÈ¡µÄXMLÎÄ¼ş¶ÔÓ¦µÄURL
-     * @param rulesUrl XMLÎÄ¼ş¶ÁÈ¡¹æÔò¶ÔÓ¦µÄURL
-     * @return ¶ÁÈ¡Êı¾İºó¶ÔÓ¦µÄ¶ÔÏó£¬Èç¹û¶ÁÈ¡Ê§°Ü£¬Ôò·µ»Ønull
+     * ä»XMLæ–‡ä»¶ä¸­è¯»å–æ•°æ®
+     * @param obj ä¿å­˜æ•°æ®çš„å¯¹è±¡
+     * @param inputUrl æ‰€è¦è¯»å–çš„XMLæ–‡ä»¶å¯¹åº”çš„URL
+     * @param rulesUrl XMLæ–‡ä»¶è¯»å–è§„åˆ™å¯¹åº”çš„URL
+     * @return è¯»å–æ•°æ®åå¯¹åº”çš„å¯¹è±¡ï¼Œå¦‚æœè¯»å–å¤±è´¥ï¼Œåˆ™è¿”å›null
      */
     public static Object parse(Object obj, URL inputUrl, URL rulesUrl)
     {
-        // Digester 1.8 ĞèÒªµÄ¹Ø±ÕµÄÈÕÖ¾
+        // Digester 1.8 éœ€è¦çš„å…³é—­çš„æ—¥å¿—
         Logger.getLogger("org.apache.commons.digester.Digester").setLevel(Level.OFF);
         Logger.getLogger("org.apache.commons.beanutils.BeanUtils").setLevel(Level.OFF);
         Logger.getLogger("org.apache.commons.beanutils.ConvertUtils").setLevel(Level.OFF);
 
-        // Digester 2.0 ĞÂÔöµÄĞèÒªµÄ¹Ø±ÕµÄÈÕÖ¾
+        // Digester 2.0 æ–°å¢çš„éœ€è¦çš„å…³é—­çš„æ—¥å¿—
         Logger.getLogger("org.apache.commons.beanutils.converters").setLevel(Level.OFF);
 
         InputStream inputStream = null;

@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 public class RecordInfo
 {
-    /** ¼ÇÂ¼µÄÃèÊöĞÅÏ¢ */
+    /** è®°å½•çš„æè¿°ä¿¡æ¯ */
     private String description;
 
-    /** ¼ÇÂ¼µÄ×Ö¶Î·Ö¸ô·û */
+    /** è®°å½•çš„å­—æ®µåˆ†éš”ç¬¦ */
     private String fieldSep;
 
-    /** ±£´æ×Ö¶ÎµÄÁĞ±í */
+    /** ä¿å­˜å­—æ®µçš„åˆ—è¡¨ */
     private ArrayList<RecordField> fieldList;
 
     public RecordInfo(String description, String fieldSep)
@@ -58,10 +58,10 @@ public class RecordInfo
 
 class RecordField
 {
-    /** ×Ö¶ÎÏÔÊ¾Ãû */
+    /** å­—æ®µæ˜¾ç¤ºå */
     private String title;
 
-    /** ×Ö¶ÎÈ¡ÖµÓëÆäº¬ÒåµÄÓ³Éä */
+    /** å­—æ®µå–å€¼ä¸å…¶å«ä¹‰çš„æ˜ å°„ */
     private HashMap<String, String> valueMap;
 
     public RecordField(String title)

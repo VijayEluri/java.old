@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * 一个专门显示图片的Panel
+ * 涓�涓笓闂ㄦ樉绀哄浘鐗囩殑Panel
  * @author Dharma
  * @created 2009-5-17
  */
@@ -63,6 +63,6 @@ public class ImagePanel extends JPanel
         g.drawImage(image, 0, 0, null);
     }
 
-    /** 所要显示的图片 */
+    /** 鎵�瑕佹樉绀虹殑鍥剧墖 */
     private Image image;
 }

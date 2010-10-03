@@ -5,11 +5,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * ½âÎöµÄ¸ñÊ½ÈçÏÂ
- * <record separator="," description="²âÊÔ¼ÇÂ¼¸ñÊ½">
+ * è§£æçš„æ ¼å¼å¦‚ä¸‹
+ * <record separator="," description="æµ‹è¯•è®°å½•æ ¼å¼">
  *     <field name="field1" />
  *     <field name="field2">
- *         <value src="1" dest="ÄãºÃ"/>
+ *         <value src="1" dest="ä½ å¥½"/>
  *         <value src="2" dest="Hello"/>
  *     </field>
  * </record>

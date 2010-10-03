@@ -43,20 +43,20 @@ public class MiddleMan
 
     private Button btnStart = null;
 
-    private Table table = null; // ÏÔÊ¾ÏûÏ¢¸ÅÒªĞÅÏ¢µÄ±í
+    private Table table = null; // æ˜¾ç¤ºæ¶ˆæ¯æ¦‚è¦ä¿¡æ¯çš„è¡¨
 
-    private Text textDetail = null; // ÏÔÊ¾Ä³Ò»¸öÌØ¶¨ÏûÏ¢µÄÏêÏ¸ĞÅÏ¢
+    private Text textDetail = null; // æ˜¾ç¤ºæŸä¸€ä¸ªç‰¹å®šæ¶ˆæ¯çš„è¯¦ç»†ä¿¡æ¯
 
-    private Text textLog = null; // ÏÔÊ¾ÔËĞĞÈÕÖ¾
+    private Text textLog = null; // æ˜¾ç¤ºè¿è¡Œæ—¥å¿—
 
-    private ArrayList<MsgInfo> msgList = new ArrayList<MsgInfo>(); // ¼ÇÂ¼ËùÊÕµ½µÄÍêÕûµÄÏûÏ¢
+    private ArrayList<MsgInfo> msgList = new ArrayList<MsgInfo>(); // è®°å½•æ‰€æ”¶åˆ°çš„å®Œæ•´çš„æ¶ˆæ¯
 
     private MuteServer server = null;
 
     static Logger logger = Logger.getLogger(MiddleMan.class);
 
     /**
-     * runº¯Êı»ù±¾¿ÉÒÔ²»ÓÃĞŞ¸Ä£¬ËùÓĞSWT³ÌĞò¶¼ÊÇÕâÑùĞ´µÄ¡£
+     * runå‡½æ•°åŸºæœ¬å¯ä»¥ä¸ç”¨ä¿®æ”¹ï¼Œæ‰€æœ‰SWTç¨‹åºéƒ½æ˜¯è¿™æ ·å†™çš„ã€‚
      */
     public void run()
     {
@@ -65,7 +65,7 @@ public class MiddleMan
         shell.setSize(600, 500);
         shell.setText("Middle Man");
         createContents(shell);
-        // shell.pack(); // ¿ÉÑ¡²½Öè
+        // shell.pack(); // å¯é€‰æ­¥éª¤
         shell.open();
         while (!shell.isDisposed())
         {
@@ -86,7 +86,7 @@ public class MiddleMan
     }
 
     /**
-     * ´´½¨ÊäÈë¼àÌı¶Ë¿ÚºÅµÄ
+     * åˆ›å»ºè¾“å…¥ç›‘å¬ç«¯å£å·çš„
      * @param shell
      */
     private void createConfigure(Shell shell)
@@ -95,13 +95,13 @@ public class MiddleMan
         composite.setLayoutData(BorderData.NORTH);
         composite.setLayout(new RowLayout());
 
-        new Label(composite, SWT.NONE).setText("¼àÌı¶Ë¿Ú(&P)");
+        new Label(composite, SWT.NONE).setText("ç›‘å¬ç«¯å£(&P)");
         textPort = new Text(composite, SWT.NONE);
         textPort.setText("8088          ");
 
         new Label(composite, SWT.NONE).setText("        ");
         btnStart = new Button(composite, SWT.TOGGLE);
-        btnStart.setText("¿ªÊ¼(&S)");
+        btnStart.setText("å¼€å§‹(&S)");
         btnStart.addSelectionListener(new SelectionAdapter()
         {
             @Override
@@ -183,7 +183,7 @@ public class MiddleMan
         if (ret)
         {
             new Thread(server).start();
-            btnStart.setText("Í£Ö¹(&S)");
+            btnStart.setText("åœæ­¢(&S)");
         }
         return ret;
     }
@@ -191,22 +191,22 @@ public class MiddleMan
     private void stopServer()
     {
         server.setQuit(true);
-        btnStart.setText("¿ªÊ¼(&S)");
+        btnStart.setText("å¼€å§‹(&S)");
     }
 
     private void shutDownServer()
     {
-        // ÖÕÖ¹ºóÌ¨Ïß³ÌÔËĞĞ
+        // ç»ˆæ­¢åå°çº¿ç¨‹è¿è¡Œ
         if (server != null)
         {
             server.setQuit(true);
-            // ServerÏß³ÌselectÊ±¼äÎª1Ãë£¬ÕâÀïsleep2Ãë£¬ÒÔ±ãServerÓĞ×ã¹»µÄÊ±¼äÍË³ö
+            // Serverçº¿ç¨‹selectæ—¶é—´ä¸º1ç§’ï¼Œè¿™é‡Œsleep2ç§’ï¼Œä»¥ä¾¿Serveræœ‰è¶³å¤Ÿçš„æ—¶é—´é€€å‡º
             Utils.sleep(2000);
         }
     }
 
     /**
-    * ÔÚÎÄ±¾¿òÖĞÏÔÊ¾ÏêÏ¸µÄÏûÏ¢
+    * åœ¨æ–‡æœ¬æ¡†ä¸­æ˜¾ç¤ºè¯¦ç»†çš„æ¶ˆæ¯
     */
     private void showDetailMsg()
     {
@@ -226,7 +226,7 @@ public class MiddleMan
         }
         catch (Exception e)
         {
-            textDetail.append("ÏÔÊ¾´íÎóĞÅÏ¢£º\r\n");
+            textDetail.append("æ˜¾ç¤ºé”™è¯¯ä¿¡æ¯ï¼š\r\n");
             String errInfo = e.getLocalizedMessage();
             textDetail.append(errInfo);
         }
@@ -238,13 +238,13 @@ public class MiddleMan
         textLog.append(StringUtils.CRLF);
     }
 
-    private static final String[] columnName = { "ĞòºÅ", "·¢ËÍIP", "·¢ËÍ¶Ë¿Ú", "½ÓÊÕIP", "½ÓÈë¶Ë¿Ú", "ÏûÏ¢³¤¶È" };
+    private static final String[] columnName = { "åºå·", "å‘é€IP", "å‘é€ç«¯å£", "æ¥æ”¶IP", "æ¥å…¥ç«¯å£", "æ¶ˆæ¯é•¿åº¦" };
 
     void addMessage(MsgInfo msgInfo)
     {
         msgList.add(msgInfo);
         TableItem item = new TableItem(table, SWT.NONE);
-        // "ĞòºÅ", "·¢ËÍIP", "·¢ËÍ¶Ë¿Ú", "½ÓÊÕIP", "½ÓÈë¶Ë¿Ú", "ÏûÏ¢³¤¶È"
+        // "åºå·", "å‘é€IP", "å‘é€ç«¯å£", "æ¥æ”¶IP", "æ¥å…¥ç«¯å£", "æ¶ˆæ¯é•¿åº¦"
         item.setText(0, Integer.toString(msgList.size()));
         item.setText(1, msgInfo.getSrcIP());
         item.setText(2, Integer.toString(msgInfo.getSrcPort()));
@@ -259,7 +259,7 @@ public class MiddleMan
      */
     public static void main(String[] args)
     {
-        BasicConfigurator.configure(); // Ê¹ÓÃÈ±Ê¡ÅäÖÃ
+        BasicConfigurator.configure(); // ä½¿ç”¨ç¼ºçœé…ç½®
         new MiddleMan().run();
     }
 

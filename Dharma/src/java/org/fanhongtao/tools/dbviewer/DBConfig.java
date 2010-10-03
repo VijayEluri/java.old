@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 /**
- * ÊäÈëÊı¾İ¿âµÄÅäÖÃĞÅÏ¢
+ * è¾“å…¥æ•°æ®åº“çš„é…ç½®ä¿¡æ¯
  * @author Dharma
  * @created 2010-7-4
  */
@@ -26,7 +26,7 @@ public class DBConfig extends JPanel
 {
     private static final long serialVersionUID = 7616513524121542033L;
 
-    /** ±£´æJDBCÇı¶¯ÏÔÊ¾ÖµºÍÊµ¼ÊÖµµÄMap */
+    /** ä¿å­˜JDBCé©±åŠ¨æ˜¾ç¤ºå€¼å’Œå®é™…å€¼çš„Map */
     private static final Map<String, String> driverMap;
     static
     {
@@ -40,16 +40,16 @@ public class DBConfig extends JPanel
 
     private JDialog dialog;
 
-    /** Ñ¡ÔñJDBCÇı¶¯µÄÏÂÀ­¿ò */
+    /** é€‰æ‹©JDBCé©±åŠ¨çš„ä¸‹æ‹‰æ¡† */
     private JComboBox comboBox;
 
-    /** ¼ÇÂ¼URLµØÖ·µÄ¿Ø¼ş */
+    /** è®°å½•URLåœ°å€çš„æ§ä»¶ */
     private JTextField textURL;
 
-    /** ¼ÇÂ¼Êı¾İ¿âÓÃ»§ÃûĞÅÏ¢µÄ¿Ø¼ş */
+    /** è®°å½•æ•°æ®åº“ç”¨æˆ·åä¿¡æ¯çš„æ§ä»¶ */
     private JTextField textUser;
 
-    /** ¼ÇÂ¼Êı¾İ¿âÓÃ»§ÃÜÂëµÄ¿Ø¼ş */
+    /** è®°å½•æ•°æ®åº“ç”¨æˆ·å¯†ç çš„æ§ä»¶ */
     private JTextField textPassword;
 
     public DBConfig()

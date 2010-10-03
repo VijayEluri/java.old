@@ -46,11 +46,11 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
 
     private Button btnStart = null;
 
-    private TableViewer tv = null; // ÏÔÊ¾ÏûÏ¢¸ÅÒªĞÅÏ¢µÄ±í
+    private TableViewer tv = null; // æ˜¾ç¤ºæ¶ˆæ¯æ¦‚è¦ä¿¡æ¯çš„è¡¨
 
-    private Text textLog = null; // ÏÔÊ¾ÔËĞĞÈÕÖ¾
+    private Text textLog = null; // æ˜¾ç¤ºè¿è¡Œæ—¥å¿—
 
-    private ArrayList<MsgInfo> msgList = new ArrayList<MsgInfo>(); // ¼ÇÂ¼ËùÊÕµ½µÄÍêÕûµÄÏûÏ¢
+    private ArrayList<MsgInfo> msgList = new ArrayList<MsgInfo>(); // è®°å½•æ‰€æ”¶åˆ°çš„å®Œæ•´çš„æ¶ˆæ¯
 
     private MuteServer server = null;
 
@@ -82,7 +82,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
     }
 
     /**
-     * ´´½¨ÊäÈë¼àÌı¶Ë¿ÚºÅµÄ
+     * åˆ›å»ºè¾“å…¥ç›‘å¬ç«¯å£å·çš„
      * @param shell
      */
     private void createConfigure(Composite parent)
@@ -91,7 +91,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         composite.setLayoutData(BorderData.NORTH);
         composite.setLayout(new RowLayout());
 
-        new Label(composite, SWT.NONE).setText("·şÎñÆ÷ÀàĞÍ(&T)");
+        new Label(composite, SWT.NONE).setText("æœåŠ¡å™¨ç±»å‹(&T)");
         comboServer = new Combo(composite, SWT.READ_ONLY);
         comboServer.add("Mute Server");
         comboServer.add("Echo Server");
@@ -99,13 +99,13 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         comboServer.setData("Echo Server", "EchoServer");
         comboServer.select(0);
 
-        new Label(composite, SWT.NONE).setText(" ¼àÌı¶Ë¿Ú(&P)");
+        new Label(composite, SWT.NONE).setText(" ç›‘å¬ç«¯å£(&P)");
         textPort = new Text(composite, SWT.NONE);
         textPort.setText("8088          ");
 
         new Label(composite, SWT.NONE).setText("        ");
         btnStart = new Button(composite, SWT.TOGGLE);
-        btnStart.setText("¿ªÊ¼(&S)");
+        btnStart.setText("å¼€å§‹(&S)");
         btnStart.addSelectionListener(new SelectionAdapter()
         {
             @Override
@@ -197,7 +197,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         if (ret)
         {
             new Thread(server).start();
-            btnStart.setText("Í£Ö¹(&S)");
+            btnStart.setText("åœæ­¢(&S)");
         }
         return ret;
     }
@@ -205,16 +205,16 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
     private void stopServer()
     {
         server.setQuit(true);
-        btnStart.setText("¿ªÊ¼(&S)");
+        btnStart.setText("å¼€å§‹(&S)");
     }
 
     private void shutDownServer()
     {
-        // ÖÕÖ¹ºóÌ¨Ïß³ÌÔËĞĞ
+        // ç»ˆæ­¢åå°çº¿ç¨‹è¿è¡Œ
         if (server != null)
         {
             server.setQuit(true);
-            // ServerÏß³ÌselectÊ±¼äÎª1Ãë£¬ÕâÀïsleep2Ãë£¬ÒÔ±ãServerÓĞ×ã¹»µÄÊ±¼äÍË³ö
+            // Serverçº¿ç¨‹selectæ—¶é—´ä¸º1ç§’ï¼Œè¿™é‡Œsleep2ç§’ï¼Œä»¥ä¾¿Serveræœ‰è¶³å¤Ÿçš„æ—¶é—´é€€å‡º
             Utils.sleep(2000);
         }
     }
@@ -242,7 +242,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         textLog.append(StringUtils.CRLF);
     }
 
-    private static final String[] columnName = { "ĞòºÅ", "Ê±¼ä", "·¢ËÍIP", "·¢ËÍ¶Ë¿Ú", "½ÓÊÕIP", "½ÓÈë¶Ë¿Ú", "ÏûÏ¢³¤¶È", "ÏûÏ¢" };
+    private static final String[] columnName = { "åºå·", "æ—¶é—´", "å‘é€IP", "å‘é€ç«¯å£", "æ¥æ”¶IP", "æ¥å…¥ç«¯å£", "æ¶ˆæ¯é•¿åº¦", "æ¶ˆæ¯" };
 
     private static final int[] columnLen = { 15, 15, 20, 20, 20, 20, 20, 30 };
 

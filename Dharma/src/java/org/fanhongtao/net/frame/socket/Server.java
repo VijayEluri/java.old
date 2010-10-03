@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class Server
 {
-    // ¼àÌı¶Ë¿Ú
+    // ç›‘å¬ç«¯å£
     private int port;
 
     private ServerSocket s;

@@ -18,27 +18,27 @@ public class AsyncObject
     // private static Logger logger = Logger.getLogger(AsyncObject.class);
 
     /**
-     * »º´æ´óĞ¡
+     * ç¼“å­˜å¤§å°
      */
     private final static int MAX_LENGTH = 64 * 1024;
 
     /**
-     * ¶ÁÏûÏ¢µÄ»º´æ
+     * è¯»æ¶ˆæ¯çš„ç¼“å­˜
      */
     protected ByteBuffer readBuffer = ByteBuffer.allocate(MAX_LENGTH);
 
     /**
-     * Ğ´ÏûÏ¢µÄ»º´æ
+     * å†™æ¶ˆæ¯çš„ç¼“å­˜
      */
     protected ByteBuffer writeBuffer = ByteBuffer.allocate(MAX_LENGTH);
 
     /**
-     * ¶ÔÓ¦µÄ½çÃæ
+     * å¯¹åº”çš„ç•Œé¢
      */
     protected IMessageWindow logWindow = null;
 
     /**
-     * ÊÇ·ñĞèÒªÍË³ö
+     * æ˜¯å¦éœ€è¦é€€å‡º
      */
     private boolean quit = false;
 
@@ -53,7 +53,7 @@ public class AsyncObject
     }
 
     /**
-     * ¼ÇÂ¼´ÓchannelÖĞ¶ÁÈ¡µ½µÄÏûÏ¢
+     * è®°å½•ä»channelä¸­è¯»å–åˆ°çš„æ¶ˆæ¯
      * @param channel
      */
     protected void logReceivedMessage(SocketChannel channel)
@@ -80,7 +80,7 @@ public class AsyncObject
     }
 
     /**
-     * ¼ÇÂ¼Ğ´ÈëchannelÖĞµÄÏûÏ¢
+     * è®°å½•å†™å…¥channelä¸­çš„æ¶ˆæ¯
      */
     protected void logWritedMessage(SocketChannel channel)
     {

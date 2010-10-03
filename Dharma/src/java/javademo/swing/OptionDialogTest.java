@@ -39,7 +39,7 @@ public class OptionDialogTest
 class ButtonPanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
-
+    
     /**
        Constructs a button panel.
        @param title the title shown in the border
@@ -50,7 +50,7 @@ class ButtonPanel extends JPanel
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         group = new ButtonGroup();
-
+        
         // make one radio button for each option
         for (int i = 0; i < options.length; i++)
         {
@@ -61,7 +61,7 @@ class ButtonPanel extends JPanel
             b.setSelected(i == 0);
         }
     }
-
+    
     /**
        Gets the currently selected option.
        @return the label of the currently selected radio button.
@@ -70,7 +70,7 @@ class ButtonPanel extends JPanel
     {
         return group.getSelection().getActionCommand();
     }
-
+    
     private ButtonGroup group;
 }
 
@@ -81,47 +81,47 @@ class ButtonPanel extends JPanel
 class OptionDialogFrame extends JFrame
 {
     private static final long serialVersionUID = 1L;
-
+    
     public OptionDialogFrame()
     {
         setTitle("OptionDialogTest");
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-
+        
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(2, 3));
-
+        
         typePanel = new ButtonPanel("Type", new String[] { "Message", "Confirm", "Option", "Input" });
-
+        
         messageTypePanel = new ButtonPanel("Message Type", new String[] { "ERROR_MESSAGE", "INFORMATION_MESSAGE",
                 "WARNING_MESSAGE", "QUESTION_MESSAGE", "PLAIN_MESSAGE" });
-
+        
         messagePanel = new ButtonPanel("Message", new String[] { "String", "Icon", "Component", "Other", "Object[]" });
-
+        
         optionTypePanel = new ButtonPanel("Confirm", new String[] { "DEFAULT_OPTION", "YES_NO_OPTION",
                 "YES_NO_CANCEL_OPTION", "OK_CANCEL_OPTION" });
-
+        
         optionsPanel = new ButtonPanel("Option", new String[] { "String[]", "Icon[]", "Object[]" });
-
+        
         inputPanel = new ButtonPanel("Input", new String[] { "Text field", "Combo box" });
-
+        
         gridPanel.add(typePanel);
         gridPanel.add(messageTypePanel);
         gridPanel.add(messagePanel);
         gridPanel.add(optionTypePanel);
         gridPanel.add(optionsPanel);
         gridPanel.add(inputPanel);
-
+        
         // add a panel with a Show button
-
+        
         JPanel showPanel = new JPanel();
         JButton showButton = new JButton("Show");
         showButton.addActionListener(new ShowAction());
         showPanel.add(showButton);
-
+        
         add(gridPanel, BorderLayout.CENTER);
         add(showPanel, BorderLayout.SOUTH);
     }
-
+    
     /**
        Gets the currently selected message.
        @return a string, icon, component, or object array,
@@ -143,7 +143,7 @@ class OptionDialogFrame extends JFrame
         else
             return null;
     }
-
+    
     /**
        Gets the currently selected options.
        @return an array of strings, icons, or objects, depending
@@ -162,7 +162,7 @@ class OptionDialogFrame extends JFrame
         else
             return null;
     }
-
+    
     /**
        Gets the selected message or option type
        @param panel the Message Type or Confirm panel
@@ -181,7 +181,7 @@ class OptionDialogFrame extends JFrame
             return -1;
         }
     }
-
+    
     /**
        The action listener for the Show button shows a
        Confirm, Input, Message, or Option dialog depending
@@ -210,38 +210,39 @@ class OptionDialogFrame extends JFrame
                         getType(messageTypePanel), null, getOptions(), getOptions()[0]);
         }
     }
-
+    
     public static final int DEFAULT_WIDTH = 600;
-
+    
     public static final int DEFAULT_HEIGHT = 400;
-
+    
     private ButtonPanel typePanel;
-
+    
     private ButtonPanel messagePanel;
-
+    
     private ButtonPanel messageTypePanel;
-
+    
     private ButtonPanel optionTypePanel;
-
+    
     private ButtonPanel optionsPanel;
-
+    
     private ButtonPanel inputPanel;
-
+    
     private String messageString = "Message";
-
+    
     private Icon messageIcon = new ImageIcon("blue-ball.gif");
-
+    
     private Object messageObject = new Date();
-
+    
     private Component messageComponent = new SamplePanel();
 }
 
 /**
    A panel with a painted surface
 */
-
 class SamplePanel extends JPanel
 {
+    private static final long serialVersionUID = 1L;
+    
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -252,7 +253,7 @@ class SamplePanel extends JPanel
         g2.setPaint(Color.BLUE);
         g2.draw(rect);
     }
-
+    
     public Dimension getMinimumSize()
     {
         return new Dimension(10, 10);

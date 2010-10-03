@@ -22,10 +22,10 @@ import org.fanhongtao.net.frame.handler.IHandler;
  */
 public class Server
 {
-    /** ·şÎñ¶Ë¿Ú */
+    /** æœåŠ¡ç«¯å£ */
     private int port = 0;
 
-    /** ÏìÓ¦SocketÊÂ¼ş£¨½¨Á¢Á¬½Ó¡¢½ÓÊÕµ½ÏûÏ¢¡¢¶Ï¿ªÁ¬½Ó£©µÄ´¦ÀíÆ÷ */
+    /** å“åº”Socketäº‹ä»¶ï¼ˆå»ºç«‹è¿æ¥ã€æ¥æ”¶åˆ°æ¶ˆæ¯ã€æ–­å¼€è¿æ¥ï¼‰çš„å¤„ç†å™¨ */
     private IHandler handler = null;
 
     private ServerSocketChannel serverChannel = null;
@@ -52,16 +52,16 @@ public class Server
     {
         RunLogger.info("Try to start server with port " + port);
 
-        // Éú³ÉÒ»¸öÕìÌı¶Ë
-        selector = Selector.open(); // Éú³ÉÒ»¸öĞÅºÅ¼àÊÓÆ÷
+        // ç”Ÿæˆä¸€ä¸ªä¾¦å¬ç«¯
+        selector = Selector.open(); // ç”Ÿæˆä¸€ä¸ªä¿¡å·ç›‘è§†å™¨
 
         serverChannel = ServerSocketChannel.open();
-        serverChannel.configureBlocking(false); // ½«ÕìÌı¶ËÉèÎªÒì²½·½Ê½
+        serverChannel.configureBlocking(false); // å°†ä¾¦å¬ç«¯è®¾ä¸ºå¼‚æ­¥æ–¹å¼
 
-        // ÕìÌı¶Ë°ó¶¨µ½Ò»¸ö¶Ë¿Ú
+        // ä¾¦å¬ç«¯ç»‘å®šåˆ°ä¸€ä¸ªç«¯å£
         serverChannel.socket().bind(new InetSocketAddress(port));
 
-        // ÉèÖÃÕìÌı¶ËËùÑ¡µÄÒì²½ĞÅºÅOP_ACCEPT, ÕâÑù²ÅÄÜ¹»ĞÂµÄÁ¬½Ó
+        // è®¾ç½®ä¾¦å¬ç«¯æ‰€é€‰çš„å¼‚æ­¥ä¿¡å·OP_ACCEPT, è¿™æ ·æ‰èƒ½å¤Ÿæ–°çš„è¿æ¥
         serverChannel.register(selector, SelectionKey.OP_ACCEPT);
 
         return;
@@ -98,7 +98,7 @@ public class Server
     }
 
     /**
-     * ´´½¨¹¤×÷Ïß³Ì¡£
+     * åˆ›å»ºå·¥ä½œçº¿ç¨‹ã€‚
      */
     private void initThread()
     {
@@ -138,7 +138,7 @@ public class Server
                 }
                 else
                 {
-                    // Ã»ÓĞÖ¸¶¨µÄI/OÊÂ¼ş·¢Éú
+                    // æ²¡æœ‰æŒ‡å®šçš„I/Oäº‹ä»¶å‘ç”Ÿ
                     count++;
                     if (count > 10)
                     {
@@ -157,7 +157,7 @@ public class Server
     }
 
     /**
-     * ´¦ÀíIOÊÂ¼ş
+     * å¤„ç†IOäº‹ä»¶
      * 
      * @param selector
      * @throws IOException
@@ -172,7 +172,7 @@ public class Server
             {
                 onAccept(key);
             }
-            if (key.isReadable()) // Ä³socketÓĞÊı¾İ¿ÉÒÔ¶ÁÈ¡
+            if (key.isReadable()) // æŸsocketæœ‰æ•°æ®å¯ä»¥è¯»å–
             {
                 // logger.debug("Receive date from client: " + key);
                 ChannelReader.processRequest(key);
@@ -183,21 +183,21 @@ public class Server
     }
 
     /**
-     * »ñµÃÒ»¸ö¿Í»§¶ËµÄÁ´½Ó
+     * è·å¾—ä¸€ä¸ªå®¢æˆ·ç«¯çš„é“¾æ¥
      * @param client
      * @throws IOException 
      */
     private void onAccept(SelectionKey key) throws IOException
     {
-        // ÕìÌı¶ËĞÅºÅ´¥·¢
+        // ä¾¦å¬ç«¯ä¿¡å·è§¦å‘
         ServerSocketChannel server = (ServerSocketChannel) key.channel();
 
-        // ½ÓÊÜÒ»¸öĞÂµÄÁ¬½Ó
+        // æ¥å—ä¸€ä¸ªæ–°çš„è¿æ¥
         SocketChannel client = server.accept();
         client.configureBlocking(false);
 
-        // ÉèÖÃ¸ÃsocketµÄÒì²½ĞÅºÅOP_READ
-        // µ±socketÖĞÓĞÊı¾İÊ±£¬»á´¥·¢ processIOEvent£¬²¢Âú×ã key.isReadable() Ìõ¼ş
+        // è®¾ç½®è¯¥socketçš„å¼‚æ­¥ä¿¡å·OP_READ
+        // å½“socketä¸­æœ‰æ•°æ®æ—¶ï¼Œä¼šè§¦å‘ processIOEventï¼Œå¹¶æ»¡è¶³ key.isReadable() æ¡ä»¶
         SelectionKey clientKey = client.register(selector, SelectionKey.OP_READ);
 
         RunLogger.info("Accept a client , port is " + client.socket().getPort());

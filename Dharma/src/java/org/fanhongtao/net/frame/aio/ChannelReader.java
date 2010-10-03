@@ -17,8 +17,8 @@ import org.fanhongtao.thread.ExRunnable;
 
 
 /**
- * ÊµÏÖ¶ÁÈ¡SocketµÄÏß³Ì<br>
- * ÕâÀï²ÉÓÃ¾²Ì¬¶ÓÁĞÀ´¶Ô¶ÁÏß³Ì½øĞĞµ÷¶È£ºµ±ÓĞSocketÊÂ¼şÊ±£¬½«¶ÔÓ¦µÄSocket·ÅÈëpoolÖĞ£¬ÔÙÓÉ¸÷¸öÏß³ÌÈ¥¾ºÕù¡£
+ * å®ç°è¯»å–Socketçš„çº¿ç¨‹<br>
+ * è¿™é‡Œé‡‡ç”¨é™æ€é˜Ÿåˆ—æ¥å¯¹è¯»çº¿ç¨‹è¿›è¡Œè°ƒåº¦ï¼šå½“æœ‰Socketäº‹ä»¶æ—¶ï¼Œå°†å¯¹åº”çš„Socketæ”¾å…¥poolä¸­ï¼Œå†ç”±å„ä¸ªçº¿ç¨‹å»ç«äº‰ã€‚
  * 
  * @author Dharma
  * @created 2009-5-2
@@ -34,7 +34,7 @@ public class ChannelReader extends ExRunnable
         {
             try
             {
-                // Ïß³Ì´Ó¶ÓÁĞÖĞ»ñÈ¡ÈÎÎñ²¢Ö´ĞĞ
+                // çº¿ç¨‹ä»é˜Ÿåˆ—ä¸­è·å–ä»»åŠ¡å¹¶æ‰§è¡Œ
                 SelectionKey key = pool.take();
                 readMessage(key);
             }
@@ -46,13 +46,13 @@ public class ChannelReader extends ExRunnable
     }
 
     /**
-     * ´¦ÀíÁ¬½ÓÊı¾İ¶ÁÈ¡
+     * å¤„ç†è¿æ¥æ•°æ®è¯»å–
      * @param key SelectionKey
      * @throws IOException 
      */
     private void readMessage(SelectionKey key)
     {
-        // ¶ÁÈ¡¿Í»§¶ËÊı¾İ
+        // è¯»å–å®¢æˆ·ç«¯æ•°æ®
         SocketChannel sc = (SocketChannel) key.channel();
 
         byte[] clientData = null;
@@ -83,12 +83,12 @@ public class ChannelReader extends ExRunnable
 
         Request request = new Request(key, msgInfo);
 
-        MessageHandler.process(request);// Ìá½»¸ø´¦ÀíÏß³Ì½øĞĞ´¦Àí
+        MessageHandler.process(request);// æäº¤ç»™å¤„ç†çº¿ç¨‹è¿›è¡Œå¤„ç†
     }
 
     /**
-     * ¶ÁÈ¡¿Í»§¶Ë·¢³öÇëÇóÊı¾İ
-     * @param sc Ì×½ÓÍ¨µÀ
+     * è¯»å–å®¢æˆ·ç«¯å‘å‡ºè¯·æ±‚æ•°æ®
+     * @param sc å¥—æ¥é€šé“
      */
     private static int BUFFER_SIZE = 1024;
 
@@ -119,10 +119,10 @@ public class ChannelReader extends ExRunnable
     }
 
     /**
-     * Êı×éÀ©Èİ
-     * @param src byte[] Ô´Êı×éÊı¾İ
-     * @param size int À©ÈİµÄÔö¼ÓÁ¿
-     * @return byte[] À©ÈİºóµÄÊı×é
+     * æ•°ç»„æ‰©å®¹
+     * @param src byte[] æºæ•°ç»„æ•°æ®
+     * @param size int æ‰©å®¹çš„å¢åŠ é‡
+     * @return byte[] æ‰©å®¹åçš„æ•°ç»„
      */
     private byte[] grow(byte[] src, int size)
     {
@@ -132,7 +132,7 @@ public class ChannelReader extends ExRunnable
     }
 
     /**
-     * ´¦Àí¿Í»§ÇëÇó,¹ÜÀíÓÃ»§µÄÁª½á³Ø,²¢»½ĞÑ¶ÓÁĞÖĞµÄÏß³Ì½øĞĞ´¦Àí
+     * å¤„ç†å®¢æˆ·è¯·æ±‚,ç®¡ç†ç”¨æˆ·çš„è”ç»“æ± ,å¹¶å”¤é†’é˜Ÿåˆ—ä¸­çš„çº¿ç¨‹è¿›è¡Œå¤„ç†
      */
     public static void processRequest(SelectionKey key)
     {

@@ -11,7 +11,7 @@ import org.fanhongtao.log.RunLogger;
  */
 public abstract class SafeTimerTask extends TimerTask
 {
-    /** ÈÎÎñµÄÃû×Ö */
+    /** ä»»åŠ¡çš„åå­— */
     private String name;
 
     public SafeTimerTask(String name)

@@ -13,7 +13,7 @@ import org.fanhongtao.utils.TimeDuration;
 
 
 /**
- * ÁĞ³öÖ¸¶¨Ä¿Â¼ÏÂµÄÎÄ¼ş
+ * åˆ—å‡ºæŒ‡å®šç›®å½•ä¸‹çš„æ–‡ä»¶
  * @author Dharma
  * @created 2009-3-31
  */
@@ -27,7 +27,7 @@ public class Dir
     {
         StringBuffer buf = new StringBuffer(1024);
         File[] files = path.listFiles();
-        if (files == null) // ×¢ÒâÕâÀïĞèÒªÅĞ¶Ï¿ÕÖµ
+        if (files == null) // æ³¨æ„è¿™é‡Œéœ€è¦åˆ¤æ–­ç©ºå€¼
         {
             return;
         }
@@ -63,7 +63,7 @@ public class Dir
      */
     public static void main(String[] args)
     {
-        BasicConfigurator.configure(); // Ê¹ÓÃÈ±Ê¡ÅäÖÃ
+        BasicConfigurator.configure(); // ä½¿ç”¨ç¼ºçœé…ç½®
         LogUtils.changeRootLayout("%m");
 
         TimeDuration dur = new TimeDuration();
