@@ -1,10 +1,10 @@
 package org.fanhongtao.net.frame.handler;
 
 import org.fanhongtao.net.frame.MsgInfo;
-import org.fanhongtao.net.frame.NetUtils;
-import org.fanhongtao.net.frame.Request;
-import org.fanhongtao.net.frame.aio.ChannelWriter;
-
+import org.fanhongtao.net.frame.nio.ChannelWriter;
+import org.fanhongtao.net.frame.nio.Connection;
+import org.fanhongtao.net.frame.nio.NetUtils;
+import org.fanhongtao.net.frame.nio.Request;
 
 /**
  * 实现将消息原样返回给客户端
@@ -13,21 +13,25 @@ import org.fanhongtao.net.frame.aio.ChannelWriter;
  */
 public class EchoHandler extends HandlerAdapter
 {
-
+    
     @Override
-    public void onMessage(Request req)
+    public void onMessage(Connection connection)
     {
-        MsgInfo msg = req.getMsgInfo();
-        byte[] data = msg.getMsg();
+        byte[] data = connection.getBuffer().getData();
         if ((data.length == 1) && (data[0] == 0x03)) // Ctrl-C 中断连接
         {
-            NetUtils.closeKey(req.getKey());
+            NetUtils.closeKey(connection.getKey());
             return;
         }
-
-        MsgInfo retMsg = MsgInfo.getResponseMsg(msg);
-        retMsg.setMsg(msg.getMsg());
-        Request res = new Request(req.getKey(), retMsg);
+        String str = new String(data);
+        if (str.startsWith("quit"))
+        {
+            NetUtils.closeKey(connection.getKey());
+            return;
+        }
+        MsgInfo retMsg = MsgInfo.getResponseMsg(connection.getSendDirection());
+        retMsg.setMsg(data);
+        Request res = new Request(connection.getKey(), retMsg);
         ChannelWriter.send(res);
     }
 }

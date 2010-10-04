@@ -1,11 +1,11 @@
-package org.fanhongtao.net.frame;
+package org.fanhongtao.net.frame.nio;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.fanhongtao.log.RunLogger;
+import org.fanhongtao.net.frame.handler.IHandler;
 import org.fanhongtao.thread.ExRunnable;
-
 
 /**
  * @author Dharma
@@ -13,8 +13,8 @@ import org.fanhongtao.thread.ExRunnable;
  */
 public class MessageHandler extends ExRunnable
 {
-    private static BlockingQueue<Request> reqList = new LinkedBlockingQueue<Request>();
-
+    private static BlockingQueue<Connection> connList = new LinkedBlockingQueue<Connection>();
+    
     @Override
     public void run()
     {
@@ -22,8 +22,9 @@ public class MessageHandler extends ExRunnable
         {
             try
             {
-                Request req = reqList.take();
-                Processer.process(req);
+                Connection connection = connList.take();
+                IHandler handler = connection.getHandler();
+                handler.onMessage(connection);
             }
             catch (Exception e)
             {
@@ -31,12 +32,12 @@ public class MessageHandler extends ExRunnable
             }
         }
     }
-
-    public static void process(Request req)
+    
+    public static void process(Connection connectionInfo)
     {
         try
         {
-            reqList.put(req);
+            connList.put(connectionInfo);
         }
         catch (InterruptedException e)
         {

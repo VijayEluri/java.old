@@ -2,8 +2,7 @@ package org.fanhongtao.net.frame.handler;
 
 import org.fanhongtao.lang.StringUtils;
 import org.fanhongtao.log.RunLogger;
-import org.fanhongtao.net.frame.Request;
-
+import org.fanhongtao.net.frame.nio.Connection;
 
 /**
  * 将接收到的消息记录到日志
@@ -13,9 +12,10 @@ import org.fanhongtao.net.frame.Request;
 public class PrintHandler extends HandlerAdapter
 {
     @Override
-    public void onMessage(Request req)
+    public void onMessage(Connection connection)
     {
-        String str = StringUtils.toHexString(req.getMsgInfo().getMsg());
+        byte[] msg = connection.getBuffer().getData();
+        String str = StringUtils.toHexString(msg);
         RunLogger.info(str);
     }
 }

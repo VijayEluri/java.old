@@ -1,6 +1,8 @@
-package org.fanhongtao.net.frame;
+package org.fanhongtao.net.frame.nio;
 
 import java.nio.channels.SelectionKey;
+
+import org.fanhongtao.net.frame.MsgInfo;
 
 /**
  * 

@@ -1,7 +1,9 @@
-package org.fanhongtao.net.frame;
+package org.fanhongtao.net.frame.nio;
 
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
+
+import org.fanhongtao.log.RunLogger;
 
 /**
  * @author Dharma
@@ -17,12 +19,14 @@ public class NetUtils
     {
         try
         {
+            Connection conn = (Connection) key.attachment();
+            RunLogger.info("Disconnect a client, " + conn.getRemoteAddress());
             key.cancel();
             key.channel().close();
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            RunLogger.error("Failed to cancel key: " + key, e);
         }
     }
 }

@@ -1,9 +1,6 @@
 package org.fanhongtao.net.frame.handler;
 
-import java.nio.channels.SelectionKey;
-
-import org.fanhongtao.net.frame.Request;
-
+import org.fanhongtao.net.frame.nio.Connection;
 
 /**
  * @author Dharma
@@ -15,17 +12,17 @@ public interface IHandler
      * 处理建立连接的事件
      * @param clientKey
      */
-    public void onAccept(SelectionKey clientKey);
-
+    public void onAccept(Connection connection);
+    
     /**
      * 处理消息
      * @param req 请求消息
      */
-    public void onMessage(Request req);
-
+    public void onMessage(Connection connection);
+    
     /**
      * 处理连接断开的事件
      * @param clientKey
      */
-    public void onClose(SelectionKey clientKey);
+    public void onClose(Connection connection);
 }

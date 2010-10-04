@@ -3,8 +3,8 @@ package org.fanhongtao.net.server;
 import java.io.IOException;
 
 import org.fanhongtao.log.LogUtils;
-import org.fanhongtao.net.frame.aio.Server;
 import org.fanhongtao.net.frame.handler.PrintHandler;
+import org.fanhongtao.net.frame.nio.Server;
 
 
 public class PrintServer

@@ -1,4 +1,4 @@
-package org.fanhongtao.net.frame.aio;
+package org.fanhongtao.net.frame.nio;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -9,10 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.fanhongtao.log.RunLogger;
 import org.fanhongtao.net.frame.MsgInfo;
-import org.fanhongtao.net.frame.NetUtils;
-import org.fanhongtao.net.frame.Request;
 import org.fanhongtao.thread.ExRunnable;
-
 
 /**
  * @author Dharma
@@ -21,7 +18,7 @@ import org.fanhongtao.thread.ExRunnable;
 public class ChannelWriter extends ExRunnable
 {
     private static BlockingQueue<Request> pool = new LinkedBlockingQueue<Request>();
-
+    
     @Override
     public void run()
     {
@@ -43,7 +40,7 @@ public class ChannelWriter extends ExRunnable
             }
         }
     }
-
+    
     private void writeMessage(Request req)
     {
         SelectionKey key = req.getKey();
@@ -59,11 +56,11 @@ public class ChannelWriter extends ExRunnable
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            RunLogger.warn("Failed to write. ", e);
             NetUtils.closeKey(key);
         }
     }
-
+    
     /**
      * 处理客户请求,管理用户的连接池,并唤醒队列中的线程进行处理
      */
@@ -75,5 +72,5 @@ public class ChannelWriter extends ExRunnable
             // pool.notifyAll();
         }
     }
-
+    
 }
