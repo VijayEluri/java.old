@@ -1,0 +1,27 @@
+# based 0 
+rowNum = 9
+columnNum = 9
+startRow = 0
+startColumn = 0
+stopRow = 3
+stopColumn = 7
+
+blockNum = 6
+
+blockRow1 = 0
+blockColumn1 = 5
+
+blockRow2 = 1
+blockColumn2 = 0
+
+blockRow3 = 2
+blockColumn3 = 2
+
+blockRow4 = 5
+blockColumn4 = 5
+
+blockRow5 = 5
+blockColumn5 = 6
+
+blockRow6 = 5
+blockColumn6 = 7
