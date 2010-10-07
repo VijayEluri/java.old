@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<classes pgkName="org.fanhongtao.mybatis.generator.domain">
+    <class name="Operator" desc="操作员"/>
+    <class name="Company" desc="公司"/>
+</classes>

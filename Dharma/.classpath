@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="lib/mybatis-3.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/Apache/Commons/commons-beanutils-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/Apache/Commons/commons-digester-2.0.jar"/>
-	<classpathentry kind="lib" path="lib/Apache/Commons/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/Apache/Commons/commons-lang-2.4.jar" sourcepath="D:/Java/Apache/Commons/src/commons-lang-2.4-sources.jar"/>
 	<classpathentry kind="lib" path="lib/Apache/Commons/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/Apache/Commons/jakarta-oro-2.0.8.jar"/>
 	<classpathentry kind="lib" path="lib/Apache/Log4J/log4j-1.2.15.jar"/>

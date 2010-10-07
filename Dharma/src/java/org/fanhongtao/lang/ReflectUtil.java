@@ -42,7 +42,7 @@ public class ReflectUtil
      * @param fieldName The name of the field
      * @param value New value for the field 
      */
-    public static void setFieldValue(Object obj, String fieldName, Object value)
+    public static void setField(Object obj, String fieldName, Object value)
     {
         try
         {
@@ -64,7 +64,7 @@ public class ReflectUtil
      * @param fieldName The name of the field
      * @return Value of the field.
      */
-    public static Object getFileValue(Object object, String filedName)
+    public static Object getField(Object object, String filedName)
     {
         Class<?> classType = object.getClass();
         Object value = null;
@@ -90,7 +90,7 @@ public class ReflectUtil
      * @param fieldName The name of the field. The field must defined in class.
      * @return Value of the field.
      */
-    public static Object getFieldValue(Class<?> clazz, Object obj, String fieldName)
+    public static Object getField(Class<?> clazz, Object obj, String fieldName)
     {
         Object value = null;
         try

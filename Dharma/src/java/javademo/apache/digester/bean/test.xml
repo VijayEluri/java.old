@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services>
+	<request>
+		<input class="org.fanhongtao.message.LogMsg" />
+		<service>org.fanhongtao.service.LoginService</service>
+	</request>
+	<request>
+		<input class="org.fanhongtao.message.LogoutMsg" />
+		<service>org.fanhongtao.service.LoginService</service>
+	</request>
+</services>
+

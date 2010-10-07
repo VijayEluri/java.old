@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<digester-rules>
+    <pattern value="classes">
+        <set-properties-rule/>
+        
+        <pattern value="class">
+            <call-method-rule methodname="addClass" paramcount="2" />
+            <call-param-rule paramnumber='0' attrname='name' />
+            <call-param-rule paramnumber='1' attrname='desc' />
+        </pattern>
+    </pattern>
+</digester-rules>

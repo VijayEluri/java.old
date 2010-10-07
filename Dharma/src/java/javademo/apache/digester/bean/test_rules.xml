@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 读取 ServiceBean 的配置文件，供 Digester 使用 -->
+
+<digester-rules>
+    <pattern value="services">     <!-- XML文件根结点是 services -->
+        <set-properties-rule />     <!-- 要求自动设置 ServiceBean 对象的属性 -->
+
+		<pattern value="request">    <!-- services 下面的元素 request -->
+			<object-create-rule classname="javademo.apache.digester.bean.RequestBean" /> <!-- request 使用类 RequestBean 来解析 -->
+            <set-properties-rule />     <!-- 要求自动设置 RequestBean 对象的属性 -->
+            <set-next-rule methodname="addRequest" />    <!-- request 元素通过 addRequest 方法加入 ServiceBean 对象 -->
+
+			<pattern value="input">    <!-- request 下面的元素 input -->
+				<call-method-rule methodname="setInput" paramcount="1" />   <!-- 使用 RequestBean 的 setInput方法来处理  input 元素-->
+              	<call-param-rule paramnumber='0' attrname='class' />    <!-- 调用 setInput 方法时传入的第一个参数是 input 元素的 class 属性 -->
+			</pattern>  <!-- input -->
+			
+			<bean-property-setter-rule pattern="service" />  <!-- service 子元素作为request的一个属性值  -->
+
+		</pattern>		<!-- request -->
+		
+    </pattern>  <!-- services -->
+</digester-rules>
+
