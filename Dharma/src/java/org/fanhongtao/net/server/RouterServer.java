@@ -53,7 +53,7 @@ class RouterHandler extends HandlerAdapter
         
         MsgInfo retMsg = MsgInfo.getResponseMsg(connection.getSendDirection());
         retMsg.setMsg(data);
-        Request res = new Request(connection.getKey(), retMsg);
+        Request res = new Request(connection, retMsg);
         
         ChannelWriter.send(res);
     }

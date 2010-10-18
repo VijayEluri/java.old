@@ -19,14 +19,14 @@ public class Data
     
     public Data(byte[] buf)
     {
-        this(buf, 0, buf.length - 1);
+        this(buf, 0, buf.length);
     }
     
     public Data(byte[] buf, int start, int length)
     {
         this.buffer = buf;
         this.begin = start;
-        this.end = length;
+        this.end = start + length;
     }
     
     public int getSize()
@@ -140,7 +140,7 @@ public class Data
         
         byte[] data = new byte[num];
         int capability = getCapability();
-        if (begin + num < capability)
+        if (begin + num <= capability)
         {
             System.arraycopy(buffer, begin, data, 0, num);
         }
@@ -148,7 +148,7 @@ public class Data
         {
             int partlen = buffer.length - end;
             System.arraycopy(buffer, begin, data, 0, partlen);
-            System.arraycopy(buffer, 0, data, partlen, size - partlen);
+            System.arraycopy(buffer, 0, data, partlen, num - partlen);
         }
         return data;
     }

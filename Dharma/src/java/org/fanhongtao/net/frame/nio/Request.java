@@ -1,7 +1,5 @@
 package org.fanhongtao.net.frame.nio;
 
-import java.nio.channels.SelectionKey;
-
 import org.fanhongtao.net.frame.MsgInfo;
 
 /**
@@ -11,21 +9,21 @@ import org.fanhongtao.net.frame.MsgInfo;
  */
 public class Request
 {
-    private SelectionKey key;
-
+    private Connection connection;
+    
     private MsgInfo msg;
-
-    public Request(SelectionKey key, MsgInfo msg)
+    
+    public Request(Connection connection, MsgInfo msg)
     {
-        this.key = key;
+        this.connection = connection;
         this.msg = msg;
     }
-
-    public SelectionKey getKey()
+    
+    public Connection getConnection()
     {
-        return key;
+        return connection;
     }
-
+    
     public MsgInfo getMsgInfo()
     {
         return msg;

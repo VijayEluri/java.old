@@ -20,7 +20,7 @@ public class StringUtils
      */
     public static String bytesToHexString(byte[] bytes)
     {
-        StringBuffer sb = new StringBuffer(1024);
+        StringBuilder sb = new StringBuilder(1024);
         for (int i = 0; i < bytes.length; i++)
         {
             int n = bytes[i];
@@ -51,7 +51,7 @@ public class StringUtils
     public static String toHexString(byte[] bytes)
     {
         final int INCREMENT = 0x10;
-        StringBuffer sb = new StringBuffer(1024);
+        StringBuilder sb = new StringBuilder(1024);
         Formatter format = new Formatter(sb, Locale.US);
         
         byte b;
@@ -85,7 +85,14 @@ public class StringUtils
             sb.append(" ; ");
             
             // 写原始的字符
-            sb.append(new String(bytes, i, count));
+            // sb.append(new String(bytes, i, count));
+            
+            // 显示原始字符的方式在换行时无法正确显示，所以最终修改成以"."表示不可见字符（包括汉字）
+            for (j = 0; j < count; j++)
+            {
+                b = bytes[i + j];
+                format.format("%c", b >= 32 ? b : '.');
+            }
             
             sb.append(CRLF);
         }

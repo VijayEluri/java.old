@@ -7,6 +7,7 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.fanhongtao.lang.StringUtils;
 import org.fanhongtao.log.RunLogger;
 import org.fanhongtao.net.frame.MsgInfo;
 import org.fanhongtao.thread.ExRunnable;
@@ -43,10 +44,13 @@ public class ChannelWriter extends ExRunnable
     
     private void writeMessage(Request req)
     {
-        SelectionKey key = req.getKey();
+        // SelectionKey key = req.getKey();
+        Connection connection = req.getConnection();
+        SelectionKey key = connection.getKey();
         SocketChannel sc = (SocketChannel) key.channel();
         MsgInfo msgInfo = req.getMsgInfo();
         byte[] data = msgInfo.getMsg();
+        RunLogger.debug("Write to " + connection.getRemoteAddress() + ", " + StringUtils.toHexString(data));
         ByteBuffer buffer = ByteBuffer.allocate(data.length);
         buffer.put(data, 0, data.length);
         buffer.flip();
