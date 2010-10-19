@@ -1,17 +1,16 @@
 package org.fanhongtao.middleman.ui;
 
 import org.eclipse.swt.widgets.Shell;
-import org.fanhongtao.swt.windows.ApplicationWindowEx;
-
+import org.fanhongtao.swt.window.ApplicationWindowEx;
 
 public class Client extends ApplicationWindowEx
 {
-
+    
     public Client(Shell parentShell)
     {
         super(parentShell);
     }
-
+    
     @Override
     protected void configureShell(Shell shell)
     {
@@ -19,7 +18,7 @@ public class Client extends ApplicationWindowEx
         shell.setText("Client");
         shell.setSize(500, 400);
     }
-
+    
     /**
      * @param args
      */
@@ -29,5 +28,5 @@ public class Client extends ApplicationWindowEx
         app.initLog("middle_man.properties");
         app.run();
     }
-
+    
 }

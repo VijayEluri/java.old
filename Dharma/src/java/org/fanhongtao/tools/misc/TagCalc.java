@@ -12,9 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.fanhongtao.lang.StringUtils;
-import org.fanhongtao.ui.swing.BaseFrame;
-import org.fanhongtao.ui.swing.panel.TextPanel;
-
+import org.fanhongtao.swing.BaseFrame;
+import org.fanhongtao.swing.panel.TextPanel;
 
 /**
  * @author Dharma
@@ -23,9 +22,9 @@ import org.fanhongtao.ui.swing.panel.TextPanel;
 public class TagCalc extends BaseFrame
 {
     private JTextField tagField;
-
+    
     private JTextArea resultArea;
-
+    
     /* (non-Javadoc)
      * @see dharma.ui.swing.BaseFrame#createContents(javax.swing.JFrame)
      */
@@ -33,11 +32,11 @@ public class TagCalc extends BaseFrame
     protected void createContents(JFrame frame)
     {
         // frame.setSize(500, 250);
-
+        
         JPanel buttonPanel = new JPanel();
         frame.setLayout(new BorderLayout(10, 10));
         frame.add(buttonPanel, BorderLayout.SOUTH);
-
+        
         JButton btnCalc = new JButton("Calc");
         buttonPanel.add(btnCalc);
         btnCalc.setMnemonic(java.awt.event.KeyEvent.VK_C);
@@ -48,24 +47,24 @@ public class TagCalc extends BaseFrame
                 calcTag();
             }
         });
-
+        
         tagField = new JTextField(40);
         TextPanel tagPanel = new TextPanel("&Tag", tagField);
-
+        
         resultArea = new JTextArea(5, 35);
         resultArea.setEditable(false);
         TextPanel resultPanel = new TextPanel("&Result", resultArea);
-
+        
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout(10, 10));
         panel.add(tagPanel, BorderLayout.NORTH);
         panel.add(resultPanel, BorderLayout.CENTER);
         frame.add(panel, BorderLayout.CENTER);
-
+        
         frame.setSize(frame.getPreferredSize());
         frame.setResizable(false);
     }
-
+    
     private void calcTag()
     {
         String tag = tagField.getText().trim();
@@ -86,7 +85,7 @@ public class TagCalc extends BaseFrame
                 return;
             }
         }
-
+        
         if (value < 0)
         {
             value += 256;
@@ -101,7 +100,7 @@ public class TagCalc extends BaseFrame
         }
         resultArea.setText(buf.toString());
     }
-
+    
     /**
      * @param args
      */
@@ -109,5 +108,5 @@ public class TagCalc extends BaseFrame
     {
         new TagCalc().run("Tag Calc");
     }
-
+    
 }

@@ -1,4 +1,4 @@
-package org.fanhongtao.ui.swing.panel;
+package org.fanhongtao.swing.panel;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 public class ImagePanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
-
+    
     public ImagePanel(File file)
     {
         try
@@ -30,7 +30,7 @@ public class ImagePanel extends JPanel
             e.printStackTrace();
         }
     }
-
+    
     public ImagePanel(byte[] imageContent)
     {
         try
@@ -43,26 +43,26 @@ public class ImagePanel extends JPanel
             e.printStackTrace();
         }
     }
-
+    
     private void init()
     {
         if (image == null)
         {
             return;
         }
-
+        
         int imageWidth = image.getWidth(this);
         int imageHeight = image.getHeight(this);
         this.setSize(imageWidth, imageHeight);
     }
-
+    
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-
+        
         g.drawImage(image, 0, 0, null);
     }
-
+    
     /** 所要显示的图片 */
     private Image image;
 }

@@ -1,4 +1,4 @@
-package org.fanhongtao.ui.swing;
+package org.fanhongtao.swing;
 
 import javax.swing.JFrame;
 
@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 public abstract class BaseFrame
 {
     private JFrame frame;
-
+    
     public void run(String title)
     {
         frame = new JFrame();
@@ -18,12 +18,12 @@ public abstract class BaseFrame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-
+    
     abstract protected void createContents(JFrame frame);
-
+    
     protected JFrame getFrame()
     {
         return frame;
     }
-
+    
 }

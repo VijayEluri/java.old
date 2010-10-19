@@ -1,20 +1,18 @@
-package org.fanhongtao.ui.swt.window;
+package org.fanhongtao.swt.window;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.fanhongtao.log.LogUtils;
 import org.fanhongtao.log.RunLogger;
 
-/**
- * @author Fan Hongtao
- * @created 2010-10-18
- */
 public class ApplicationWindowEx extends ApplicationWindow
 {
     /** Resource for I18N */
@@ -30,10 +28,30 @@ public class ApplicationWindowEx extends ApplicationWindow
         super(parentShell);
     }
     
+    protected void initLog(String log4jFile)
+    {
+        if (log4jFile == null)
+        {
+            LogUtils.initBasicLog();
+        }
+        else
+        {
+            PropertyConfigurator.configure(log4jFile);
+        }
+    }
+    
+    /**
+     * Runs the application
+     */
     public void run()
     {
+        // Don't return from open() until window closes
         setBlockOnOpen(true);
+        
+        // Open the main window
         open();
+        
+        // Dispose the display
         Display.getCurrent().dispose();
     }
     
@@ -50,6 +68,16 @@ public class ApplicationWindowEx extends ApplicationWindow
     protected void showErrorMsg(Shell parent, String message)
     {
         MessageDialog.openError(parent, getBundleString("Message.Error"), message);
+    }
+    
+    protected void showError(String title, String info)
+    {
+        MessageDialog.openError(getShell(), title, info);
+    }
+    
+    protected void showInfo(String title, String info)
+    {
+        MessageDialog.openInformation(getShell(), title, info);
     }
     
     @Override
@@ -76,7 +104,7 @@ public class ApplicationWindowEx extends ApplicationWindow
     protected void addShellImage(Shell shell)
     {
         // the default icon file was generate by f.png, with http://www.bitbug.net/
-        String basePath = "org/fanhongtao/ui/swt/window/";
+        String basePath = "org/fanhongtao/swt/window/";
         URL smallURL = this.getClass().getClassLoader().getResource(basePath + "f16.ico");
         URL bigURL = this.getClass().getClassLoader().getResource(basePath + "f32.ico");
         try
@@ -102,5 +130,4 @@ public class ApplicationWindowEx extends ApplicationWindow
             RunLogger.debug("Can't load i18n bundle", e);
         }
     }
-    
 }

@@ -1,4 +1,4 @@
-package org.fanhongtao.ui.swing;
+package org.fanhongtao.swing;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,18 +21,18 @@ public class ExtensionFileFilter extends FileFilter
         }
         extensions.add(extension);
     }
-
+    
     public void setDescription(String description)
     {
         this.description = description;
     }
-
+    
     @Override
     public String getDescription()
     {
         return description;
     }
-
+    
     @Override
     public boolean accept(File f)
     {
@@ -40,9 +40,9 @@ public class ExtensionFileFilter extends FileFilter
         {
             return true;
         }
-
+        
         String name = f.getName().toLowerCase();
-
+        
         for (String ext : extensions)
         {
             if (name.endsWith(ext))
@@ -50,12 +50,12 @@ public class ExtensionFileFilter extends FileFilter
                 return true;
             }
         }
-
+        
         return false;
     }
-
+    
     private String description = "";
-
+    
     private ArrayList<String> extensions = new ArrayList<String>();
-
+    
 }

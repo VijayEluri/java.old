@@ -1,4 +1,4 @@
-package org.fanhongtao.ui.swt.window;
+package org.fanhongtao.swt.window;
 
 import org.eclipse.swt.widgets.Shell;
 import org.fanhongtao.log.LogUtils;

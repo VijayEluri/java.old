@@ -1,4 +1,4 @@
-package org.fanhongtao.ui.swing.panel;
+package org.fanhongtao.swing.panel;
 
 import java.awt.BorderLayout;
 
@@ -13,9 +13,9 @@ import javax.swing.text.JTextComponent;
 public class TextPanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
-
+    
     private JTextComponent component;
-
+    
     public TextPanel(String text, JTextComponent component)
     {
         // this.setLayout(new GridLayout(0, 2));
@@ -39,7 +39,7 @@ public class TextPanel extends JPanel
         add(label, BorderLayout.WEST);
         add(component, BorderLayout.CENTER);
     }
-
+    
     public JTextComponent getComponent()
     {
         return component;

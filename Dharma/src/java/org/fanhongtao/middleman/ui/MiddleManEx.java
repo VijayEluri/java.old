@@ -34,35 +34,34 @@ import org.fanhongtao.middleman.server.MuteServer;
 import org.fanhongtao.net.frame.MsgInfo;
 import org.fanhongtao.swt.layout.BorderData;
 import org.fanhongtao.swt.layout.BorderLayout;
-import org.fanhongtao.swt.windows.ApplicationWindowEx;
+import org.fanhongtao.swt.window.ApplicationWindowEx;
 import org.fanhongtao.utils.Utils;
-
 
 public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
 {
     private Combo comboServer = null;
-
+    
     private Text textPort = null;
-
+    
     private Button btnStart = null;
-
+    
     private TableViewer tv = null; // 显示消息概要信息的表
-
+    
     private Text textLog = null; // 显示运行日志
-
+    
     private ArrayList<MsgInfo> msgList = new ArrayList<MsgInfo>(); // 记录所收到的完整的消息
-
+    
     private MuteServer server = null;
-
+    
     private int msgSerial = 0;
-
+    
     private long startTime = 0;
-
+    
     public MiddleManEx(Shell parentShell)
     {
         super(parentShell);
     }
-
+    
     @Override
     protected void configureShell(Shell shell)
     {
@@ -70,7 +69,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         shell.setText("Middle man");
         shell.setSize(500, 400);
     }
-
+    
     @Override
     protected Control createContents(Composite parent)
     {
@@ -80,7 +79,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         createContent(composite);
         return composite;
     }
-
+    
     /**
      * 创建输入监听端口号的
      * @param shell
@@ -90,7 +89,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         Composite composite = new Composite(parent, SWT.NONE);
         composite.setLayoutData(BorderData.NORTH);
         composite.setLayout(new RowLayout());
-
+        
         new Label(composite, SWT.NONE).setText("服务器类型(&T)");
         comboServer = new Combo(composite, SWT.READ_ONLY);
         comboServer.add("Mute Server");
@@ -98,11 +97,11 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         comboServer.setData("Mute Server", "MuteServer");
         comboServer.setData("Echo Server", "EchoServer");
         comboServer.select(0);
-
+        
         new Label(composite, SWT.NONE).setText(" 监听端口(&P)");
         textPort = new Text(composite, SWT.NONE);
         textPort.setText("8088          ");
-
+        
         new Label(composite, SWT.NONE).setText("        ");
         btnStart = new Button(composite, SWT.TOGGLE);
         btnStart.setText("开始(&S)");
@@ -114,11 +113,11 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
                 super.widgetSelected(e);
                 pushButton();
             }
-
+            
         });
-
+        
     }
-
+    
     private void pushButton()
     {
         if (btnStart.getSelection())
@@ -138,12 +137,12 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
             comboServer.setEnabled(true);
         }
     }
-
+    
     private void createContent(Composite parent)
     {
         SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
         sashForm.setLayoutData(BorderData.CENTER);
-
+        
         tv = new TableViewer(sashForm, SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
         Table table = tv.getTable();
         table.setHeaderVisible(true);
@@ -160,23 +159,23 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         tv.setContentProvider(new MsgContentProvider());
         tv.setInput(msgList);
         addListener(tv);
-
+        
         textLog = new Text(sashForm, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
         textLog.addDisposeListener(new DisposeListener()
         {
-
+            
             @Override
             public void widgetDisposed(DisposeEvent e)
             {
                 shutDownServer();
             }
-
+            
         });
         SwtTextLogAppender appender = new SwtTextLogAppender(new PatternLayout("%r [%t] %-5p %c - %m%n"), textLog);
         Logger.getRootLogger().addAppender(appender);
-
+        
     }
-
+    
     private boolean startServer()
     {
         String serverType = comboServer.getText();
@@ -192,7 +191,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         startTime = System.currentTimeMillis();
         MsgLableProvider provider = (MsgLableProvider) tv.getLabelProvider();
         provider.setStartTime(startTime);
-
+        
         boolean ret = server.bind();
         if (ret)
         {
@@ -201,13 +200,13 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         }
         return ret;
     }
-
+    
     private void stopServer()
     {
         server.setQuit(true);
         btnStart.setText("开始(&S)");
     }
-
+    
     private void shutDownServer()
     {
         // 终止后台线程运行
@@ -218,12 +217,12 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
             Utils.sleep(2000);
         }
     }
-
+    
     private void addListener(TableViewer tv)
     {
         tv.addDoubleClickListener(new IDoubleClickListener()
         {
-
+            
             @Override
             public void doubleClick(DoubleClickEvent event)
             {
@@ -232,20 +231,20 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
                 DetailMessageDialog dlg = new DetailMessageDialog(getShell(), msgInfo);
                 dlg.open();
             }
-
+            
         });
     }
-
+    
     public void log(String str)
     {
         textLog.append(str);
         textLog.append(StringUtils.CRLF);
     }
-
+    
     private static final String[] columnName = { "序号", "时间", "发送IP", "发送端口", "接收IP", "接入端口", "消息长度", "消息" };
-
+    
     private static final int[] columnLen = { 15, 15, 20, 20, 20, 20, 20, 30 };
-
+    
     public void addMessage(MsgInfo msgInfo)
     {
         msgInfo.setTime(System.currentTimeMillis() - startTime);
@@ -253,7 +252,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         msgList.add(msgInfo);
         tv.refresh();
     }
-
+    
     /**
      * @param args
      */
@@ -263,5 +262,5 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
         app.initLog("middle_man.properties");
         app.run();
     }
-
+    
 }
