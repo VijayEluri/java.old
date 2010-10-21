@@ -47,10 +47,10 @@ public class ChannelWriter extends ExRunnable
         // SelectionKey key = req.getKey();
         Connection connection = req.getConnection();
         SelectionKey key = connection.getKey();
-        SocketChannel sc = (SocketChannel) key.channel();
+        SocketChannel sc = (SocketChannel)key.channel();
         MsgInfo msgInfo = req.getMsgInfo();
         byte[] data = msgInfo.getMsg();
-        RunLogger.debug("Write to " + connection.getRemoteAddress() + ", " + StringUtils.toHexString(data));
+        RunLogger.debug("Write to " + connection.getRemoteAddress() + ", \n" + StringUtils.toHexString(data));
         ByteBuffer buffer = ByteBuffer.allocate(data.length);
         buffer.put(data, 0, data.length);
         buffer.flip();
