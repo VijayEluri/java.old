@@ -5,3 +5,6 @@ Dharma
 shell
     the directory to store shells.
 
+CodeFormatter.xml
+    code formatter file for Eclipse.
+

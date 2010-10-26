@@ -37,7 +37,7 @@ public class Data
         }
         else
         {
-            return buffer.length + begin - end;
+            return buffer.length + end - begin;
         }
     }
     
@@ -146,7 +146,7 @@ public class Data
         }
         else
         {
-            int partlen = buffer.length - end;
+            int partlen = buffer.length - begin;
             System.arraycopy(buffer, begin, data, 0, partlen);
             System.arraycopy(buffer, 0, data, partlen, num - partlen);
         }
