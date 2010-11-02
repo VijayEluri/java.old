@@ -37,47 +37,47 @@ public class SplitPaneTest
 class SplitPaneFrame extends JFrame
 {
     private static final long serialVersionUID = -7216293790736267039L;
-
+    
     public SplitPaneFrame()
     {
         setTitle("SplitPaneTest");
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-
+        
         // set up components for planet names, images, descriptions
         final JList planetList = new JList(planets);
         final JLabel planetImage = new JLabel();
         final JTextArea planetDescription = new JTextArea();
-
+        
         planetList.addListSelectionListener(new ListSelectionListener()
         {
             public void valueChanged(ListSelectionEvent event)
             {
-                Planet value = (Planet) planetList.getSelectedValue();
-
+                Planet value = (Planet)planetList.getSelectedValue();
+                
                 // update image and description
                 planetImage.setIcon(value.getImage());
                 planetDescription.setText(value.getDescription());
             }
         });
-
+        
         // set up split panes
         JSplitPane innerPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, planetList, planetImage);
-
+        innerPane.setDividerLocation(100);
         innerPane.setContinuousLayout(true);
         innerPane.setOneTouchExpandable(true);
-
+        
         JSplitPane outerPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, innerPane, planetDescription);
-
+        
         add(outerPane, BorderLayout.CENTER);
     }
-
+    
     private Planet[] planets = { new Planet("Mercury", 2440, 0), new Planet("Venus", 6052, 0),
             new Planet("Earth", 6378, 1), new Planet("Mars", 3397, 2), new Planet("Jupiter", 71492, 16),
             new Planet("Saturn", 60268, 18), new Planet("Uranus", 25559, 17), new Planet("Neptune", 24766, 8),
             new Planet("Pluto", 1137, 1), };
-
+    
     private static final int DEFAULT_WIDTH = 300;
-
+    
     private static final int DEFAULT_HEIGHT = 300;
 }
 
@@ -99,12 +99,12 @@ class Planet
         moons = m;
         image = new ImageIcon(name + ".gif");
     }
-
+    
     public String toString()
     {
         return name;
     }
-
+    
     /**
        Gets a description of the planet.
        @return the description
@@ -113,7 +113,7 @@ class Planet
     {
         return "Radius: " + radius + "\nMoons: " + moons + "\n";
     }
-
+    
     /**
        Gets an image of the planet.
        @return the image
@@ -122,12 +122,12 @@ class Planet
     {
         return image;
     }
-
+    
     private String name;
-
+    
     private double radius;
-
+    
     private int moons;
-
+    
     private ImageIcon image;
 }
