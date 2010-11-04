@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.fanhongtao.lang.StringUtils;
-import org.fanhongtao.log.SwtTextLogAppender;
+import org.fanhongtao.log.SwtTextAppender;
 import org.fanhongtao.middleman.core.IMessageWindow;
 import org.fanhongtao.middleman.server.EchoServer;
 import org.fanhongtao.middleman.server.MuteServer;
@@ -171,9 +171,9 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
             }
             
         });
-        SwtTextLogAppender appender = new SwtTextLogAppender(new PatternLayout("%r [%t] %-5p %c - %m%n"), textLog);
+        SwtTextAppender appender = new SwtTextAppender(textLog);
+        appender.setLayout(new PatternLayout("%r [%t] %-5p %c - %m%n"));
         Logger.getRootLogger().addAppender(appender);
-        
     }
     
     private boolean startServer()
@@ -189,7 +189,7 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
             server = new MuteServer(port, this);
         }
         startTime = System.currentTimeMillis();
-        MsgLableProvider provider = (MsgLableProvider) tv.getLabelProvider();
+        MsgLableProvider provider = (MsgLableProvider)tv.getLabelProvider();
         provider.setStartTime(startTime);
         
         boolean ret = server.bind();
@@ -226,8 +226,8 @@ public class MiddleManEx extends ApplicationWindowEx implements IMessageWindow
             @Override
             public void doubleClick(DoubleClickEvent event)
             {
-                IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-                MsgInfo msgInfo = (MsgInfo) selection.getFirstElement();
+                IStructuredSelection selection = (IStructuredSelection)event.getSelection();
+                MsgInfo msgInfo = (MsgInfo)selection.getFirstElement();
                 DetailMessageDialog dlg = new DetailMessageDialog(getShell(), msgInfo);
                 dlg.open();
             }

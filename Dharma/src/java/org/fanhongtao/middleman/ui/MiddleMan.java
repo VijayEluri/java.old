@@ -24,13 +24,12 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.fanhongtao.lang.StringUtils;
-import org.fanhongtao.log.SwtTextLogAppender;
+import org.fanhongtao.log.SwtTextAppender;
 import org.fanhongtao.middleman.server.MuteServer;
 import org.fanhongtao.net.frame.MsgInfo;
 import org.fanhongtao.swt.layout.BorderData;
 import org.fanhongtao.swt.layout.BorderLayout;
 import org.fanhongtao.utils.Utils;
-
 
 /**
  * @author Dharma
@@ -38,23 +37,23 @@ import org.fanhongtao.utils.Utils;
  */
 public class MiddleMan
 {
-
+    
     private Text textPort = null;
-
+    
     private Button btnStart = null;
-
+    
     private Table table = null; // 显示消息概要信息的表
-
+    
     private Text textDetail = null; // 显示某一个特定消息的详细信息
-
+    
     private Text textLog = null; // 显示运行日志
-
+    
     private ArrayList<MsgInfo> msgList = new ArrayList<MsgInfo>(); // 记录所收到的完整的消息
-
+    
     private MuteServer server = null;
-
+    
     static Logger logger = Logger.getLogger(MiddleMan.class);
-
+    
     /**
      * run函数基本可以不用修改，所有SWT程序都是这样写的。
      */
@@ -74,17 +73,17 @@ public class MiddleMan
                 display.sleep();
             }
         }
-
+        
         display.dispose();
     }
-
+    
     public void createContents(Shell shell)
     {
         shell.setLayout(new BorderLayout());
         createConfigure(shell);
         createContent(shell);
     }
-
+    
     /**
      * 创建输入监听端口号的
      * @param shell
@@ -94,11 +93,11 @@ public class MiddleMan
         Composite composite = new Composite(shell, SWT.NONE);
         composite.setLayoutData(BorderData.NORTH);
         composite.setLayout(new RowLayout());
-
+        
         new Label(composite, SWT.NONE).setText("监听端口(&P)");
         textPort = new Text(composite, SWT.NONE);
         textPort.setText("8088          ");
-
+        
         new Label(composite, SWT.NONE).setText("        ");
         btnStart = new Button(composite, SWT.TOGGLE);
         btnStart.setText("开始(&S)");
@@ -110,11 +109,11 @@ public class MiddleMan
                 super.widgetSelected(e);
                 pushButton();
             }
-
+            
         });
-
+        
     }
-
+    
     private void pushButton()
     {
         if (btnStart.getSelection())
@@ -129,12 +128,12 @@ public class MiddleMan
             stopServer();
         }
     }
-
+    
     private void createContent(Shell shell)
     {
         SashForm sashForm = new SashForm(shell, SWT.VERTICAL);
         sashForm.setLayoutData(BorderData.CENTER);
-
+        
         table = new Table(sashForm, SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
@@ -144,37 +143,38 @@ public class MiddleMan
             column.setText(columnName[i]);
             column.pack();
         }
-
+        
         table.addMouseListener(new MouseAdapter()
         {
-
+            
             @Override
             public void mouseDoubleClick(MouseEvent e)
             {
                 super.mouseDoubleClick(e);
                 showDetailMsg();
             }
-
+            
         });
-
+        
         // textDetail = new Text(sashForm, SWT.BORDER | SWT.MULTI);
-
+        
         textLog = new Text(sashForm, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
         textLog.addDisposeListener(new DisposeListener()
         {
-
+            
             @Override
             public void widgetDisposed(DisposeEvent e)
             {
                 shutDownServer();
             }
-
+            
         });
-        SwtTextLogAppender appender = new SwtTextLogAppender(new PatternLayout("%r [%t] %-5p %c - %m%n"), textLog);
+        SwtTextAppender appender = new SwtTextAppender(textLog);
+        appender.setLayout(new PatternLayout("%r [%t] %-5p %c - %m%n"));
         Logger.getRootLogger().addAppender(appender);
-
+        
     }
-
+    
     private boolean startServer()
     {
         int port = Integer.parseInt(textPort.getText().trim());
@@ -187,13 +187,13 @@ public class MiddleMan
         }
         return ret;
     }
-
+    
     private void stopServer()
     {
         server.setQuit(true);
         btnStart.setText("开始(&S)");
     }
-
+    
     private void shutDownServer()
     {
         // 终止后台线程运行
@@ -204,7 +204,7 @@ public class MiddleMan
             Utils.sleep(2000);
         }
     }
-
+    
     /**
     * 在文本框中显示详细的消息
     */
@@ -221,7 +221,7 @@ public class MiddleMan
         {
             textDetail.setText(item.getText());
             int msgIndex = Integer.parseInt(item.getText(0)) - 1;
-            MsgInfo msgInfo = (MsgInfo) msgList.get(msgIndex);
+            MsgInfo msgInfo = (MsgInfo)msgList.get(msgIndex);
             textDetail.setText(StringUtils.toHexString(msgInfo.getMsg()));
         }
         catch (Exception e)
@@ -231,15 +231,15 @@ public class MiddleMan
             textDetail.append(errInfo);
         }
     }
-
+    
     public void log(String str)
     {
         textLog.append(str);
         textLog.append(StringUtils.CRLF);
     }
-
+    
     private static final String[] columnName = { "序号", "发送IP", "发送端口", "接收IP", "接入端口", "消息长度" };
-
+    
     void addMessage(MsgInfo msgInfo)
     {
         msgList.add(msgInfo);
@@ -253,7 +253,7 @@ public class MiddleMan
         item.setText(5, Integer.toString(msgInfo.getMsg().length));
         table.redraw();
     }
-
+    
     /**
      * @param args
      */
@@ -262,5 +262,5 @@ public class MiddleMan
         BasicConfigurator.configure(); // 使用缺省配置
         new MiddleMan().run();
     }
-
+    
 }

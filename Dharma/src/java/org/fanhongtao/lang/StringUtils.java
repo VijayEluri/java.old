@@ -50,6 +50,18 @@ public class StringUtils
      */
     public static String toHexString(byte[] bytes)
     {
+        return toHexString(bytes, 0, bytes.length);
+    }
+    
+    /**
+     * 将byte数据的指定范围转换成类似于UltraEdit中的十六进制的形式显示
+     * @param bytes 需要转换的数组
+     * @param offset 转换的开始位置
+     * @param length 转换的长度
+     * @return 转换后的字符串
+     */
+    public static String toHexString(byte[] bytes, int offset, int length)
+    {
         final int INCREMENT = 0x10;
         StringBuilder sb = new StringBuilder(1024);
         Formatter format = new Formatter(sb, Locale.US);
@@ -57,13 +69,14 @@ public class StringUtils
         byte b;
         int j;
         int count = 0;
-        for (int i = 0; i < bytes.length; i += INCREMENT)
+        int end = offset + length;
+        for (int i = 0; i < end; i += INCREMENT)
         {
             // 写序号
             format.format("%08Xh:", i);
             
             // 写十六进制的码流
-            for (j = 0; j < INCREMENT && i + j < bytes.length; j++)
+            for (j = 0; j < INCREMENT && i + j < end; j++)
             {
                 b = bytes[j + i];
                 if (j != 8)
