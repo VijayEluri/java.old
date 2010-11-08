@@ -19,8 +19,8 @@
 
     <!-- 打包源码 -->
     <target name="make-jar">
-        <jar jarfile="${dir.jar}/dharma.jar" basedir="${dir.build}"/>
-    	<jar jarfile="${dir.jar}/dharma.src.jar" basedir="${dir.src}"/>
+        <jar jarfile="${dir.jar}/dharma.jar" basedir="${dir.build}" includes="org/fanhongtao/**"/>
+    	<jar jarfile="${dir.jar}/dharma.src.jar" basedir="${dir.src}" includes="java/org/fanhongtao/**"/>
     </target>
 
     <target name="clean" description="clean up" >
