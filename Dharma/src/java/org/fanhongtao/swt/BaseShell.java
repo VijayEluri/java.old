@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 public abstract class BaseShell
 {
     private Shell shell = null;
-
+    
     public void run(String title)
     {
         Display display = new Display();
@@ -25,15 +25,23 @@ public abstract class BaseShell
                 display.sleep();
             }
         }
-
+        
+        dispose();
         display.dispose();
     }
-
+    
     public abstract void createContents(Shell shell);
-
+    
     protected Shell getShell()
     {
         return shell;
     }
-
+    
+    /**
+     * Disposes the resources created
+     */
+    protected void dispose()
+    {
+        // Do nothing by default
+    }
 }

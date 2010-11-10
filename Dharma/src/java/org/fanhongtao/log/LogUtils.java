@@ -10,6 +10,8 @@ import org.apache.log4j.PatternLayout;
 
 public final class LogUtils
 {
+    public static final String DEFAULT_PATTERN_LAYOUT = "[%d{MM-dd HH:mm:ss,SSS}] [%p] [%t] [%F:%L] [%m]%n";
+    
     /**
      * Initiate log4j in the a simply way.
      */
@@ -30,7 +32,7 @@ public final class LogUtils
         Enumeration<?> enmu = Logger.getRootLogger().getAllAppenders();
         while (enmu.hasMoreElements())
         {
-            Appender a = (Appender) enmu.nextElement();
+            Appender a = (Appender)enmu.nextElement();
             a.setLayout(new PatternLayout(pattern));
         }
     }

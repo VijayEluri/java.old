@@ -35,10 +35,10 @@ import org.fanhongtao.swt.layout.BorderLayout;
  */
 public class BytesViewer extends BaseShell
 {
-    // 需要解析的XML文件
+    // 需要解析的Byte数组
     private Text srcBytes = null;
     
-    // 解析后的XML文件
+    // 解析后的Byte数组
     private Text destBytes = null;
     
     // 系统运行过程中的提示信息
