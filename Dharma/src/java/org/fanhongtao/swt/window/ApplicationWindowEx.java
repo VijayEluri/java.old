@@ -20,7 +20,7 @@ public class ApplicationWindowEx extends ApplicationWindow
     
     public ApplicationWindowEx()
     {
-        super(null);
+        this(null);
     }
     
     public ApplicationWindowEx(Shell parentShell)
@@ -55,27 +55,31 @@ public class ApplicationWindowEx extends ApplicationWindow
         Display.getCurrent().dispose();
     }
     
-    protected String getBundleString(String key)
+    public String getBundleString(String key)
     {
+        if (null == bundle)
+        {
+            loadI18nBundle();
+        }
         return bundle.getString(key);
     }
     
-    protected void showErrorMsg(String message)
+    public void showErrorMsg(String message)
     {
         showErrorMsg(getShell(), message);
     }
     
-    protected void showErrorMsg(Shell parent, String message)
+    public void showErrorMsg(Shell parent, String message)
     {
         MessageDialog.openError(parent, getBundleString("Message.Error"), message);
     }
     
-    protected void showError(String title, String info)
+    public void showError(String title, String info)
     {
         MessageDialog.openError(getShell(), title, info);
     }
     
-    protected void showInfo(String title, String info)
+    public void showInfo(String title, String info)
     {
         MessageDialog.openInformation(getShell(), title, info);
     }
@@ -85,7 +89,6 @@ public class ApplicationWindowEx extends ApplicationWindow
     {
         super.configureShell(shell);
         addShellImage(shell);
-        loadI18nBundle();
     }
     
     @Override
@@ -119,7 +122,7 @@ public class ApplicationWindowEx extends ApplicationWindow
         }
     }
     
-    private void loadI18nBundle()
+    private synchronized void loadI18nBundle()
     {
         try
         {
