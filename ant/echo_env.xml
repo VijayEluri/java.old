@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<project name="TestProject" default="echo" basedir="."> 
+    <property environment="env"/>
+    <target name="echo">
+        <echo message="${env.JAVA_HOME}"/> <!-- 显示环境变量JAVA_HOME的值 -->
+    </target>
+</project>
+
