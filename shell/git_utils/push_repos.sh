@@ -9,7 +9,7 @@ fi
 
 base_dir=`pwd`
 remote_name=$2
-if [ $# -ne 3 ]; then
+if [ $# -eq 3 ]; then
     branch_name=$3
 else
     branch_name="master"

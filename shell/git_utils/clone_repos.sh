@@ -20,7 +20,7 @@ repo_base_url=$1
 
 # Clone repository .project.git
 repo_url=${repo_base_url}/.project.git
-git clone $repo
+git clone $repo_url
 if [ $? -ne 0 ]; then
     echo "Can't clone $repo_url"
     exit 1

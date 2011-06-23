@@ -14,9 +14,9 @@ fi
 base_dir=`pwd`
 remote_name=""
 branch_name=""
-if [ $# -lt 1 ]; then
+if [ $# -gt 1 ]; then
     remote_name=$2
-    if [ $# -lt 2 ]; then
+    if [ $# -gt 2 ]; then
         branch_name=$3
     fi
 fi
