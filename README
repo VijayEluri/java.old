@@ -1,4 +1,7 @@
 
+C
+    the directory to store C&C++ code.
+
 Dharma
     the directory to store my java code.
 
@@ -7,4 +10,5 @@ shell
 
 CodeFormatter.xml
     code formatter file for Eclipse.
+
 
