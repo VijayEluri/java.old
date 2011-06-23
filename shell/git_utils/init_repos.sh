@@ -3,7 +3,7 @@
 
 # check args
 if [ $# -ne 1 ]; then
-    echo "Usage: $0  project-file-list"
+    echo "Usage: $0  project-list-file"
     exit 1
 fi
 
@@ -14,9 +14,9 @@ do
     echo $line
     repo_dir=${base_dir}/${line}
 
-    cd ${repo_dir}
+    cd $repo_dir
     if [ $? -ne 0 ]; then
-        echo "Can't entry directory [${repo_dir}]."
+        echo "Can't enter directory [$repo_dir]."
         continue
     fi    
 

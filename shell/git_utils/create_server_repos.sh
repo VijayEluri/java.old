@@ -3,7 +3,7 @@
 
 # check args
 if [ $# -ne 1 ]; then
-    echo "Usage: $0  project-file-list"
+    echo "Usage: $0  project-list-file"
     exit 1
 fi
 
@@ -14,15 +14,15 @@ do
     echo $line
     repo_dir=${base_dir}/${line}.git
 
-    if [ -d ${repo_dir} ]; then
-        echo "Repository [${repo_dir}] already exist."
+    if [ -d $repo_dir ]; then
+        echo "Repository [$repo_dir] already exist."
         continue
     fi
 
-    mkdir -p ${repo_dir}
-    cd ${repo_dir}
+    mkdir -p $repo_dir
+    cd $repo_dir
     git init --bare
     cd ..
-    chown -R git:users
+    chown -R git:users $repo_dir
 done < $1
 

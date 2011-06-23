@@ -3,7 +3,7 @@
 
 # check args
 if [ $# -lt 1 ]; then
-    echo "Usage: $0  project-file-list  [ remote-name  [ branch-name ] ]"
+    echo "Usage: $0  project-list-file  [ remote-name  [ branch-name ] ]"
     echo "Example:"
     echo "    $0  project.list"
     echo "    $0  project.list  origin"
@@ -26,12 +26,12 @@ do
     echo $line
     repo_dir=${base_dir}/${line}
 
-    cd ${repo_dir}
+    cd $repo_dir
     if [ $? -ne 0 ]; then
-        echo "Can't entry directory [${repo_dir}]."
+        echo "Can't enter directory [$repo_dir]."
         continue
     fi    
 
-    git pull ${remote_name}  ${branch_name}
+    git pull $remote_name  $branch_name
 done < $1
 

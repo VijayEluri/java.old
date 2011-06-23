@@ -3,7 +3,7 @@
 
 # check args
 if [ $# -ne 2 -a $# -ne 3 ]; then
-    echo "Usage: $0  project-file-list  remote-name  [ branch-name ]"
+    echo "Usage: $0  project-list-file  remote-name  [ branch-name ]"
     exit 1
 fi
 
@@ -18,14 +18,14 @@ fi
 while read line
 do
     echo $line
-    repo_dir=${base_dir}/${line}
+    repo_dir=$base_dir/$line
 
-    cd ${repo_dir}
+    cd $repo_dir
     if [ $? -ne 0 ]; then
-        echo "Can't entry directory [${repo_dir}]."
+        echo "Can't enter directory [$repo_dir]."
         continue
     fi    
 
-    git push ${remote_name}  ${branch_name}
+    git push $remote_name  $branch_name
 done < $1
 
