@@ -1,5 +1,6 @@
 #!/bin/bash
 # Add remote to existing local git repositories.
+# Execute this script in the projects' base directory.
 
 # check args
 if [ $# -ne 3 ]; then
@@ -15,7 +16,7 @@ remote_name=$3
 
 while read line
 do
-    echo $line
+    echo "Add remote to $line"
     repo_dir=${base_dir}/${line}
     cd $repo_dir
     if [ $? -ne 0 ]; then

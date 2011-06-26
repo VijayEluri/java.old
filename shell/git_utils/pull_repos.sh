@@ -1,5 +1,6 @@
 #!/bin/bash
 # Pull git repositories to the local.
+# Execute this script in the projects' base directory.
 
 # check args
 if [ $# -lt 1 ]; then
@@ -23,14 +24,14 @@ fi
 
 while read line
 do
-    echo $line
     repo_dir=${base_dir}/${line}
+    echo "Pulling $repo_dir ..."
 
     cd $repo_dir
     if [ $? -ne 0 ]; then
         echo "Can't enter directory [$repo_dir]."
         continue
-    fi    
+    fi
 
     git pull $remote_name  $branch_name
 done < $1

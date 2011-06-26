@@ -1,10 +1,12 @@
 #!/bin/bash
-# Init git repositories on the local.
+# Record the last log of each repositories. Uses this before build a release version.
 # Execute this script in the projects' base directory.
 
 # check args
-if [ $# -ne 1 ]; then
+if [ $# -lt 1 ]; then
     echo "Usage: $0  project-list-file"
+    echo "Example:"
+    echo "    $0  project.list"
     exit 1
 fi
 
@@ -12,7 +14,6 @@ base_dir=`pwd`
 
 while read line
 do
-    # echo $line
     repo_dir=${base_dir}/${line}
 
     cd $repo_dir
@@ -21,11 +22,6 @@ do
         continue
     fi
 
-    git init
-    git add *
-    if [ -f .gitignore ]; then
-        git add .gitignore
-    fi
-    git commit -m "First commit"
+    git log -n 1
 done < $1
 

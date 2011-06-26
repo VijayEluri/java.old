@@ -1,5 +1,6 @@
 #!/bin/bash
 # Clone git repositories from the server.
+# Execute this script in the projects' base directory.
 
 # create directory if it doesn't exist
 function create_dir()
@@ -32,6 +33,7 @@ if [ ! -f $project_file ]; then
     exit 1
 fi
 
+# get repositories listed in the project.list
 while read line
 do
     cd $base_dir

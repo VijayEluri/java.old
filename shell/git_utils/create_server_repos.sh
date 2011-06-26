@@ -1,5 +1,6 @@
 #!/bin/bash
 # Create git repositories on the server.
+# Execute this script in the projects' base directory.
 
 # check args
 if [ $# -ne 1 ]; then
