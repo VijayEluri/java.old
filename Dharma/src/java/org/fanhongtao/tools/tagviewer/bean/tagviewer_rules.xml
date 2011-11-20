@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<digester-rules>
+    <pattern value="root">
+        <set-properties-rule />
+
+		<pattern value="group">
+			<object-create-rule classname="org.fanhongtao.tools.tagviewer.bean.GroupBean" />
+            <set-properties-rule /> 
+            <set-next-rule methodname="addGroup" />
+
+            <pattern value="title">
+                <object-create-rule classname="org.fanhongtao.tools.tagviewer.bean.TitleBean" />
+                <set-properties-rule />
+                <set-next-rule methodname="setTitle" />    
+            </pattern>
+            
+			<pattern value="tag">
+                <object-create-rule classname="org.fanhongtao.tools.tagviewer.bean.TagBean" />
+                <set-properties-rule /> 
+                <set-next-rule methodname="addTag" />
+			</pattern>
+            
+		</pattern>
+		
+    </pattern>
+</digester-rules>
