@@ -8,7 +8,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.fanhongtao.log.RunLogger;
-import org.fanhongtao.net.frame.Data;
+import org.fanhongtao.net.frame.LoopedData;
 import org.fanhongtao.thread.ExRunnable;
 
 /**
@@ -52,8 +52,8 @@ public class ChannelReader extends ExRunnable
     private void readMessage(SelectionKey key)
     {
         // 读取客户端数据
-        SocketChannel sc = (SocketChannel) key.channel();
-        Data data = new Data();
+        SocketChannel sc = (SocketChannel)key.channel();
+        LoopedData data = new LoopedData();
         boolean closeKey = false;
         try
         {
@@ -90,7 +90,7 @@ public class ChannelReader extends ExRunnable
             }
         }
         
-        Connection conn = (Connection) key.attachment();
+        Connection conn = (Connection)key.attachment();
         conn.getBuffer().add(data.getData());
         MessageHandler.process(conn);// 提交给处理线程进行处理
     }

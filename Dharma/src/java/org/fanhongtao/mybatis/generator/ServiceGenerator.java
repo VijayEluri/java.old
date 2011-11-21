@@ -29,8 +29,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 import org.apache.commons.lang.WordUtils;
+import org.fanhongtao.log.LogUtils;
 import org.fanhongtao.xml.DigesterUtils;
 
 /**
@@ -57,11 +59,11 @@ public class ServiceGenerator extends JFrame
     
     private JTextArea serviceArea;
     
-    private ExStringWriter mapperWritter;
+    private ExStringWriter mapperWriter;
     
-    private ExStringWriter xmlWritter;
+    private ExStringWriter xmlWriter;
     
-    private ExStringWriter serviceWritter;
+    private ExStringWriter serviceWriter;
     
     @SuppressWarnings("rawtypes")
     private Class clazz;
@@ -75,7 +77,7 @@ public class ServiceGenerator extends JFrame
         URL url = classInfo.getClass().getResource("classinfo_rules.xml");
         try
         {
-            classInfo = (ClassInfo) DigesterUtils.parse(classInfo, input, url);
+            classInfo = (ClassInfo)DigesterUtils.parse(classInfo, input, url);
             classMap = classInfo.getClassMap();
         }
         catch (Exception e)
@@ -116,12 +118,13 @@ public class ServiceGenerator extends JFrame
         JPanel classPanel = new JPanel();
         innerPanel.add(classPanel, BorderLayout.NORTH);
         JPanel dirPanel = new JPanel();
+        dirPanel.setLayout(new SpringLayout());
         innerPanel.add(dirPanel, BorderLayout.CENTER);
         
         JLabel label = new JLabel("package: ");
         classPanel.add(label);
         packageNameText = new JTextField(30);
-        packageNameText.setText("org.fanhongtao.persistence");
+        // packageNameText.setText("org.fanhongtao.persistence");
         classPanel.add(packageNameText);
         
         label = new JLabel("class: ");
@@ -186,7 +189,7 @@ public class ServiceGenerator extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                String className = packageNameText.getText() + "." + (String) classNameCombo.getSelectedItem();
+                String className = packageNameText.getText() + "." + (String)classNameCombo.getSelectedItem();
                 try
                 {
                     generate(className, true);
@@ -212,7 +215,7 @@ public class ServiceGenerator extends JFrame
                 {
                     Map.Entry<String, String> entry = iter.next();
                     classNameCombo.setSelectedItem(entry.getKey());
-                    String className = packageNameText.getText() + "." + (String) classNameCombo.getSelectedItem();
+                    String className = packageNameText.getText() + "." + (String)classNameCombo.getSelectedItem();
                     try
                     {
                         generate(className, false);
@@ -248,9 +251,9 @@ public class ServiceGenerator extends JFrame
         clazz = Class.forName(className);
         Table table = new TableUtils(clazz).parseTable();
         
-        mapperWritter = new ExStringWriter(1024);
-        xmlWritter = new ExStringWriter(1024);
-        serviceWritter = new ExStringWriter(1024);
+        mapperWriter = new ExStringWriter(1024);
+        xmlWriter = new ExStringWriter(1024);
+        serviceWriter = new ExStringWriter(1024);
         
         generateHead(table);
         generateDeleteMethod(table);
@@ -261,15 +264,15 @@ public class ServiceGenerator extends JFrame
         
         if (showInScreen)
         {
-            mapperArea.setText(mapperWritter.toString());
-            xmlArea.setText(xmlWritter.toString());
-            serviceArea.setText(serviceWritter.toString());
+            mapperArea.setText(mapperWriter.toString());
+            xmlArea.setText(xmlWriter.toString());
+            serviceArea.setText(serviceWriter.toString());
         }
         
         String dir = outputDirText.getText();
-        writeFile(dir + "/iface", clazz.getSimpleName() + "Mapper.java", mapperWritter.toString());
-        writeFile(dir + "/mapper", clazz.getSimpleName() + "Mapper.xml", xmlWritter.toString());
-        writeFile(dir + "/service", clazz.getSimpleName() + "Service.java", serviceWritter.toString());
+        writeFile(dir + "/iface", clazz.getSimpleName() + "Mapper.java", mapperWriter.toString());
+        writeFile(dir + "/mapper", clazz.getSimpleName() + "Mapper.xml", xmlWriter.toString());
+        writeFile(dir + "/service", clazz.getSimpleName() + "Service.java", serviceWriter.toString());
     }
     
     private void writeFile(String dirName, String fileName, String content)
@@ -314,57 +317,57 @@ public class ServiceGenerator extends JFrame
         String author = System.getenv("USERNAME");
         String dateStr = formatter.format(new Date());
         
-        xmlWritter.writeln("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        xmlWritter.writeln("<!DOCTYPE mapper");
-        xmlWritter.writeln("    PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\"");
-        xmlWritter.writeln("    \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\"> ");
-        xmlWritter.writeln("");
-        xmlWritter.writeln("<mapper namespace=\"" + mapperClass + "\">");
+        xmlWriter.writeln("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        xmlWriter.writeln("<!DOCTYPE mapper");
+        xmlWriter.writeln("    PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\"");
+        xmlWriter.writeln("    \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\"> ");
+        xmlWriter.writeln("");
+        xmlWriter.writeln("<mapper namespace=\"" + mapperClass + "\">");
         
-        mapperWritter.writeln("package " + pkgName + ".iface");
-        mapperWritter.writeln("");
-        mapperWritter.writeln("import java.util.List;");
-        mapperWritter.writeln("");
-        mapperWritter.writeln("import org.apache.ibatis.session.RowBounds;");
-        mapperWritter.writeln("");
-        mapperWritter.writeln("import " + clazz.getName() + ";");
-        mapperWritter.writeln("");
-        mapperWritter.writeln("/**");
-        mapperWritter.writeln(" * @author " + author);
-        mapperWritter.writeln(" * @created " + dateStr);
-        mapperWritter.writeln(" */");
-        mapperWritter.writeln("public interface " + mapperName + " extends BasicMapper<" + clazz.getSimpleName() + ">");
+        mapperWriter.writeln("package " + pkgName + ".iface");
+        mapperWriter.writeln("");
+        mapperWriter.writeln("import java.util.List;");
+        mapperWriter.writeln("");
+        mapperWriter.writeln("import org.apache.ibatis.session.RowBounds;");
+        mapperWriter.writeln("");
+        mapperWriter.writeln("import " + clazz.getName() + ";");
+        mapperWriter.writeln("");
+        mapperWriter.writeln("/**");
+        mapperWriter.writeln(" * @author " + author);
+        mapperWriter.writeln(" * @created " + dateStr);
+        mapperWriter.writeln(" */");
+        mapperWriter.writeln("public interface " + mapperName + " extends BasicMapper<" + clazz.getSimpleName() + ">");
         
-        serviceWritter.writeln("package " + pkgName + ".service");
-        serviceWritter.writeln("");
-        serviceWritter.writeln("import java.util.List;");
-        serviceWritter.writeln("");
-        serviceWritter.writeln("import org.apache.ibatis.session.RowBounds;");
-        serviceWritter.writeln("import org.apache.ibatis.session.SqlSession;");
-        serviceWritter.writeln("import " + mapperClass + ";");
-        serviceWritter.writeln("import " + clazz.getName() + ";");
-        serviceWritter.writeln("");
-        serviceWritter.writeln("/**");
-        serviceWritter.writeln(" * @author " + author);
-        serviceWritter.writeln(" * @created " + dateStr);
-        serviceWritter.writeln(" */");
-        serviceWritter.writeln("final class " + serviceName + " extends BaseService<" + clazz.getSimpleName() + ", "
+        serviceWriter.writeln("package " + pkgName + ".service");
+        serviceWriter.writeln("");
+        serviceWriter.writeln("import java.util.List;");
+        serviceWriter.writeln("");
+        serviceWriter.writeln("import org.apache.ibatis.session.RowBounds;");
+        serviceWriter.writeln("import org.apache.ibatis.session.SqlSession;");
+        serviceWriter.writeln("import " + mapperClass + ";");
+        serviceWriter.writeln("import " + clazz.getName() + ";");
+        serviceWriter.writeln("");
+        serviceWriter.writeln("/**");
+        serviceWriter.writeln(" * @author " + author);
+        serviceWriter.writeln(" * @created " + dateStr);
+        serviceWriter.writeln(" */");
+        serviceWriter.writeln("final class " + serviceName + " extends BaseService<" + clazz.getSimpleName() + ", "
                 + mapperName + "> impements " + mapperName);
-        serviceWritter.writeln("{");
-        serviceWritter.writeln("    public " + serviceName + "()");
-        serviceWritter.writeln("    {");
-        serviceWritter.writeln("    }");
-        serviceWritter.writeln("    ");
-        serviceWritter.writeln("    public " + serviceName + "(SqlSession session)");
-        serviceWritter.writeln("    {");
-        serviceWritter.writeln("        super(session);");
-        serviceWritter.writeln("    }");
-        serviceWritter.writeln("    ");
-        serviceWritter.writeln("    public " + mapperName + " getMapper()");
-        serviceWritter.writeln("    {");
-        serviceWritter.writeln("        return getSession().getMapper(" + mapperName + ".class);");
-        serviceWritter.writeln("    }");
-        serviceWritter.writeln("    ");
+        serviceWriter.writeln("{");
+        serviceWriter.writeln("    public " + serviceName + "()");
+        serviceWriter.writeln("    {");
+        serviceWriter.writeln("    }");
+        serviceWriter.writeln("    ");
+        serviceWriter.writeln("    public " + serviceName + "(SqlSession session)");
+        serviceWriter.writeln("    {");
+        serviceWriter.writeln("        super(session);");
+        serviceWriter.writeln("    }");
+        serviceWriter.writeln("    ");
+        serviceWriter.writeln("    public " + mapperName + " getMapper()");
+        serviceWriter.writeln("    {");
+        serviceWriter.writeln("        return getSession().getMapper(" + mapperName + ".class);");
+        serviceWriter.writeln("    }");
+        serviceWriter.writeln("    ");
     }
     
     private void generateDeleteMethod(Table table)
@@ -408,37 +411,37 @@ public class ServiceGenerator extends JFrame
             methodName += WordUtils.capitalize(column);
         }
         
-        xmlWritter.writeln("    <delete id=\"" + methodName + "\" parameterType=\"" + type + "\">");
-        xmlWritter.write("        delete from " + table.getName() + " where ");
+        xmlWriter.writeln("    <delete id=\"" + methodName + "\" parameterType=\"" + type + "\">");
+        xmlWriter.write("        delete from " + table.getName() + " where ");
         for (int i = 0, n = columnList.size(); i < n; i++)
         {
             String column = columnList.get(i);
             if (i != 0)
             {
-                xmlWritter.write(" and ");
+                xmlWriter.write(" and ");
             }
-            xmlWritter.write(column + " = #{" + column + "}");
+            xmlWriter.write(column + " = #{" + column + "}");
         }
-        xmlWritter.writeln("");
-        xmlWritter.writeln("    </delete>");
-        xmlWritter.writeln("    ");
+        xmlWriter.writeln("");
+        xmlWriter.writeln("    </delete>");
+        xmlWriter.writeln("    ");
         
-        mapperWritter.writeln("    /**");
-        mapperWritter.writeln("     * @param " + param + " xxx");
-        mapperWritter.writeln("     * @return 删除的记录数");
-        mapperWritter.writeln("     */");
-        mapperWritter.writeln("    public int " + methodName + "(" + type + " " + param + ");");
-        mapperWritter.writeln("    ");
+        mapperWriter.writeln("    /**");
+        mapperWriter.writeln("     * @param " + param + " xxx");
+        mapperWriter.writeln("     * @return 删除的记录数");
+        mapperWriter.writeln("     */");
+        mapperWriter.writeln("    public int " + methodName + "(" + type + " " + param + ");");
+        mapperWriter.writeln("    ");
         
-        serviceWritter.writeln("    /**");
-        serviceWritter.writeln("     * @param " + param + " xxx");
-        serviceWritter.writeln("     * @return 删除的记录数");
-        serviceWritter.writeln("     */");
-        serviceWritter.writeln("    public int " + methodName + "(" + type + " " + param + ")");
-        serviceWritter.writeln("    {");
-        serviceWritter.writeln("        return getMapper()." + methodName + "(" + param + ")");
-        serviceWritter.writeln("    }");
-        serviceWritter.writeln("    ");
+        serviceWriter.writeln("    /**");
+        serviceWriter.writeln("     * @param " + param + " xxx");
+        serviceWriter.writeln("     * @return 删除的记录数");
+        serviceWriter.writeln("     */");
+        serviceWriter.writeln("    public int " + methodName + "(" + type + " " + param + ")");
+        serviceWriter.writeln("    {");
+        serviceWriter.writeln("        return getMapper()." + methodName + "(" + param + ");");
+        serviceWriter.writeln("    }");
+        serviceWriter.writeln("    ");
     }
     
     /**
@@ -466,28 +469,28 @@ public class ServiceGenerator extends JFrame
             sbValue.append("#{" + column.getName() + ",jdbcType=" + column.getType() + "}");
         }
         
-        xmlWritter.writeln("    <insert id=\"" + methodName + "\" parameterType=\"" + type + "\">");
-        xmlWritter.writeln("        insert into " + table.getName() + "(" + sbColumn.toString() + ") values ("
-                + sbValue + ")");
-        xmlWritter.writeln("    </insert>");
-        xmlWritter.writeln("    ");
+        xmlWriter.writeln("    <insert id=\"" + methodName + "\" parameterType=\"" + type + "\">");
+        xmlWriter.writeln("        insert into " + table.getName() + "(" + sbColumn.toString() + ") values (" + sbValue
+                + ")");
+        xmlWriter.writeln("    </insert>");
+        xmlWriter.writeln("    ");
         
-        mapperWritter.writeln("    /**");
-        mapperWritter.writeln("     * @param " + param + " xxx");
-        mapperWritter.writeln("     * @return 增加的记录数");
-        mapperWritter.writeln("     */");
-        mapperWritter.writeln("    public int " + methodName + "(" + type + " " + param + ");");
-        mapperWritter.writeln("    ");
+        mapperWriter.writeln("    /**");
+        mapperWriter.writeln("     * @param " + param + " xxx");
+        mapperWriter.writeln("     * @return 增加的记录数");
+        mapperWriter.writeln("     */");
+        mapperWriter.writeln("    public int " + methodName + "(" + type + " " + param + ");");
+        mapperWriter.writeln("    ");
         
-        serviceWritter.writeln("    /**");
-        serviceWritter.writeln("     * @param " + param + " xxx");
-        serviceWritter.writeln("     * @return 增加的记录数");
-        serviceWritter.writeln("     */");
-        serviceWritter.writeln("    public int " + methodName + "(" + type + " " + param + ")");
-        serviceWritter.writeln("    {");
-        serviceWritter.writeln("        return getMapper()." + methodName + "(" + param + ")");
-        serviceWritter.writeln("    }");
-        serviceWritter.writeln("    ");
+        serviceWriter.writeln("    /**");
+        serviceWriter.writeln("     * @param " + param + " xxx");
+        serviceWriter.writeln("     * @return 增加的记录数");
+        serviceWriter.writeln("     */");
+        serviceWriter.writeln("    public int " + methodName + "(" + type + " " + param + ")");
+        serviceWriter.writeln("    {");
+        serviceWriter.writeln("        return getMapper()." + methodName + "(" + param + ")");
+        serviceWriter.writeln("    }");
+        serviceWriter.writeln("    ");
     }
     
     private void generateQueryMethod(Table table)
@@ -541,62 +544,62 @@ public class ServiceGenerator extends JFrame
             methodName += WordUtils.capitalize(column);
         }
         
-        xmlWritter.writeln("    <select id=\"" + methodName + "\" parameterType=\"" + type + "\" resultType=\">"
+        xmlWriter.writeln("    <select id=\"" + methodName + "\" parameterType=\"" + type + "\" resultType=\">"
                 + resultType + "\"");
-        xmlWritter.write("        select * from " + table.getName() + " where ");
+        xmlWriter.write("        select * from " + table.getName() + " where ");
         for (int i = 0, n = columnList.size(); i < n; i++)
         {
             String column = columnList.get(i);
             if (i != 0)
             {
-                xmlWritter.write(" and ");
+                xmlWriter.write(" and ");
             }
-            xmlWritter.write(column + " = #{" + column + "}");
+            xmlWriter.write(column + " = #{" + column + "}");
         }
-        xmlWritter.writeln("");
-        xmlWritter.writeln("    </select>");
-        xmlWritter.writeln("    ");
+        xmlWriter.writeln("");
+        xmlWriter.writeln("    </select>");
+        xmlWriter.writeln("    ");
         
-        mapperWritter.writeln("    /**");
-        mapperWritter.writeln("     * @param " + param + " xxx");
-        mapperWritter.writeln("     * @return " + returnDesc);
-        mapperWritter.writeln("     */");
-        mapperWritter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param + ");");
-        mapperWritter.writeln("    ");
+        mapperWriter.writeln("    /**");
+        mapperWriter.writeln("     * @param " + param + " xxx");
+        mapperWriter.writeln("     * @return " + returnDesc);
+        mapperWriter.writeln("     */");
+        mapperWriter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param + ");");
+        mapperWriter.writeln("    ");
         
-        serviceWritter.writeln("    /**");
-        serviceWritter.writeln("     * @param " + param + " xxx");
-        serviceWritter.writeln("     * @return " + returnDesc);
-        serviceWritter.writeln("     */");
-        serviceWritter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param + ")");
-        serviceWritter.writeln("    {");
-        serviceWritter.writeln("        return getMapper()." + methodName + "(" + param + ")");
-        serviceWritter.writeln("    }");
-        serviceWritter.writeln("    ");
+        serviceWriter.writeln("    /**");
+        serviceWriter.writeln("     * @param " + param + " xxx");
+        serviceWriter.writeln("     * @return " + returnDesc);
+        serviceWriter.writeln("     */");
+        serviceWriter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param + ")");
+        serviceWriter.writeln("    {");
+        serviceWriter.writeln("        return getMapper()." + methodName + "(" + param + ")");
+        serviceWriter.writeln("    }");
+        serviceWriter.writeln("    ");
         
         // 非唯一索引，还需要提供指定rowBounds的查询方法
         if (!index.isUnique())
         {
-            mapperWritter.writeln("    /**");
-            mapperWritter.writeln("     * @param " + param + " xxx");
-            mapperWritter.writeln("     * @param rowBounds 所要查询的范围");
-            mapperWritter.writeln("     * @return " + returnDesc);
-            mapperWritter.writeln("     */");
-            mapperWritter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param
+            mapperWriter.writeln("    /**");
+            mapperWriter.writeln("     * @param " + param + " xxx");
+            mapperWriter.writeln("     * @param rowBounds 所要查询的范围");
+            mapperWriter.writeln("     * @return " + returnDesc);
+            mapperWriter.writeln("     */");
+            mapperWriter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param
                     + ", RowBounds rowBounds);");
-            mapperWritter.writeln("    ");
+            mapperWriter.writeln("    ");
             
-            serviceWritter.writeln("    /**");
-            serviceWritter.writeln("     * @param " + param + " xxx");
-            serviceWritter.writeln("     * @param rowBounds 所要查询的范围");
-            serviceWritter.writeln("     * @return " + returnDesc);
-            serviceWritter.writeln("     */");
-            serviceWritter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param
+            serviceWriter.writeln("    /**");
+            serviceWriter.writeln("     * @param " + param + " xxx");
+            serviceWriter.writeln("     * @param rowBounds 所要查询的范围");
+            serviceWriter.writeln("     * @return " + returnDesc);
+            serviceWriter.writeln("     */");
+            serviceWriter.writeln("    public " + resultType + " " + methodName + "(" + type + " " + param
                     + ", RowBounds rowBounds)");
-            serviceWritter.writeln("    {");
-            serviceWritter.writeln("        return getMapper()." + methodName + "(" + param + ", rowBounds)");
-            serviceWritter.writeln("    }");
-            serviceWritter.writeln("    ");
+            serviceWriter.writeln("    {");
+            serviceWriter.writeln("        return getMapper()." + methodName + "(" + param + ", rowBounds)");
+            serviceWriter.writeln("    }");
+            serviceWriter.writeln("    ");
         }
     }
     
@@ -642,48 +645,49 @@ public class ServiceGenerator extends JFrame
             methodName += WordUtils.capitalize(column);
         }
         
-        xmlWritter.writeln("    <delete id=\"" + methodName + "\" parameterType=\"" + type + "\"");
-        xmlWritter.write("        delete from " + table.getName() + " where ");
+        xmlWriter.writeln("    <delete id=\"" + methodName + "\" parameterType=\"" + type + "\"");
+        xmlWriter.write("        delete from " + table.getName() + " where ");
         for (int i = 0, n = columnList.size(); i < n; i++)
         {
             String column = columnList.get(i);
             if (i != 0)
             {
-                xmlWritter.write(" and ");
+                xmlWriter.write(" and ");
             }
-            xmlWritter.write(column + " = #{" + column + "}");
+            xmlWriter.write(column + " = #{" + column + "}");
         }
-        xmlWritter.writeln("");
-        xmlWritter.writeln("    </select>");
-        xmlWritter.writeln("    ");
+        xmlWriter.writeln("");
+        xmlWriter.writeln("    </select>");
+        xmlWriter.writeln("    ");
         
-        mapperWritter.writeln("    /**");
-        mapperWritter.writeln("     * @param " + param + " xxx");
-        mapperWritter.writeln("     * @return " + returnDesc);
-        mapperWritter.writeln("     */");
-        mapperWritter.writeln("    public int " + methodName + "(" + type + " " + param + ");");
-        mapperWritter.writeln("    ");
+        mapperWriter.writeln("    /**");
+        mapperWriter.writeln("     * @param " + param + " xxx");
+        mapperWriter.writeln("     * @return " + returnDesc);
+        mapperWriter.writeln("     */");
+        mapperWriter.writeln("    public int " + methodName + "(" + type + " " + param + ");");
+        mapperWriter.writeln("    ");
         
-        serviceWritter.writeln("    /**");
-        serviceWritter.writeln("     * @param " + param + " xxx");
-        serviceWritter.writeln("     * @return " + returnDesc);
-        serviceWritter.writeln("     */");
-        serviceWritter.writeln("    public int " + methodName + "(" + type + " " + param + ")");
-        serviceWritter.writeln("    {");
-        serviceWritter.writeln("        return getMapper()." + methodName + "(" + param + ")");
-        serviceWritter.writeln("    }");
-        serviceWritter.writeln("    ");
+        serviceWriter.writeln("    /**");
+        serviceWriter.writeln("     * @param " + param + " xxx");
+        serviceWriter.writeln("     * @return " + returnDesc);
+        serviceWriter.writeln("     */");
+        serviceWriter.writeln("    public int " + methodName + "(" + type + " " + param + ")");
+        serviceWriter.writeln("    {");
+        serviceWriter.writeln("        return getMapper()." + methodName + "(" + param + ");");
+        serviceWriter.writeln("    }");
+        serviceWriter.writeln("    ");
     }
     
     private void generateTail(Table table)
     {
-        xmlWritter.writeln("</mapper>");
-        mapperWritter.writeln("}");
-        serviceWritter.writeln("}");
+        xmlWriter.writeln("</mapper>");
+        mapperWriter.writeln("}");
+        serviceWriter.writeln("}");
     }
     
     public static void main(String[] args)
     {
+        LogUtils.initBasicLog();
         ServiceGenerator frame = new ServiceGenerator();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

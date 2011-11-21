@@ -78,7 +78,7 @@ final public class PageHelper
     }
     
     /**
-     * Jump to the specifed page<br>
+     * Jump to the specified page<br>
      * If the new page is less than 1, set it to 1<br>
      * If the new page is great than maxPage, set it to maxPage<br>
      * @param currPage new page number

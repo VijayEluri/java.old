@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
-import org.fanhongtao.net.frame.Data;
+import org.fanhongtao.net.frame.LoopedData;
 import org.fanhongtao.net.frame.MsgDirection;
 import org.fanhongtao.net.frame.handler.IHandler;
 
@@ -21,7 +21,7 @@ public class Connection
     
     private InetSocketAddress remoteAddress;
     
-    private Data buffer;
+    private LoopedData buffer;
     
     private IHandler handler;
     
@@ -34,12 +34,12 @@ public class Connection
         this.key = key;
         this.handler = handler;
         
-        SocketChannel sc = (SocketChannel) key.channel();
+        SocketChannel sc = (SocketChannel)key.channel();
         Socket socket = sc.socket();
-        this.localAddress = (InetSocketAddress) socket.getLocalSocketAddress();
-        this.remoteAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+        this.localAddress = (InetSocketAddress)socket.getLocalSocketAddress();
+        this.remoteAddress = (InetSocketAddress)socket.getRemoteSocketAddress();
         
-        buffer = new Data();
+        buffer = new LoopedData();
     }
     
     public SelectionKey getKey()
@@ -62,7 +62,7 @@ public class Connection
         return remoteAddress;
     }
     
-    public Data getBuffer()
+    public LoopedData getBuffer()
     {
         return buffer;
     }

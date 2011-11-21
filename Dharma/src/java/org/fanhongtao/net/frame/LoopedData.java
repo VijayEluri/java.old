@@ -4,7 +4,7 @@ package org.fanhongtao.net.frame;
  * @author Fan Hongtao
  * @created 2010-10-4
  */
-public class Data
+public class LoopedData
 {
     private byte[] buffer;
     
@@ -12,17 +12,17 @@ public class Data
     
     private int end;
     
-    public Data()
+    public LoopedData()
     {
         this(new byte[1024], 0, 0);
     }
     
-    public Data(byte[] buf)
+    public LoopedData(byte[] buf)
     {
         this(buf, 0, buf.length);
     }
     
-    public Data(byte[] buf, int start, int length)
+    public LoopedData(byte[] buf, int start, int length)
     {
         this.buffer = buf;
         this.begin = start;
