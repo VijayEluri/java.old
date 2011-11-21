@@ -3,28 +3,39 @@
     <!-- 定义目录变量 -->
     <property name="dir.src" value="src" />
     <property name="dir.build" location="build"/>
-    <property name="dir.jar" value="D:\Java\dharma\"/>
+    <property name="dir.output" value="output"/>
 
 	<target name="init">
 	    <!-- Create the time stamp -->
-	    <tstamp/>
+	    <tstamp>
+            <format property="verdate" pattern="yyyy-MM-dd"/>
+        </tstamp>
+
 	    <!-- Create the build directory structure used by compile -->
-	    <mkdir dir="${build}"/>
+	    <mkdir dir="${dir.build}"/>
+	    <mkdir dir="${dir.output}"/>
 	</target>
 
-    <target name="compile" description="compile the source">
+    <target name="compile" description="compile the source" depends="init">
         <!-- Compile the java code from ${src} into ${build} -->
-        <javac srcdir="${dir.src}" destdir="${dir.build}"/>
+        <javac srcdir="${dir.src}" destdir="${dir.build}" listfiles="yes"
+            source="1.5" target="1.5" encoding="UTF-8">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
     </target>
 
     <!-- 打包源码 -->
-    <target name="make-jar">
-        <jar jarfile="${dir.jar}/dharma.jar" basedir="${dir.build}" includes="org/fanhongtao/**"/>
-    	<jar jarfile="${dir.jar}/dharma.src.jar" basedir="${dir.src}" includes="java/org/fanhongtao/**"/>
+    <target name="make-jar" depends="compile">
+        <jar jarfile="${dir.output}/dharma.jar" basedir="${dir.build}" includes="org/fanhongtao/**"/>
+    	<jar jarfile="${dir.output}/dharma.src.jar" basedir="${dir.src}" includes="java/org/fanhongtao/**"/>
     </target>
 
     <target name="clean" description="clean up" >
         <!-- Delete the ${build} and ${dist} directory trees -->
-        <delete dir="${build}"/>
+        <delete dir="${dir.build}"/>
     </target>
 </project>
