@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<digester-rules>
+	<pattern value="*/node">
+			<object-create-rule classname="org.fanhongtao.tools.treeviewer.bean.NodeBean" />
+            <set-properties-rule /> 
+            <set-next-rule methodname="addNode" />
+    </pattern>
+
+    <pattern value="*/attr">
+        <object-create-rule
+            classname="org.fanhongtao.tools.treeviewer.bean.AttrBean" />
+        <set-properties-rule />
+        <set-next-rule methodname="addAttr" />
+    </pattern>
+
+</digester-rules>

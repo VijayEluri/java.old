@@ -11,7 +11,7 @@ FOR /R %LIB_PATH% %%I in (*.jar) DO set MY_JARS=!MY_JARS!;%%~fI
 set prog=%1
 shift
 
-javaw -cp %MY_JARS%;build  %prog% %*
+start javaw -cp %MY_JARS%;build  %prog% %*
 
 endlocal
 popd

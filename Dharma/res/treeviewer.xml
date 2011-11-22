@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE root [
+    <!ELEMENT treeroot (node*)>
+    
+    <!ELEMENT node ((node | attr)*)>
+    <!ATTLIST node 
+        id CDATA #REQUIRED
+        title CDATA #REQUIRED
+        type CDATA #REQUIRED
+    >
+
+    <!ELEMENT attr EMPTY>
+    <!ATTLIST attr 
+        name CDATA #REQUIRED
+        value CDATA #REQUIRED
+    >
+]>
+
+<tree>
+    <node id="123" title="company 1" type="Company">
+        <attr name="Telephone" value="+86-025-12345678"/>
+        <attr name="Address" value="Nanjing, China"/>
+        <node id="123-1" title="Jack" type="Person">
+            <attr name="Telephone" value="+86-13912345678"/>
+        </node>
+        <node id="123-2" title="Rose" type="Person">
+            <attr name="Telephone" value="+86-13912345679"/>
+        </node>
+    </node>
+    <node id="567" title="company 2" type="Company">
+        <node id="567-1" title="Bill" type="Person">
+            <attr name="Telephone" value="+1-123-456-7890"/>
+        </node>
+    </node>
+</tree>
