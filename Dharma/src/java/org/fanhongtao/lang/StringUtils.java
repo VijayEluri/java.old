@@ -20,14 +20,10 @@ public class StringUtils
      */
     public static String bytesToHexString(byte[] bytes)
     {
-        StringBuilder sb = new StringBuilder(1024);
-        for (int i = 0; i < bytes.length; i++)
-        {
-            int n = bytes[i];
-            if (n < 0)
-                n += 256;
-            sb.append(HEX[n / 16]);
-            sb.append(HEX[n % 16]);
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(HEX[(bytes[i] & 0xf0) >>> 4]);
+            sb.append(HEX[bytes[i] & 0x0f]);
         }
         return sb.toString();
     }
@@ -109,6 +105,7 @@ public class StringUtils
             
             sb.append(CRLF);
         }
+        format.close();
         
         return sb.toString();
     }
